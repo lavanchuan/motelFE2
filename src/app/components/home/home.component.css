@@ -1,0 +1,171 @@
+.room-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* Căn giữa các hàng */
+}
+
+.room-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Các card sẽ căn đều trên mỗi hàng */
+    max-width: 1200px;
+    /* Giới hạn chiều rộng của grid */
+}
+
+.room-card {
+    width: calc(25% - 20px);
+    /* 25% width cho mỗi card và margin 20px giữa các card */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    /* Sử dụng flex để căn chỉnh ảnh và thông tin */
+    overflow: hidden;
+    /* Ẩn phần thông tin bị tràn ra ngoài card */
+}
+
+.room-image {
+    width: 100px;
+    /* Kích thước ảnh */
+    height: auto;
+    margin-right: 10px;
+    /* Khoảng cách giữa ảnh và thông tin */
+}
+
+.room-details {
+    flex: 1;
+    /* Thông tin phòng chiếm phần còn lại của card */
+}
+
+.room-name {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.room-info {
+    margin-bottom: 5px;
+}
+
+.appoint-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.appoint-button:hover {
+    background-color: #0056b3;
+}
+
+/*  */
+.modal {
+    /* display: block; */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    width: 80%;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* FORM */
+.form-container {
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container label {
+    font-weight: bold;
+}
+
+.form-container input[type="datetime"],
+.form-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm thay đổi kích thước của input */
+}
+
+.form-container .btnControl {
+    text-align: center;
+}
+
+.form-container button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* info */
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.room-detail,
+.owner-info {
+    width: 45%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.room-detail h3,
+.owner-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.room-detail p,
+.owner-info p {
+    margin: 5px 0;
+}

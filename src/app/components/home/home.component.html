@@ -1,0 +1,63 @@
+<div *ngIf="rooms" class="room-list-container">
+    <div class="room-card" *ngFor="let room of rooms; index as i">
+        <img src="assets/p10{{i+1}}-1.png" alt="Room Image" class="room-image" (click)="openDialog(room)">
+        <div class="room-details">
+            <h2 class="room-name">{{ room.data.room.name }}</h2>
+            <p class="room-info">Area: {{ room.data.room.area }}</p>
+            <p class="room-info">Price: {{ room.data.room.price }}</p>
+            <p class="room-info">Facility: {{ room.data.room.facility }}</p>
+            <button class="appoint-button" (click)="openAppointmentDialog(room)">Appoint</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for room details -->
+<div id="roomDialog" class="modal" *ngIf="openRoomDetailDialog">
+    <div class="modal-content">
+        <span class="close" (click)="closeDialog()">&times;</span>
+        <div class="info" *ngIf="roomOwnerCurrentInfo">
+            <div class="room-detail">
+                <h3>Room Info</h3>
+                <p>Name: {{ roomOwnerCurrentInfo.data.room.name }}</p>
+                <p>Created At: {{ roomOwnerCurrentInfo.data.room.createAt | date }}</p>
+                <p>Area: {{ roomOwnerCurrentInfo.data.room.area }}</p>
+                <p>Price: {{ roomOwnerCurrentInfo.data.room.price }}</p>
+                <p>Sale: {{ roomOwnerCurrentInfo.data.room.sale }}</p>
+                <p>Facility: {{ roomOwnerCurrentInfo.data.room.facility }}</p>
+                <p>Status: {{ roomOwnerCurrentInfo.data.room.status }}</p>
+            </div>
+            <div class="owner-info">
+                <h3>Owner Info</h3>
+                <p>Name: {{ roomOwnerCurrentInfo.data.owner.name }}</p>
+                <p>Email: {{ roomOwnerCurrentInfo.data.owner.mail }}</p>
+                <p>Phone: {{ roomOwnerCurrentInfo.data.owner.phone }}</p>
+                <p>Address: {{ roomOwnerCurrentInfo.data.owner.address }}</p>
+                <p>Sex: {{ roomOwnerCurrentInfo.data.owner.sex }}</p>
+                <p>Date of Birth: {{ roomOwnerCurrentInfo.data.owner.dateOfBirth | date }}</p>
+                <p>Status: {{ roomOwnerCurrentInfo.data.owner.status }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for appointment -->
+<div id="appointmentDialog" class="modal" *ngIf="openAppointDialog">
+    <div class="modal-content">
+        <span class="close" (click)="closeAppointmentDialog()">&times;</span>
+
+        <form (ngSubmit)="makeAppoint()" class="form-container">
+            <label for="meetTime">Date of Birth:</label>
+            <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime">
+
+            <div>
+                <label for="reason">Reason:</label>
+                <textarea name="reason" id="reason" cols="100%" rows="10" [(ngModel)]="formData.reason"></textarea>
+            </div>
+
+            <div class="btnControl">
+                <button type="submit">Booking Appoint</button>
+            </div>
+
+        </form>
+    </div>
+</div>

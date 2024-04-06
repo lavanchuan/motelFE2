@@ -1,0 +1,40 @@
+<form (ngSubmit)="register()" class="form-container">
+    <label for="mail">Mail:</label>
+    <input type="email" id="mail" name="mail" [(ngModel)]="formData.mail" required>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
+    
+    <label for="name">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="formData.password" required>
+
+    <label for="phone">Phone:</label>
+    <input type="text" id="phone" name="phone" [(ngModel)]="formData.phone">
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" [(ngModel)]="formData.address">
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="formData.dateOfBirth">
+
+    <label for="sex">Sex:</label>
+    <select id="sex" name="sex" [(ngModel)]="formData.sex">
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+        <option value="LGBT">LGBT</option>
+        <option value="OTHER" selected>Other</option>
+    </select>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" [(ngModel)]="formData.role">
+        <option value="USER" selected>User</option>
+        <option value="OWNER">Owner</option>
+    </select>
+
+    <div class="btnControl">
+        <button type="button" class="left" (click)="login()">Login</button>
+        <div class="space"></div>
+        <button type="submit" class="right">Register</button>
+    </div>
+
+</form>

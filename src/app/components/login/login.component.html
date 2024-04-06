@@ -1,0 +1,11 @@
+<form (ngSubmit)="login()">
+    <label for="username">Mail:</label>
+    <input type="text" id="mail" name="mail" [(ngModel)]="mail" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    <p id="log" *ngIf="!isCorrect">Mail or password is incorrect !!</p>
+    <button type="submit" class="left">Login</button>
+    <button type="button" class="right" (click)="register()">Register</button>
+
+</form>

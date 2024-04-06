@@ -1,0 +1,81 @@
+/* reset CSS để loại bỏ các đặc điểm mặc định của trình duyệt */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style cho form */
+form {
+    width: 65%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 0px 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Style cho các label */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style cho input */
+input[type="email"],
+input[type="text"],
+input[type="date"],
+input[type="password"],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover state cho input và select */
+input[type="email"]:hover,
+input[type="text"]:hover,
+input[type="date"]:hover,
+input[type="password"]:hover,
+select:hover {
+    border-color: #999;
+}
+
+/* Focus state cho input và select */
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Style cho button */
+button{
+    width: calc((100% - 10%)/2);
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+/* Hover state cho button */
+button:hover {
+    background-color: #0056b3;
+}
