@@ -7,7 +7,7 @@ import { AccountDTO } from '../../models/dto/AccountDTO';
 import { LoginRequest } from '../../models/request/LoginRequest';
 import { LoginResponse } from '../../models/response/LoginResponse';
 import { AuthenService } from '../../services/authen.service';
-import { IS_LOGGED, LOGGIN_VALUE, USER_ID } from '../../services/Instance';
+import { IS_LOGGED, LOGGIN_VALUE, USER_ID, USER_INFO } from '../../services/Instance';
 
 @Component({
   selector: 'app-login',
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
             console.log(response);
             //
             localStorage.setItem(USER_ID, ""+response.data.id);
+            localStorage.setItem(USER_INFO, JSON.stringify(response.data));
             observer.next(true); 
             observer.complete(); 
           } else {

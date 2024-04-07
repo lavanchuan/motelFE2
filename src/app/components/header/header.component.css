@@ -1,0 +1,54 @@
+.header {
+    background-color: #333; /* Màu nền của header */
+    color: #fff; /* Màu chữ của header */
+    padding: 20px; /* Khoảng cách giữa nội dung và viền của header */
+    display: flex; /* Hiển thị các phần tử trên cùng một dòng */
+    justify-content: space-between; /* Canh chỉnh các phần tử theo chiều ngang */
+    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    z-index: 9999; /* Đảm bảo header hiển thị trên tất cả các phần tử khác */
+
+}
+
+.logo img {
+    width: 50px; /* Độ rộng của logo */
+}
+
+.navigation {
+    flex-grow: 1; /* Mở rộng navigation để lấp đầy không gian trống */
+    margin-right: 10%; 
+    font-size: 1.5em;
+}
+
+.nav-menu {
+    list-style: none; /* Loại bỏ dấu chấm trong danh sách */
+    padding: 0; /* Loại bỏ phần padding mặc định */
+    margin: 0; /* Loại bỏ phần margin mặc định */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-menu li {
+    display: inline; /* Hiển thị các phần tử trên cùng một hàng */
+    margin-right: 50px; /* Khoảng cách giữa các mục trong menu */
+}
+
+.nav-menu li:last-child {
+    margin-right: 0; /* Không cách cuối cùng */
+}
+
+.nav-menu li a {
+    color: #fff; /* Màu chữ của menu */
+    text-decoration: none; /* Loại bỏ gạch chân */
+}
+
+.nav-menu li a:hover {
+    color: #ccc; /* Màu chữ khi rê chuột qua */
+}

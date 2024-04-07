@@ -1,3 +1,11 @@
+html{
+    scroll-behavior: smooth;
+}
+
+.container{
+    margin-top: 8%;;
+}
+
 .room-list-container {
     display: flex;
     flex-wrap: wrap;
@@ -25,6 +33,10 @@
     /* Sử dụng flex để căn chỉnh ảnh và thông tin */
     overflow: hidden;
     /* Ẩn phần thông tin bị tràn ra ngoài card */
+}
+
+.room-card:hover{
+    border: 1px solid #1e2731;
 }
 
 .room-image {
@@ -77,6 +89,11 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal::-webkit-scrollbar{
+    display: none;
+}
+
+
 .modal-content {
     width: 80%;
     background-color: #fefefe;
@@ -87,7 +104,7 @@
 }
 
 .close {
-    color: #aaa;
+    color: rgb(226, 63, 63);
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -95,9 +112,11 @@
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: rgb(190, 5, 5);
+
     text-decoration: none;
     cursor: pointer;
+    font-size: 40px;
 }
 
 /* FORM */
@@ -114,9 +133,8 @@
     font-weight: bold;
 }
 
-.form-container input[type="datetime"],
-.form-container input[type="text"] {
-    width: 100%;
+.form-container input[type="datetime-local"]{
+    width: 70%;
     padding: 10px;
     margin: 5px 0 20px 0;
     border: 1px solid #ccc;
