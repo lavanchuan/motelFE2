@@ -3,18 +3,33 @@ body {
     font-size: 18px;
 }
 
+.room-image {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
+    height: 100%; /* Chiếm toàn bộ chiều cao của màn hình */
+    object-fit: cover;
+    filter: blur(5px);
+}
+
 .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     font-family: Lexend;
 }
 
 .page-register {
+    position: absolute;
     width: 500px;
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 750px;
     border-radius: 10px;
     text-align: left;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* Tạo hiệu ứng mờ */
@@ -35,7 +50,8 @@ body {
     padding-bottom: 30px;
 }
 
-/* Style cho form */
+
+/*Style cho form*/
 form {
     width: auto;
     margin: 0 auto;

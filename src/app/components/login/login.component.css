@@ -3,17 +3,34 @@ body {
     font-size: 18px;
 }
 
+.room-image {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
+    height: 100%; /* Chiếm toàn bộ chiều cao của màn hình */
+    object-fit: cover;
+    filter: blur(5px);
+}
+
 .container {
+    position:relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     font-family: Lexend;
 }
 
+
 .page-login {
+    position:absolute;
     width: 500px;
     padding: 20px;
+    margin-top: 700px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* Tạo hiệu ứng mờ */

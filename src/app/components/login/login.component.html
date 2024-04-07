@@ -10,12 +10,12 @@
 </head>
 <body>
     <app-header></app-header>
+    <img src="assets/image.png" alt="Room Image" class="room-image">
     <div class="container">
         <div class = "page-login">
             <div class = "title-login">
                 <h3>Xin chào bạn</h3>
                 <h2>Đăng nhập để tiếp tục</h2>
-                
             </div>
             
             <form (ngSubmit)="login()">
@@ -36,7 +36,10 @@
             <div class = "register">
                 <p>Bạn chưa có tài khoản? <a href="/register" style = "color: red;">Đăng ký</a> tại đây</p>
             </div>
+            
         </div>
+
+        
     </div>
 </body>
 </html>
