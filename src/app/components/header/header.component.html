@@ -1,15 +1,13 @@
 <header class="header">
-    <div class="logo">
-        <a href="/home"><img src="/assets/logo.png" alt="Motel Logo"></a>
-    </div>
     <nav class="navigation">
-        <ul class="nav-menu">
-            <li><a href="/home">Home</a></li>
-            <li><a href="#">Rooms</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#footer">Contact</a></li>
-            <li *ngIf="!isLogged()"><a href="/login">Login</a></li>
-            <li *ngIf="isLogged()" (click)="logout()"><a href="">Logout </a>[{{getUserName()}}]</li>
+        <ul class = "nav-home">
+            <li class = "logo"><a href="/home"><img src="/assets/logo.png" alt="Motel Logo"></a></li>
+            <li><a href="/home">TroGiaRe.vn</a></li>
+        </ul>
+        <ul class="nav-menu"> 
+            <li *ngIf="!isLogged()"><a href="/login">Đăng Nhập</a></li>
+            <li *ngIf="!isLogged()"><a href="/register">Đăng Ký</a></li>
+            <li *ngIf="isLogged()" (click)="logout()"><a href="">Đăng Xuất</a>[{{getUserName()}}]</li>
         </ul>
     </nav>
 </header>

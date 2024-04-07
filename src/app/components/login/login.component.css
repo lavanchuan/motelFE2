@@ -1,6 +1,39 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Lexend;
+}
+
+.page-login {
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* Tạo hiệu ứng mờ */
+    background-color: rgba(128, 128, 128, 0.2); /* Màu xám với độ trong suốt */
+}
+
+.title-login {
+    text-align: left;
+    
+  
+}
+
+.title-login h3  {
+    font-size: 15px;
+    margin: 0;
+}
+
+.title-login h2  {
+    margin-top: 5px;
+    padding-bottom: 30px;
+}
+
 /* Style cho form */
 form {
-    width: 300px;
+    width: auto;
     margin: 0 auto;
 }
 
@@ -13,7 +46,7 @@ label {
 /* Style cho input */
 input[type="text"],
 input[type="password"] {
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -35,8 +68,8 @@ input[type="password"]:focus {
 }
 
 /* Style cho button */
-button {
-    width: calc(45%);
+.btn-login {
+    width:100%;
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -44,10 +77,11 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 25px;
 }
 
 /* Hover state cho button */
-button:hover {
+.btn-login:hover {
     background-color: #0056b3;
 }
 
@@ -55,10 +89,27 @@ button:hover {
     color: red;
 }
 
-.left{
-    float: left;
+.glyphicon {
+    padding-right: 10px;
 }
 
-.right{
-    float: right;
+.forgot-pass {
+    padding-top: 10px;
+    font-size: 17px;
+    text-align: right;
+}
+
+.register {
+    padding-top: 20px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.forgot-pass a:hover{
+    opacity: 0.5;
+}
+
+
+.register a:hover{
+    opacity: 0.5;
 }

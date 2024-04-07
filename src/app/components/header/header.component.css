@@ -1,7 +1,8 @@
+
 .header {
-    background-color: #333; /* Màu nền của header */
-    color: #fff; /* Màu chữ của header */
-    padding: 20px; /* Khoảng cách giữa nội dung và viền của header */
+    background-color: #F1F1F1;
+    color: hsl(0, 0%, 0%); /* Màu chữ của header */
+    padding: 10px; /* Khoảng cách giữa nội dung và viền của header */
     display: flex; /* Hiển thị các phần tử trên cùng một dòng */
     justify-content: space-between; /* Canh chỉnh các phần tử theo chiều ngang */
     align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
@@ -10,45 +11,63 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+   
     z-index: 9999; /* Đảm bảo header hiển thị trên tất cả các phần tử khác */
 
 }
 
-.logo img {
-    width: 50px; /* Độ rộng của logo */
-}
-
-.navigation {
+.header .navigation {
+    display: flex;
+    align-items: center; /* Canh các phần tử theo chiều dọc giữa nhau */
     flex-grow: 1; /* Mở rộng navigation để lấp đầy không gian trống */
     margin-right: 10%; 
     font-size: 1.5em;
+    
+}
+
+.nav-home {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-home li {
+    display: inline; /* Hiển thị các phần tử trên cùng một hàng */
 }
 
 .nav-menu {
-    list-style: none; /* Loại bỏ dấu chấm trong danh sách */
-    padding: 0; /* Loại bỏ phần padding mặc định */
-    margin: 0; /* Loại bỏ phần margin mặc định */
-    display: flex;
-    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: auto; /* Đẩy các phần tử sang phải cùng khoảng cách giữa chúng */
 }
 
 .nav-menu li {
-    display: inline; /* Hiển thị các phần tử trên cùng một hàng */
-    margin-right: 50px; /* Khoảng cách giữa các mục trong menu */
+    display: inline;
+    margin-left: 20px; /* Khoảng cách giữa các phần tử */
 }
 
-.nav-menu li:last-child {
-    margin-right: 0; /* Không cách cuối cùng */
+.logo img {
+    height: 50px; /* Đặt chiều cao của logo */
+    width: auto; /* Đảm bảo logo co dãn đúng tỷ lệ */
+    vertical-align: middle; /* Canh logo theo chiều dọc giữa với văn bản */
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
-.nav-menu li a {
-    color: #fff; /* Màu chữ của menu */
-    text-decoration: none; /* Loại bỏ gạch chân */
+.nav-menu li a{
+    color: #6C78AF;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 10px;
+}
+.nav-home li a {
+    font-size:45px;
+    color: #6C78AF;
+    text-decoration: none;
 }
 
-.nav-menu li a:hover {
-    color: #ccc; /* Màu chữ khi rê chuột qua */
+.nav-menu li a:hover{
+    color: #fff;
+    background-color: #6C78AF;
 }

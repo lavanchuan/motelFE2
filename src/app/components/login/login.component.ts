@@ -8,14 +8,15 @@ import { LoginRequest } from '../../models/request/LoginRequest';
 import { LoginResponse } from '../../models/response/LoginResponse';
 import { AuthenService } from '../../services/authen.service';
 import { IS_LOGGED, LOGGIN_VALUE, USER_ID, USER_INFO } from '../../services/Instance';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule,
-    CommonModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [FormsModule,
+        CommonModule, HeaderComponent]
 })
 export class LoginComponent implements OnInit {
 

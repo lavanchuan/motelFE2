@@ -1,11 +1,40 @@
-<form (ngSubmit)="login()">
-    <label for="username">Mail:</label>
-    <input type="text" id="mail" name="mail" [(ngModel)]="mail" required>
-    <br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" [(ngModel)]="password" required>
-    <p id="log" *ngIf="!isCorrect">Mail or password is incorrect !!</p>
-    <button type="submit" class="left">Login</button>
-    <button type="button" class="right" (click)="register()">Register</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class = "page-login">
+            <div class = "title-login">
+                <h3>Xin chào bạn</h3>
+                <h2>Đăng nhập để tiếp tục</h2>
+                
+            </div>
+            
+            <form (ngSubmit)="login()">
+                <i class="glyphicon glyphicon-user"></i>
+                <input type="text" id="mail" name="mail" [(ngModel)]="mail" required placeholder = "Email hoặc SDT">
+                <br>
+                <i class="glyphicon glyphicon-lock"></i>
+                <input type="password" id="password" name="password" [(ngModel)]="password" required placeholder = "Mật khẩu">
+                <p id="log" *ngIf="!isCorrect">Tài khoản hoặc mật khẩu không chính xác !!</p>
+                <button type="submit" class="btn-login">Đăng Nhập</button>
+                <!-- <button type="button" class="right" (click)="register()">Register</button> -->
+            </form>
+        
+            <div class = "forgot-pass">
+                <a href="" style="color: red;">Quên mật khẩu?</a>
+            </div>
 
-</form>
+            <div class = "register">
+                <p>Bạn chưa có tài khoản? <a href="/register" style = "color: red;">Đăng ký</a> tại đây</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
