@@ -1,3 +1,8 @@
+body {
+    line-height: normal;
+    font-size: 18px;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -17,8 +22,6 @@
 
 .title-login {
     text-align: left;
-    
-  
 }
 
 .title-login h3  {

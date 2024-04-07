@@ -1,25 +1,52 @@
-/* reset CSS để loại bỏ các đặc điểm mặc định của trình duyệt */
-* {
+body {
+    line-height: normal;
+    font-size: 18px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Lexend;
+}
+
+.page-register {
+    width: 500px;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3); /* Tạo hiệu ứng mờ */
+    background-color: rgba(128, 128, 128, 0.2); /* Màu xám với độ trong suốt */
+}
+
+.title-register {
+    text-align: left;
+}
+
+.title-register h3  {
+    font-size: 15px;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+}
+
+.title-register h2  {
+    margin-top: 5px;
+    padding-bottom: 30px;
 }
 
 /* Style cho form */
 form {
-    width: 65%;
+    width: auto;
     margin: 0 auto;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0px 0px 10px 20px rgba(0,0,0,0.5);
 }
 
 /* Style cho các label */
 label {
-    display: block;
+    display: inline-block;
     margin-bottom: 5px;
     font-weight: bold;
+    width: 150px;
 }
 
 /* Style cho input */
@@ -28,7 +55,7 @@ input[type="text"],
 input[type="date"],
 input[type="password"],
 select {
-    width: calc(100% - 20px);
+    width: calc(100% - 152px);
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -36,6 +63,9 @@ select {
     transition: border-color 0.3s ease;
 }
 
+select{
+    width: calc(100% - 152px);
+}
 /* Hover state cho input và select */
 input[type="email"]:hover,
 input[type="text"]:hover,
@@ -56,8 +86,9 @@ select:focus {
 }
 
 /* Style cho button */
-button{
-    width: calc((100% - 10%)/2);
+.btn-register{
+    width: 100%;
+    margin-top: 20px;
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -65,17 +96,21 @@ button{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.left{
-    float: left;
-}
-
-.right{
-    float: right;
+    font-size: 25px;
 }
 
 /* Hover state cho button */
-button:hover {
+.btn-register:hover {
     background-color: #0056b3;
+}
+
+.login {
+    padding-top: 20px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.login a:hover {
+    opacity: 0.5;
+    
 }

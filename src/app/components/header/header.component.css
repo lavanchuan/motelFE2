@@ -22,7 +22,7 @@
     flex-grow: 1; /* Mở rộng navigation để lấp đầy không gian trống */
     margin-right: 10%; 
     font-size: 1.5em;
-    
+    font-family: Lexend;
 }
 
 .nav-home {

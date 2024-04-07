@@ -9,6 +9,7 @@ import { LoginResponse } from '../../models/response/LoginResponse';
 import { AuthenService } from '../../services/authen.service';
 import { IS_LOGGED, LOGGIN_VALUE, USER_ID, USER_INFO } from '../../services/Instance';
 import { HeaderComponent } from "../header/header.component";
+import { HomeComponent } from "../home/home.component";
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,7 @@ import { HeaderComponent } from "../header/header.component";
     templateUrl: './login.component.html',
     styleUrl: './login.component.css',
     imports: [FormsModule,
-        CommonModule, HeaderComponent]
+        CommonModule, HeaderComponent, HomeComponent]
 })
 export class LoginComponent implements OnInit {
 

@@ -9,14 +9,15 @@ import { LoginRequest } from '../../models/request/LoginRequest';
 import { RegisterRequest } from '../../models/request/RegisterRequest';
 import { RegisterResponse } from '../../models/response/RegisterResponse';
 import { AuthenService } from '../../services/authen.service';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [CommonModule,
-  FormsModule],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    standalone: true,
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css',
+    imports: [CommonModule,
+        FormsModule, HeaderComponent]
 })
 export class RegisterComponent {
 
