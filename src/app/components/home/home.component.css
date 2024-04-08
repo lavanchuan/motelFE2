@@ -75,24 +75,22 @@ html{
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    /* Sử dụng flex để căn chỉnh ảnh và thông tin */
+    
     overflow: hidden;
     /* Ẩn phần thông tin bị tràn ra ngoài card */
     margin-left: 3%;
     margin-top: 4%;
+    transition: box-shadow 0.3s;
 }
 
 .room-card:hover{
-    border: 1px solid #1e2731;
+    box-shadow: 0 0 10px 2px rgba(3, 65, 236, 0.5);
 }
 
 .room-image {
-    width: 100px;
+    width: 100%;
     /* Kích thước ảnh */
     height: auto;
-    margin-right: 10px;
-    /* Khoảng cách giữa ảnh và thông tin */
 }
 
 .room-details {
@@ -101,15 +99,18 @@ html{
 }
 
 .room-name {
-    margin-top: 0;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-size: 2.4rem;
+    color:#0056b3;
+    text-align: center;
 }
 
 .room-info {
+    margin-left: 20px;
     margin-bottom: 5px;
     font-size: 1.8rem;
-}
+} 
 
 .appoint-button {
     padding: 10px 20px;
