@@ -38,7 +38,19 @@ body {
 }
 
 .title-login {
+    position: relative;
     text-align: left;
+}
+
+.glyphicon-remove {
+    position: absolute; 
+    top: 0; /* Đặt top là 0 để đưa thẻ a lên đầu trang */
+    right: 0; /* Đặt right là 0 để đưa thẻ a sang phải cùng */
+    padding: 5px;
+    color: #000;
+}
+.glyphicon-remove:hover{
+    color: red;
 }
 
 .title-login h3  {
@@ -50,7 +62,6 @@ body {
     margin-top: 5px;
     padding-bottom: 30px;
 }
-
 /* Style cho form */
 form {
     width: auto;
@@ -109,7 +120,7 @@ input[type="password"]:focus {
     color: red;
 }
 
-.glyphicon {
+.glyphicon-lock, .glyphicon-user {
     padding-right: 10px;
 }
 
@@ -133,3 +144,4 @@ input[type="password"]:focus {
 .register a:hover{
     opacity: 0.5;
 }
+

@@ -7,10 +7,53 @@ html{
     margin-top: 8%;;
 }
 
+.search {
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.form-search {
+    width: 100%;
+    padding: 10px;
+}
+
+#address, #price {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 30%;
+    border: 1px solid #ddd;
+}
+
+#address:hover,
+#price:hover {
+    border-color: #1e2731;
+}
+
+.btn-search {
+    padding: 10px;
+    width: 30%;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+ 
+.btn-search:hover {
+    background-color: #0056b3;
+}
+
 .room-list-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 60px;
+    margin-right: 60px;
     /* Căn giữa các hàng */
 }
 
@@ -24,7 +67,7 @@ html{
 }
 
 .room-card {
-    width: calc(25% - 20px);
+    width: calc(30% - 40px);
     /* 25% width cho mỗi card và margin 20px giữa các card */
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -34,6 +77,7 @@ html{
     /* Sử dụng flex để căn chỉnh ảnh và thông tin */
     overflow: hidden;
     /* Ẩn phần thông tin bị tràn ra ngoài card */
+    margin: 40px;
 }
 
 .room-card:hover{

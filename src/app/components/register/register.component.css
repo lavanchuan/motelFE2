@@ -36,8 +36,22 @@ body {
     background-color: rgba(128, 128, 128, 0.2); /* Màu xám với độ trong suốt */
 }
 
+
 .title-register {
+    position: relative;
     text-align: left;
+}
+
+.glyphicon-remove {
+    position: absolute; 
+    top: 0; /* Đặt top là 0 để đưa thẻ a lên đầu trang */
+    right: 0; /* Đặt right là 0 để đưa thẻ a sang phải cùng */
+    padding: 5px;
+    color: #000;
+}
+
+.glyphicon-remove:hover{
+    color: red;
 }
 
 .title-register h3  {
@@ -128,5 +142,4 @@ select:focus {
 
 .login a:hover {
     opacity: 0.5;
-    
 }
