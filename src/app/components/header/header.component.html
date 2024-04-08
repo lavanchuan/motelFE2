@@ -1,13 +1,25 @@
-<header class="header">
-    <nav class="navigation">
-        <ul class = "nav-home">
-            <li class = "logo"><a href="/home"><img src="/assets/logo.png" alt="Motel Logo"></a></li>
-            <li><a href="/home">TroGiaRe.vn</a></li>
-        </ul>
-        <ul class="nav-menu"> 
-            <li *ngIf="!isLogged()"><a href="/login">Đăng Nhập</a></li>
-            <li *ngIf="!isLogged()"><a href="/register">Đăng Ký</a></li>
-            <li *ngIf="isLogged()" (click)="logout()"><a href="">Đăng Xuất</a>[{{getUserName()}}]</li>
-        </ul>
-    </nav>
-</header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navigation">
+            <ul class = "nav-home">
+                <li class = "logo"><a href="/home"><img src="/assets/logo.png" alt="Motel Logo"></a></li>
+                <li><a href="/home">TroGiaRe.vn</a></li>
+            </ul>
+            <ul class="nav-menu"> 
+                <li *ngIf="!isLogged()"><a href="/login">Đăng Nhập</a></li>
+                <li *ngIf="!isLogged()"><a href="/register">Đăng Ký</a></li>
+                <li *ngIf="isLogged()"><a href="">{{getUserName()}}</a></li>
+                <li *ngIf="isLogged()" (click)="logout()"><a href=""><i class="glyphicon glyphicon-log-out"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

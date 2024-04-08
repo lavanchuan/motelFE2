@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motel Web</title>
-    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -32,9 +32,10 @@
                 <img src="assets/p101-1.png" alt="Room Image" class="room-image" (click)="openDialog(room)">
                 <div class="room-details">
                     <h2 class="room-name">{{ room.data.room.name }}</h2>
+                    <p class="room-info">Địa chỉ: {{ room.data.room.motelId}}</p>
                     <p class="room-info">Diện tích: {{ room.data.room.area }}</p>
                     <p class="room-info">Giá: {{ room.data.room.price }}</p>
-                    <p class="room-info">Địa chỉ: {{ room.data.room.motelId}}</p>
+                    
                     <p class="room-info">Mô tả: {{ room.data.room.facility }}</p>
                     <!-- <button class="appoint-button" (click)="openAppointmentDialog(room)">Appoint</button> -->
                 </div>

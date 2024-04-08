@@ -9,7 +9,7 @@ html{
 
 .search {
     display: flex;
-    width: 60%;
+    width: 80%;
     margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
@@ -35,6 +35,8 @@ html{
 
 .btn-search {
     padding: 10px;
+    margin-left: 37px;
+    
     width: 30%;
     border: none;
     border-radius: 5px;
@@ -52,8 +54,8 @@ html{
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
-    margin-left: 60px;
-    margin-right: 60px;
+    margin-left: 1%;
+    margin-right: 2%;
     /* Căn giữa các hàng */
 }
 
@@ -62,12 +64,12 @@ html{
     flex-wrap: wrap;
     justify-content: space-between;
     /* Các card sẽ căn đều trên mỗi hàng */
-    max-width: 1200px;
+    max-width: 80%;
     /* Giới hạn chiều rộng của grid */
 }
 
 .room-card {
-    width: calc(30% - 40px);
+    width: calc(30%);
     /* 25% width cho mỗi card và margin 20px giữa các card */
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -77,7 +79,8 @@ html{
     /* Sử dụng flex để căn chỉnh ảnh và thông tin */
     overflow: hidden;
     /* Ẩn phần thông tin bị tràn ra ngoài card */
-    margin: 40px;
+    margin-left: 3%;
+    margin-top: 4%;
 }
 
 .room-card:hover{
@@ -100,11 +103,12 @@ html{
 .room-name {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 1.2rem;
+    font-size: 2.4rem;
 }
 
 .room-info {
     margin-bottom: 5px;
+    font-size: 1.8rem;
 }
 
 .appoint-button {
