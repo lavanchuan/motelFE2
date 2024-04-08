@@ -1,0 +1,27 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="room-details">
+        <div class="image-container">
+            <img src="{{images[currentImageIndex]}}" alt="Room Image" (click)="changeImage()">
+        </div>
+        <div class="info-container">
+            <h2>{{ roomDetail.data.room.name }}</h2>
+            <p>Created At: {{ roomDetail.data.room.createAt }}</p>
+            <p>Area: {{ roomDetail.data.room.area }}</p>
+            <p>Price: {{ roomDetail.data.room.price }}</p>
+            <p>Sale: {{ roomDetail.data.room.sale }}</p>
+            <p>Facility: {{ roomDetail.data.room.facility }}</p>
+            <p>Status: {{ getStatusString(roomDetail.data.owner.status) }}</p>
+            <h2>Chủ trọ: {{roomDetail.data.owner.name}}</h2>
+            <p>Mail: {{ roomDetail.data.owner.mail }}</p>
+            <p>Phone: {{ roomDetail.data.owner.phone }}</p>
+            <p>Address: {{ roomDetail.data.owner.address }}</p>
+            <p>Birthday: {{ roomDetail.data.owner.dateOfBirth }}</p>
+            <p>Sex: {{ roomDetail.data.owner.sex }}</p>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

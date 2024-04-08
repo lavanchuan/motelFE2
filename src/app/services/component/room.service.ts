@@ -12,6 +12,8 @@ import { INSTANCE } from '../Instance';
 })
 export class RoomService {
 
+  private roomOwnerCurrent : RoomOwnerResponse | any; // data for room-detail
+
   constructor(private http: HttpClient ) { }
 
   findById(id : number) : Observable<MotelRoomDTO>{
@@ -33,5 +35,14 @@ export class RoomService {
 
   roomOwnerInfo(roomId: number) : Observable<RoomOwnerResponse>{
     return this.http.get<RoomOwnerResponse>(INSTANCE+"/user/info-room?roomId="+roomId);
+  }
+
+  // ROOM DETAIL SERVICE
+  setRoomOwnerCurrent(roomOwner : RoomOwnerResponse){
+    this.roomOwnerCurrent = roomOwner;
+  }
+  
+  getRoomOwnerCurrent(){
+    return this.roomOwnerCurrent;
   }
 }

@@ -139,4 +139,9 @@ export class HomeComponent {
     this.requestLoginService.setRequestLogin(true);
   }
 
+  toRoomDetail(roomDetail : RoomOwnerResponse): void{
+    this.roomService.setRoomOwnerCurrent(roomDetail);
+    this.router.navigate(["/room-detail"]);
+  }
+
 }

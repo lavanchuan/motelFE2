@@ -27,10 +27,10 @@ export class RegisterComponent {
     mail: '',
     name: '',
     phone: '',
-    address: '',
-    dateOfBirth: '',
-    sex: '',
-    role: '',
+    // address: '',
+    // dateOfBirth: '',
+    // sex: '',
+    // role: '',
     password: ''
   };
 
@@ -48,10 +48,10 @@ export class RegisterComponent {
     this.isValidRegister(new RegisterRequest(this.formData.name, 
       this.formData.mail, 
       this.formData.phone,
-      this.formData.address, 
-      this.formData.dateOfBirth, 
-      this.formData.sex, 
-      this.formData.role,
+      // this.formData.address, 
+      // this.formData.dateOfBirth, 
+      // this.formData.sex, 
+      // this.formData.role,
       this.formData.password)).subscribe((isValid)=>{
       if(isValid) this.router.navigate(["/login"]);
     });
