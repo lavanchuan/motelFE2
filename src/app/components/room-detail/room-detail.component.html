@@ -22,6 +22,31 @@
         </div>
     </div>
 
+    <!-- appointment -->
+    <div class="dialog-appoint" *ngIf="openAppointDialog">
+        <span class="close" (click)="closeAppointmentDialog()">&times;</span>
+
+        <form (ngSubmit)="makeAppoint()" class="appointment-form">
+            <div class="form-group">
+                <label for="meetTime">Thời gian hẹn</label>
+                <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime" required="true">
+            </div>
+            <div class="form-group">
+                <label for="reason">Lý do</label>
+                <textarea id="reason" name="reason" [(ngModel)]="formData.reason" rows="4" cols="70%" required></textarea>
+            </div>
+            <button type="submit">Đặt lịch hẹn</button>
+        </form>
+    </div>
+
+    <!--  -->
+    <button class="appoint-button" (click)="openAppointmentDialog()">Hẹn Xem Phòng</button>
+
+    <!-- DIALOG REQUEST LOGIN -->
+    <div>
+        <app-request-login *ngIf="getIsRequestLogin() && getAppointing()"></app-request-login>
+    </div>
+
 </div>
 
 <app-footer></app-footer>

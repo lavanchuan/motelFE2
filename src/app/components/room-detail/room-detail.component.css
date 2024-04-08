@@ -41,3 +41,76 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
 }
+
+
+/* BTN */
+.appoint-button {
+    margin-top: 5px;
+    float: right;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.appoint-button:hover {
+    background-color: #0056b3;
+}
+
+/* APPOINT */
+.dialog-appoint {
+    position: fixed;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Đảm bảo dialog hiển thị trên tất cả các thành phần khác */
+    
+}
+
+.dialog-appoint form {
+    width: 100%; /* Điều chỉnh độ rộng của form theo nhu cầu */
+}
+
+.dialog-appoint label, .dialog-appoint textarea, .dialog-appoint button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dialog-appoint input {
+    width: 70%;
+}
+
+.dialog-appoint button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+.close {
+    color: rgb(226, 63, 63);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(190, 5, 5);
+
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 40px;
+}
