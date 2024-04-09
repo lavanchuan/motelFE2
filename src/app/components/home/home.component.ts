@@ -35,6 +35,11 @@ export class HomeComponent {
     this.getRoomAll();
   }
 
+  
+  isSale(sale: number):boolean {
+    return sale == 0;
+  }
+
   getRoom(id: number) {
     let data: any;
     this.roomService.findById(id).subscribe((response) => {

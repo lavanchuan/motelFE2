@@ -1,31 +1,78 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
 .container{
     margin-top: 100px;
-    margin-bottom: 20px;
+    padding: 0;
+    width: 100%;
 }
 
 .room-details {
     display: flex;
-    padding: 20px;
+    width: 96%;
+    margin-left: 30px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
 }
 
 .image-container {
-    flex: 1;
+    position: relative;
+    width: 50%;
+    height: auto;
     margin-right: 20px;
 }
 
 .image-container img {
     width: 100%;
-    max-width: 300px;
-    height: auto;
+    height: 550px;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.previous-image,
+.next-image{
+    position: absolute;
+    border: none;
+    background-color: rgba(0, 0, 0, 0); /* Màu nền với độ mờ */
+    color: #fff; /* Màu chữ */
+    top: 50%;
+    font-size:50px;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.previous-image{
+    left: 10px;
+}
+
+.next-image{
+    right: 10px;
+}
+
+.header{
+    width: 100%;
+    
+}
+
+.header .header-btn{
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #6C78AF;
+    border-radius: 5px;
+}
+
+.header .header-btn:hover{
+    
+    cursor: pointer;
+}
+
+
 .info-container {
     flex: 2;
+
 }
 
 .room-details h2 {
@@ -40,6 +87,19 @@
 .image-container img:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s ease;
+}
+
+.price .room-info{
+    display: inline-block;
+    padding-right: 5px;
+}
+
+.current-price {
+    text-decoration: line-through;
+}
+
+.info-room{
+    margin: 20px;
 }
 
 

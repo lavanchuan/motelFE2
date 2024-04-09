@@ -69,6 +69,7 @@ html{
 }
 
 .room-card {
+    position:relative;
     width: calc(30%);
     /* 25% width cho mỗi card và margin 20px giữa các card */
     margin-bottom: 20px;
@@ -84,6 +85,7 @@ html{
 }
 
 .room-card:hover{
+    cursor: pointer;
     box-shadow: 0 0 10px 2px rgba(3, 65, 236, 0.5);
 }
 
@@ -106,25 +108,32 @@ html{
     text-align: center;
 }
 
+.price .room-info{
+    display: inline-block;
+}
+
+.current-price {
+    text-decoration: line-through;
+}
+
 .room-info {
     margin-left: 20px;
     margin-bottom: 5px;
     font-size: 1.8rem;
 } 
 
-.appoint-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+.sale-icon {
+    position: absolute;
+    top: 0; /* Đặt top là 0 để đưa thẻ a lên đầu trang */
+    right: 0; /* Đặt right là 0 để đưa thẻ a sang phải cùng */
+    padding: 5px;
+    margin: 5px;
+    color: #fff;
+    background-color: red;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 15px;
 }
 
-.appoint-button:hover {
-    background-color: #0056b3;
-}
 
 /*  */
 .modal {

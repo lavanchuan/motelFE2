@@ -43,11 +43,16 @@ export class RoomDetailComponent implements OnInit {
   currentImageIndex: number = 0;
   images: string[] = ["assets/p101-1.png", "assets/p102-1.png", "assets/p103-1.png"];
 
-  changeImage(): void {
-    if (++this.currentImageIndex === this.images.length)
+  changeImage(i:number): void {
+    this.currentImageIndex += i;
+    if (this.currentImageIndex === this.images.length)
       this.currentImageIndex = 0;
+    if (this.currentImageIndex === -1)
+      this.currentImageIndex = this.images.length -1;
   }
-
+  isSale(sale: number):boolean {
+    return sale == 0;
+  }
   // MAKE APPOINT
   formData = {
     meetTime: '',
@@ -118,4 +123,22 @@ export class RoomDetailComponent implements OnInit {
     return this.requestLoginService.getIsRequestLogin();
   }
 
+  roomColor: string = '#6C78AF';
+  ownerColor: string = '#fff';
+  roomDisplay: string = 'block'; // default display for room
+  ownerDisplay: string = 'none'; // default display for owner
+
+  showRoom() {
+    this.roomDisplay = 'block';
+    this.ownerDisplay = 'none';
+    this.roomColor = '#6C78AF';
+    this.ownerColor = '#fff';
+  }
+
+  showOwner() {
+    this.roomDisplay = 'none';
+    this.ownerDisplay = 'block';
+    this.roomColor = '#fff';
+    this.ownerColor = '#6C78AF';
+  }
 }

@@ -1,24 +1,48 @@
-<app-header></app-header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <app-header></app-header>
 
 <div class="container">
     <div class="room-details">
         <div class="image-container">
-            <img src="{{images[currentImageIndex]}}" alt="Room Image" (click)="changeImage()">
+            <button class = "previous-image" (click)="changeImage(-1)">&lt;</button>
+            <img src="{{images[currentImageIndex]}}" alt="Room Image" (click)="changeImage(-1)">
+            <button class = "next-image" (click)="changeImage(1)">&gt;</button>
         </div>
         <div class="info-container">
-            <h2>{{ roomDetail.data.room.name }}</h2>
-            <p>Created At: {{ roomDetail.data.room.createAt }}</p>
-            <p>Area: {{ roomDetail.data.room.area }}</p>
-            <p>Price: {{ roomDetail.data.room.price }}</p>
-            <p>Sale: {{ roomDetail.data.room.sale }}</p>
-            <p>Facility: {{ roomDetail.data.room.facility }}</p>
-            <p>Status: {{ getStatusString(roomDetail.data.owner.status) }}</p>
-            <h2>Chủ trọ: {{roomDetail.data.owner.name}}</h2>
-            <p>Mail: {{ roomDetail.data.owner.mail }}</p>
-            <p>Phone: {{ roomDetail.data.owner.phone }}</p>
-            <p>Address: {{ roomDetail.data.owner.address }}</p>
-            <p>Birthday: {{ roomDetail.data.owner.dateOfBirth }}</p>
-            <p>Sex: {{ roomDetail.data.owner.sex }}</p>
+            <div class ="header">
+                <p class = "header-btn" (click)="showRoom()" [style.background-color]="roomColor" [style.color] ="ownerColor">Phòng trọ</p>
+                <p class = "header-btn" (click)="showOwner()" [style.background-color]="ownerColor"  [style.color] ="roomColor">Chủ trọ</p>
+               
+            </div>
+
+            <div class = "info-room" [style.display]="roomDisplay">
+                <h2>{{ roomDetail.data.room.name }}</h2>
+                <p>Diện tích: {{ roomDetail.data.room.area }}</p>
+                <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
+                <p>Mô tả: {{ roomDetail.data.room.facility }}</p>
+                <div class = "price">
+                    <p class="room-info">Giá: </p>
+                    <p class="room-info" *ngIf="isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price }} đ</p>
+                    <p class="room-info current-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price }} đ</p>
+                    <p class="room-info oder-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price *(100 - roomDetail.data.room.sale) /100}} đ</p>
+                </div>
+                <p>Trạng thái: {{ getStatusString(roomDetail.data.owner.status) }}</p>
+            </div>
+            
+            <div class = "info-owner" [style.display]="ownerDisplay">
+                <h2>Chủ trọ: {{roomDetail.data.owner.name}}</h2>
+                <p>Email: {{ roomDetail.data.owner.mail }}</p>
+                <p>Số điện thoại: {{ roomDetail.data.owner.phone }}</p>
+                <p>Địa chỉ: {{ roomDetail.data.owner.address }}</p>    
+            </div>
         </div>
     </div>
 
@@ -48,5 +72,5 @@
     </div>
 
 </div>
-
-<app-footer></app-footer>
+</body>
+</html>
