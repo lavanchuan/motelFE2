@@ -36,74 +36,14 @@
                     <p class="room-info">Diện tích: {{ room.data.room.area }}</p>
                     <div class = "price">
                         <p class="room-info">Giá: </p>
-                        <p class="room-info" *ngIf="isSale(room.data.room.sale)">{{ room.data.room.price }} đ</p>
-                        <p class="room-info current-price" *ngIf="!isSale(room.data.room.sale)">{{ room.data.room.price }} đ</p>
-                        <p class="room-info oder-price" *ngIf="!isSale(room.data.room.sale)">{{ room.data.room.price *(100 - room.data.room.sale) /100}} đ</p>
+                        <p class="room-info" *ngIf="isSale(room.data.room.sale)">{{formatPrice(room.data.room.price)}} đ</p>
+                        <p class="room-info current-price" *ngIf="!isSale(room.data.room.sale)">{{formatPrice(room.data.room.price)}} đ</p>
+                        <p class="room-info oder-price" *ngIf="!isSale(room.data.room.sale)">{{ formatPrice(room.data.room.price *(100 - room.data.room.sale) /100)}} đ</p>
                     </div>
                     <p class="room-info">Địa chỉ: {{ room.data.motel.address}}</p>
                 </div>
             </div>
         </div>
-
-        <!-- Modal for room details -->
-        <div id="roomDialog" class="modal" *ngIf="openRoomDetailDialog">
-            <div class="modal-content">
-                <span class="close" (click)="closeDialog()">&times;</span>
-                <div class="info" *ngIf="roomOwnerCurrentInfo">
-                    <div class="room-detail">
-                        <h3>Room Info</h3>
-                        <p>Name: {{ roomOwnerCurrentInfo.data.room.name }}</p>
-                        <p>Created At: {{ roomOwnerCurrentInfo.data.room.createAt | date }}</p>
-                        <p>Area: {{ roomOwnerCurrentInfo.data.room.area }}</p>
-                        <p>Price: {{ roomOwnerCurrentInfo.data.room.price }}</p>
-                        <p>Sale: {{ roomOwnerCurrentInfo.data.room.sale }}</p>
-                        <p>Facility: {{ roomOwnerCurrentInfo.data.room.facility }}</p>
-                        <p>Status: {{ roomOwnerCurrentInfo.data.room.status }}</p>
-                    </div>
-                    <div class="owner-info">
-                        <h3>Owner Info</h3>
-                        <p>Name: {{ roomOwnerCurrentInfo.data.owner.name }}</p>
-                        <p>Email: {{ roomOwnerCurrentInfo.data.owner.mail }}</p>
-                        <p>Phone: {{ roomOwnerCurrentInfo.data.owner.phone }}</p>
-                        <p>Address: {{ roomOwnerCurrentInfo.data.owner.address }}</p>
-                        <p>Sex: {{ roomOwnerCurrentInfo.data.owner.sex }}</p>
-                        <p>Date of Birth: {{ roomOwnerCurrentInfo.data.owner.dateOfBirth | date }}</p>
-                        <p>Status: {{ roomOwnerCurrentInfo.data.owner.status }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal for appointment -->
-        <div id="appointmentDialog" class="modal" *ngIf="openAppointDialog">
-            <div class="modal-content">
-                <span class="close" (click)="closeAppointmentDialog()">&times;</span>
-
-                <form (ngSubmit)="makeAppoint()" class="form-container">
-                    <label for="meetTime">Date of Birth:</label>
-                    <br>
-                    <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime">
-
-                    <div>
-                        <label for="reason">Reason:</label>
-                        <br>
-                        <textarea name="reason" id="reason" cols="70%" rows="10"
-                            [(ngModel)]="formData.reason"></textarea>
-                    </div>
-
-                    <div class="btnControl">
-                        <button type="submit">Booking Appoint</button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
-        <!-- DIALOG REQUEST LOGIN -->
-        <div>
-            <app-request-login *ngIf="getIsRequestLogin()"></app-request-login>
-        </div>
-
     </div>
     <!-- <app-footer></app-footer> -->
 </body>

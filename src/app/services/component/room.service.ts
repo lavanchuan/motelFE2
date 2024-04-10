@@ -26,7 +26,6 @@ export class RoomService {
 
   bookingAppoint(request: AppointRequest) : Observable<AppointResponse>{
     console.log("\n\nbookingAppoint: {" + request.meetTime + ", ");
-    console.log(request.reason +", ");
     console.log(request.userId +", ");
     console.log(request.motelRoomId + "}\n\n");
     

@@ -22,6 +22,7 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './room-detail.component.css'
 })
 export class RoomDetailComponent implements OnInit {
+[x: string]: any;
 
   roomDetail: RoomOwnerResponse | any;
 
@@ -53,11 +54,22 @@ export class RoomDetailComponent implements OnInit {
   isSale(sale: number):boolean {
     return sale == 0;
   }
+
+  isRate(rate:number):boolean{
+    return rate == 0;
+  }
+  
+  formatPrice(price: number):string{
+    const integerPart: string = Math.floor(price).toString();
+    const formattedPrice: string = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formattedPrice;
+  }
+
   // MAKE APPOINT
   formData = {
     meetTime: '',
-    reason: '',
   };
+
   openAppointDialog: boolean = false;
   closeAppointmentDialog() {
     this.openAppointDialog = false;
@@ -74,7 +86,6 @@ export class RoomDetailComponent implements OnInit {
   }
 
   makeAppoint() {
-
     const timer = new Date(this.formData.meetTime);
     const meetTime = timer.getDate() + "/" +
       (timer.getMonth() + 1) + "/" +
@@ -95,7 +106,7 @@ export class RoomDetailComponent implements OnInit {
     if (!isNaN(userId)) { // Kiểm tra xem chuyển đổi thành công hay không
       // Sử dụng userId trong yêu cầu đặt lịch hẹn
       this.roomService.bookingAppoint(
-        new AppointRequest(meetTime, this.formData.reason, this.roomDetail.data.room.id, userId))
+        new AppointRequest(meetTime, this.roomDetail.data.room.id, userId))
         .subscribe((response) => {
           // Xử lý khi yêu cầu thành công
           console.log(response);
@@ -125,20 +136,49 @@ export class RoomDetailComponent implements OnInit {
 
   roomColor: string = '#6C78AF';
   ownerColor: string = '#fff';
+  reviewColor: string = '#fff';
+  roomBGColor: string = '#fff';
+  ownerBGColor: string = '#6C78AF';
+  reviewBGColor: string = '#6C78AF';
+
+  defaultColor(){
+    this.roomColor = '#fff';
+    this.ownerColor= '#fff';
+    this.reviewColor = '#fff';
+    this.roomBGColor = '#6C78AF';
+    this.ownerBGColor = '#6C78AF';
+    this.reviewBGColor = '#6C78AF';
+  }
   roomDisplay: string = 'block'; // default display for room
   ownerDisplay: string = 'none'; // default display for owner
+  reviewDisplay: string = 'none'; // default display for review
 
   showRoom() {
     this.roomDisplay = 'block';
     this.ownerDisplay = 'none';
+    this.reviewDisplay = 'none';
+    this.defaultColor();
     this.roomColor = '#6C78AF';
-    this.ownerColor = '#fff';
+    this.roomBGColor = "#fff"
   }
 
   showOwner() {
     this.roomDisplay = 'none';
     this.ownerDisplay = 'block';
-    this.roomColor = '#fff';
+    this.reviewDisplay = 'none';
+    this.defaultColor();
     this.ownerColor = '#6C78AF';
+    this.ownerBGColor = "#fff"
   }
+
+  showReview(){
+    this.roomDisplay = 'none';
+    this.ownerDisplay = 'none';
+    this.reviewDisplay = 'block';
+    this.defaultColor();
+    this.reviewColor = '#6C78AF';
+    this.reviewBGColor = "#fff"
+  }
+
+  averageRating: number = 4;
 }

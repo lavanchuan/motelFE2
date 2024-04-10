@@ -90,7 +90,7 @@ export class HomeComponent {
     if (!isNaN(userId)) { // Kiểm tra xem chuyển đổi thành công hay không
       // Sử dụng userId trong yêu cầu đặt lịch hẹn
       this.roomService.bookingAppoint(
-        new AppointRequest(meetTime, this.formData.reason, this.currentRoom.data.room.id, userId))
+        new AppointRequest(meetTime, this.currentRoom.data.room.id, userId))
         .subscribe((response) => {
           // Xử lý khi yêu cầu thành công
           console.log(response);
@@ -149,4 +149,9 @@ export class HomeComponent {
     this.router.navigate(["/room-detail"]);
   }
 
+  formatPrice(price: number):string{
+    const integerPart: string = Math.floor(price).toString();
+    const formattedPrice: string = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return formattedPrice;
+  }
 }

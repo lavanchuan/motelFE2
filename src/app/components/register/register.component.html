@@ -26,32 +26,15 @@
                 <label for="name">Họ và tên:</label>
                 <input type="text" id="name" name="name" [(ngModel)]="formData.name" required placeholder = "Họ và tên">
                 
-                <label for="name">Mật khẩu:</label>
+                <label for="password">Mật khẩu:</label>
                 <input type="password" id="password" name="password" [(ngModel)]="formData.password" required placeholder = "Mật khẩu">
             
+                <label for="re-password">Nhập lại mật khẩu:</label>
+                <input type="password" id="re-password" name="re-password" required placeholder = "Nhập lại mật khẩu">
+
                 <label for="phone">Số điện thoại:</label>
                 <input type="text" id="phone" name="phone" [(ngModel)]="formData.phone" placeholder = "Số điện thoại">
-            
-                <!-- <label for="address">Địa chỉ:</label>
-                <input type="text" id="address" name="address" [(ngModel)]="formData.address" placeholder = "Địa Chỉ">
-            
-                <label for="dateOfBirth">Ngày sinh:</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="formData.dateOfBirth">
-            
-                <label for="sex">Giới tính:</label>
-                <select id="sex" name="sex" [(ngModel)]="formData.sex">
-                    <option value="MALE">Nam</option>
-                    <option value="FEMALE">Nữ</option>
-                    <option value="LGBT">LGBT</option>
-                    <option value="OTHER" selected>Khác</option>
-                </select>
-            
-                <label for="role">Role:</label>
-                <select id="role" name="role" [(ngModel)]="formData.role">
-                    <option value="USER" selected>User</option>
-                    <option value="OWNER">Owner</option>
-                </select>
-             -->
+
                 <button type="submit" class="btn-register">Đăng Ký</button>
             
             </form>

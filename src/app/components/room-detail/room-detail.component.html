@@ -9,7 +9,7 @@
 <body>
     <app-header></app-header>
 
-<div class="container">
+<div class="container" >
     <div class="room-details">
         <div class="image-container">
             <button class = "previous-image" (click)="changeImage(-1)">&lt;</button>
@@ -18,22 +18,22 @@
         </div>
         <div class="info-container">
             <div class ="header">
-                <p class = "header-btn" (click)="showRoom()" [style.background-color]="roomColor" [style.color] ="ownerColor">Phòng trọ</p>
-                <p class = "header-btn" (click)="showOwner()" [style.background-color]="ownerColor"  [style.color] ="roomColor">Chủ trọ</p>
-               
+                <p class = "header-btn" (click)="showRoom()" [style.background-color]="roomBGColor" [style.color] ="roomColor">Phòng trọ</p>
+                <p class = "header-btn" (click)="showOwner()" [style.background-color]="ownerBGColor"  [style.color] ="ownerColor">Chủ trọ</p>
+                <p class = "header-btn" (click)="showReview()" [style.background-color]="reviewBGColor"  [style.color] ="reviewColor">Đánh giá</p>
             </div>
 
             <div class = "info-room" [style.display]="roomDisplay">
                 <h2>{{ roomDetail.data.room.name }}</h2>
                 <p>Diện tích: {{ roomDetail.data.room.area }}</p>
-                <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
-                <p>Mô tả: {{ roomDetail.data.room.facility }}</p>
                 <div class = "price">
                     <p class="room-info">Giá: </p>
-                    <p class="room-info" *ngIf="isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price }} đ</p>
-                    <p class="room-info current-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price }} đ</p>
-                    <p class="room-info oder-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ roomDetail.data.room.price *(100 - roomDetail.data.room.sale) /100}} đ</p>
+                    <p class="room-info" *ngIf="isSale(roomDetail.data.room.sale)">{{formatPrice(roomDetail.data.room.price)}} đ</p>
+                    <p class="room-info current-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{formatPrice(roomDetail.data.room.price)}} đ</p>
+                    <p class="room-info oder-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ formatPrice(roomDetail.data.room.price *(100 - roomDetail.data.room.sale) /100)}} đ</p>
                 </div>
+                <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
+                <p>Mô tả: {{ roomDetail.data.room.facility }}</p>
                 <p>Trạng thái: {{ getStatusString(roomDetail.data.owner.status) }}</p>
             </div>
             
@@ -43,29 +43,147 @@
                 <p>Số điện thoại: {{ roomDetail.data.owner.phone }}</p>
                 <p>Địa chỉ: {{ roomDetail.data.owner.address }}</p>    
             </div>
+
+            <div class = "info-review" [style.display]="reviewDisplay">
+                
+                <div class="rating">
+                    <div class="stars-container">
+                        <span class="star" [ngClass]="{'filled': averageRating > 0}">&#9733;</span>
+                        <span class="star" [ngClass]="{'filled': averageRating > 1}">&#9733;</span>
+                        <span class="star" [ngClass]="{'filled': averageRating > 2}">&#9733;</span>
+                        <span class="star" [ngClass]="{'filled': averageRating > 3}">&#9733;</span>
+                        <span class="star" [ngClass]="{'filled': averageRating > 4}">&#9733;</span>
+                    </div>
+
+                    <p class = "rate-quantity">{{averageRating}}/5</p>
+                    <p class = "rate-quantity" *ngIf ="isRate(averageRating)">(Chưa có đánh giá nào)</p>
+                    <p class = "rate-quantity" *ngIf ="!isRate(averageRating)">({{100}} đánh giá)</p>
+                    
+                </div>
+                <div class = "review">
+                    <div class = "review-card">
+                        <div class = "user-review">Username</div> <!-- roomDetail.data.review.bokingmotel.user.name -->
+                        <div class="user-star">
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 1}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>  
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 2}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 3}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 4}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 5}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                        </div>
+                        <div class = "time-review">Thời gian đánh giá</div> <!-- roomDetal.data.review.createAt-->
+                        <div class = "comment">Comment</div> <!-- roomDetail.data.review.comment -->
+                    </div>
+
+                    
+
+                    <div class = "review-card">
+                        <div class = "user-review">Username</div> <!-- roomDetail.data.review.bokingmotel.user.name -->
+                        <div class="user-star">
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 1}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>  
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 2}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 3}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 4}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 5}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                        </div>
+                        <div class = "time-review">Thời gian đánh giá</div> <!-- roomDetal.data.review.createAt-->
+                        <div class = "comment">Comment</div> <!-- roomDetail.data.review.comment -->
+                    </div>
+
+                    <div class = "review-card">
+                        <div class = "user-review">Username</div> <!-- roomDetail.data.review.bokingmotel.user.name -->
+                        <div class="user-star">
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 1}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>  
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 2}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 3}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 4}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 5}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                        </div>
+                        <div class = "time-review">Thời gian đánh giá</div> <!-- roomDetal.data.review.createAt-->
+                        <div class = "comment">Comment</div> <!-- roomDetail.data.review.comment -->
+                    </div>
+                    <div class = "review-card">
+                        <div class = "user-review">Username</div> <!-- roomDetail.data.review.bokingmotel.user.name -->
+                        <div class="user-star">
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 1}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>  
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 2}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 3}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 4}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 5}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                        </div>
+                        <div class = "time-review">Thời gian đánh giá</div> <!-- roomDetal.data.review.createAt-->
+                        <div class = "comment">Comment</div> <!-- roomDetail.data.review.comment -->
+                    </div>
+
+                    <div class = "review-card">
+                        <div class = "user-review">Username</div> <!-- roomDetail.data.review.bokingmotel.user.name -->
+                        <div class="user-star">
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 1}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>  
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 2}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 3}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 4}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                            <!-- [ngClass="{'filled': roomDetail.data.review.rate = 5}"]  -->
+                            <span class="star" [ngClass]="">&#9733;</span>
+                        </div>
+                        <div class = "time-review">Thời gian đánh giá</div> <!-- roomDetal.data.review.createAt-->
+                        <div class = "comment">Comment</div> <!-- roomDetail.data.review.comment -->
+                    </div>
+                </div>
+            </div>
+
+            <div class = "footer">
+                <button class="booking-button">Thuê Trọ Ngay</button>
+                <button class="appoint-button" (click)="openAppointmentDialog()">Đặt Lịch Đến Xem Trọ</button>
+                
+            </div>
         </div>
     </div>
 
     <!-- appointment -->
+    <div class="overlay" *ngIf="openAppointDialog" (click)="closeAppointmentDialog()"></div>
+
+
     <div class="dialog-appoint" *ngIf="openAppointDialog">
         <span class="close" (click)="closeAppointmentDialog()">&times;</span>
-
+        <div class ="title-appoint">ĐẶT LỊCH ĐẾN XEM TRỰC TIẾP PHÒNG TRỌ</div>
         <form (ngSubmit)="makeAppoint()" class="appointment-form">
-            <div class="form-group">
-                <label for="meetTime">Thời gian hẹn</label>
-                <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime" required="true">
+            <div class = "info-roomappoint">
+                <p>Phòng trọ: {{roomDetail.data.room.name}}</p>
+                <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
+                <p>Chủ trọ: {{roomDetail.data.owner.name}}</p>
+                <p>Email: {{ roomDetail.data.owner.mail }}</p>
+                <p>Số điện thoại: {{ roomDetail.data.owner.phone }}</p>
             </div>
             <div class="form-group">
-                <label for="reason">Lý do</label>
-                <textarea id="reason" name="reason" [(ngModel)]="formData.reason" rows="4" cols="70%" required></textarea>
+                <label for="meetTime">Thời gian hẹn: </label>
+                <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime" required="true">
             </div>
             <button type="submit">Đặt lịch hẹn</button>
         </form>
     </div>
-
-    <!--  -->
-    <button class="appoint-button" (click)="openAppointmentDialog()">Hẹn Xem Phòng</button>
-
     <!-- DIALOG REQUEST LOGIN -->
     <div>
         <app-request-login *ngIf="getIsRequestLogin() && getAppointing()"></app-request-login>
