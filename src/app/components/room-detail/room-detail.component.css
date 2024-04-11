@@ -37,7 +37,7 @@ body, html {
     border: none;
     background-color: rgba(0, 0, 0, 0); /* Màu nền với độ mờ */
     color: #fff; /* Màu chữ */
-    top: 50%;
+    top: 275px;
     font-size:50px;
     cursor: pointer;
     transform: translateY(-50%);

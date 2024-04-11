@@ -85,6 +85,15 @@ export class RoomDetailComponent implements OnInit {
 
   }
 
+  openBookDialog: boolean = false;
+  closeBookingDialog(){
+    this.openBookDialog = false;
+  }
+
+  openBookingDialog(){
+    this.openBookDialog = true;
+  }
+
   makeAppoint() {
     const timer = new Date(this.formData.meetTime);
     const meetTime = timer.getDate() + "/" +

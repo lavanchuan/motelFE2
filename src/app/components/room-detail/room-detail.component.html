@@ -32,6 +32,8 @@
                     <p class="room-info current-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{formatPrice(roomDetail.data.room.price)}} đ</p>
                     <p class="room-info oder-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ formatPrice(roomDetail.data.room.price *(100 - roomDetail.data.room.sale) /100)}} đ</p>
                 </div>
+                <p>Giá điện: {{roomDetail.data.motel.electric_price}}</p>
+                <p>Giá nước: {{roomDetail.data.motel.water_price}}</p>
                 <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
                 <p>Mô tả: {{ roomDetail.data.room.facility }}</p>
                 <p>Trạng thái: {{ getStatusString(roomDetail.data.owner.status) }}</p>
@@ -155,7 +157,7 @@
             </div>
 
             <div class = "footer">
-                <button class="booking-button">Thuê Trọ Ngay</button>
+                <button class="booking-button" (click)="openBookingDialog()">Thuê Trọ Ngay</button>
                 <button class="appoint-button" (click)="openAppointmentDialog()">Đặt Lịch Đến Xem Trọ</button>
                 
             </div>
@@ -182,6 +184,37 @@
                 <input type="datetime-local" id="meetTime" name="meetTime" [(ngModel)]="formData.meetTime" required="true">
             </div>
             <button type="submit">Đặt lịch hẹn</button>
+        </form>
+    </div>
+
+    <div class="overlay" *ngIf="openBookDialog" (click)="closeBookingDialog()"></div>
+
+    <div class="dialog-appoint" *ngIf="openBookDialog">
+        <span class="close" (click)="closeBookingDialog()">&times;</span>
+        <div class ="title-appoint">YÊU CẦU THUÊ PHÒNG TRỌ</div>
+        <form  class="booking-form">
+            <div class = "info-roomappoint">
+                <p>Phòng trọ: {{roomDetail.data.room.name}}</p>
+                <p>Địa chỉ: {{roomDetail.data.motel.address}}</p>
+                <div class = "price">
+                    <p class="room-info">Giá: </p>
+                    <p class="room-info" *ngIf="isSale(roomDetail.data.room.sale)">{{formatPrice(roomDetail.data.room.price)}} đ</p>
+                    <p class="room-info current-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{formatPrice(roomDetail.data.room.price)}} đ</p>
+                    <p class="room-info oder-price" *ngIf="!isSale(roomDetail.data.room.sale)">{{ formatPrice(roomDetail.data.room.price *(100 - roomDetail.data.room.sale) /100)}} đ</p>
+                </div>
+                <p>Giá điện: {{roomDetail.data.motel.electric_price}}</p>
+                <p>Giá nước: {{roomDetail.data.motel.water_price}}</p>
+                <p>Chủ trọ: {{roomDetail.data.owner.name}}</p>
+                <p>Email: {{ roomDetail.data.owner.mail }}</p>
+                <p>Số điện thoại: {{ roomDetail.data.owner.phone }}</p>
+            </div>
+            <div class="form-group">
+                <label for="startTime">Thời gian đến ở: </label>
+                <input type="date" id="startTime" name="startTime" required="true">
+                <label for="endTime">Thời gian rời đi: </label>
+                <input type="date" id="endTime" name="endTime" required="true">
+            </div>
+            <button type="submit">Thuê Ngay</button>
         </form>
     </div>
     <!-- DIALOG REQUEST LOGIN -->
