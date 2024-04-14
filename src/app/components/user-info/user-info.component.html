@@ -7,7 +7,7 @@
     </div>
     <div class="info-row">
         <span class="label">Name:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.name}}">
+        <input type="text" class="value editable-input" value="{{userInfo.name}}" [(ngModel)]="userInfo.name">
     </div>
     <div class="info-row">
         <span class="label">Created At:</span>
@@ -15,11 +15,11 @@
     </div>
     <div class="info-row">
         <span class="label">Phone:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.phone}}">
+        <input type="text" class="value editable-input" value="{{userInfo.phone}}" [(ngModel)]="userInfo.phone">
     </div>
     <div class="info-row">
         <span class="label">Address:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.address}}">
+        <input type="text" class="value editable-input" value="{{userInfo.address}}" [(ngModel)]="userInfo.address">
     </div>
     <div class="info-row">
         <span class="label">Sex:</span>
@@ -27,13 +27,34 @@
     </div>
     <div class="info-row">
         <span class="label">Date of Birth:</span>
-        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}">
+        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}" [(ngModel)]="userInfo.dateOfBirth">
     </div>
     <div class="info-row">
         <span class="label">Role:</span>
         <input type="text" class="value" value="{{userInfo.role}}" readonly>
     </div>
-    <button class="btn btn-update">Update</button>
-    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'">Register as Owner</button>
-    <button class="btn btn-change-password">Change Password</button>
+    <button class="btn btn-update" (click)="updateInfo()">Update</button>
+    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'">Register as Owner</button> <!--CHECK-->
+    <button class="btn btn-change-password" (click)="onChangePass=true">Change Password</button>
+</div>
+
+<!-- AREA PASS -->
+<div class="change-password-container" *ngIf="onChangePass">
+    <form class="change-password-form" (ngSubmit)="changePassword()">
+        <h2>Đổi Mật Khẩu</h2>
+        <div class="form-group">
+            <label for="oldPassword">Mật khẩu cũ:</label>
+            <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="formChangePassword.oldPass">
+        </div>
+        <div class="form-group">
+            <label for="newPassword">Mật khẩu mới:</label>
+            <input type="password" id="newPassword" name="newPassword" [(ngModel)]="formChangePassword.newPass">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="formChangePassword.rePass">
+        </div>
+        <button type="submit" class="btn">Đổi mật khẩu</button>
+        <button type="button" class="btn" (click)="onChangePass=false">Hủy</button>
+    </form>
 </div>

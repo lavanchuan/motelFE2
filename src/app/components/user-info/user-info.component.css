@@ -57,3 +57,52 @@
 .btn:hover {
     background-color: #0056b3;
 }
+
+
+/* Pass */
+.change-password-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.change-password-form {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.change-password-form .form-group {
+    margin-bottom: 15px;
+}
+
+.change-password-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.change-password-form .form-group input[type="password"] {
+    width: calc(100% - 16px); /* Adjust for padding */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.change-password-form .form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.change-password-form .form-group button:last-child {
+    margin-top: 10px;
+    background-color: #dc3545; /* Change color for cancel button */
+}
