@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BookRoomDTO } from '../../models/dto/BookRoomDTO';
 import { MotelRoomDTO } from '../../models/dto/MotelRoomDTO';
 import { AppointRequest } from '../../models/request/AppointRequest';
 import { AppointResponse } from '../../models/response/AppointResponse';
+import { BookRoomResponse } from '../../models/response/BookRoomResponse';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { INSTANCE } from '../Instance';
 
@@ -30,6 +32,14 @@ export class RoomService {
     console.log(request.motelRoomId + "}\n\n");
     
     return this.http.post<AppointResponse>(INSTANCE + "/user/booking-appoint", request);
+  }
+
+  // Book room
+  bookingRoom(request: BookRoomDTO) : Observable<BookRoomResponse>{
+
+    console.log(request);
+    
+    return this.http.post<BookRoomResponse>(INSTANCE + "/user/booking-room", request);
   }
 
   roomOwnerInfo(roomId: number) : Observable<RoomOwnerResponse>{

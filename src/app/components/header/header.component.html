@@ -16,7 +16,7 @@
             <ul class="nav-menu"> 
                 <li *ngIf="!isLogged()"><a href="/login">Đăng Nhập</a></li>
                 <li *ngIf="!isLogged()"><a href="/register">Đăng Ký</a></li>
-                <li *ngIf="isLogged()"><a href="">{{getUserName()}}</a></li>
+                <li *ngIf="isLogged()"><a href="/user-info">{{getUserName()}}</a></li>
                 <li *ngIf="isLogged()" (click)="logout()"><a href=""><i class="glyphicon glyphicon-log-out"></i></a></li>
             </ul>
         </nav>

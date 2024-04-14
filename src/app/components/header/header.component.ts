@@ -3,11 +3,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AccountDTO } from '../../models/dto/AccountDTO';
 import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { IS_LOGGED, LOGGIN_VALUE, USER_INFO } from '../../services/Instance';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,
+  UserInfoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })

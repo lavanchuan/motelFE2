@@ -5,6 +5,7 @@ import { AccountDTO } from '../models/dto/AccountDTO';
 import { LoginRequest } from '../models/request/LoginRequest';
 import { RegisterRequest } from '../models/request/RegisterRequest';
 import { LoginResponse } from '../models/response/LoginResponse';
+import { MailSenderResponse } from '../models/response/MailSenderResponse';
 import { RegisterResponse } from '../models/response/RegisterResponse';
 import { INSTANCE } from './Instance';
 
@@ -21,5 +22,10 @@ export class AuthenService {
 
   register(request : RegisterRequest){
     return this.http.post<RegisterResponse>(INSTANCE + "/authen/register", request);
+  }
+
+  // forgot pass
+  forgotPassword(mail:string) : Observable<MailSenderResponse>{
+    return this.http.get<MailSenderResponse>(`${INSTANCE}/authen/forgot-password?mail=${mail}`);
   }
 }

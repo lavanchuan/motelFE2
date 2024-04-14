@@ -1,3 +1,5 @@
+import { ROOM_STATUS } from "../../services/Instance";
+
 export class MotelRoomDTO {
     id: number;
     name: string;

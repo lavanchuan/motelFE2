@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BookRoomDTO } from '../../models/dto/BookRoomDTO';
+import { BookRoomStatus } from '../../models/enum/BookRoomStatus';
 import { AppointRequest } from '../../models/request/AppointRequest';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { RoomService } from '../../services/component/room.service';
@@ -22,7 +24,7 @@ import { HeaderComponent } from '../header/header.component';
   styleUrl: './room-detail.component.css'
 })
 export class RoomDetailComponent implements OnInit {
-[x: string]: any;
+  [x: string]: any;
 
   roomDetail: RoomOwnerResponse | any;
 
@@ -41,25 +43,32 @@ export class RoomDetailComponent implements OnInit {
     return "Phòng đang trống";
   }
 
+  getStatusString1(status: string): string {
+    switch (status) {
+      case "OCCUPIED_ROOM": return "Có người ở";
+    }
+    return "Phòng đang trống";
+  }
+
   currentImageIndex: number = 0;
   images: string[] = ["assets/p101-1.png", "assets/p102-1.png", "assets/p103-1.png"];
 
-  changeImage(i:number): void {
+  changeImage(i: number): void {
     this.currentImageIndex += i;
     if (this.currentImageIndex === this.images.length)
       this.currentImageIndex = 0;
     if (this.currentImageIndex === -1)
-      this.currentImageIndex = this.images.length -1;
+      this.currentImageIndex = this.images.length - 1;
   }
-  isSale(sale: number):boolean {
+  isSale(sale: number): boolean {
     return sale == 0;
   }
 
-  isRate(rate:number):boolean{
+  isRate(rate: number): boolean {
     return rate == 0;
   }
-  
-  formatPrice(price: number):string{
+
+  formatPrice(price: number): string {
     const integerPart: string = Math.floor(price).toString();
     const formattedPrice: string = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return formattedPrice;
@@ -86,11 +95,11 @@ export class RoomDetailComponent implements OnInit {
   }
 
   openBookDialog: boolean = false;
-  closeBookingDialog(){
+  closeBookingDialog() {
     this.openBookDialog = false;
   }
 
-  openBookingDialog(){
+  openBookingDialog() {
     this.openBookDialog = true;
   }
 
@@ -138,7 +147,7 @@ export class RoomDetailComponent implements OnInit {
 
   // REQUEST LOGIN
   // Control Request Login
-  getAppointing():boolean{ return this.requestLoginService.getAppointing();}
+  getAppointing(): boolean { return this.requestLoginService.getAppointing(); }
   getIsRequestLogin(): boolean {
     return this.requestLoginService.getIsRequestLogin();
   }
@@ -150,9 +159,9 @@ export class RoomDetailComponent implements OnInit {
   ownerBGColor: string = '#6C78AF';
   reviewBGColor: string = '#6C78AF';
 
-  defaultColor(){
+  defaultColor() {
     this.roomColor = '#fff';
-    this.ownerColor= '#fff';
+    this.ownerColor = '#fff';
     this.reviewColor = '#fff';
     this.roomBGColor = '#6C78AF';
     this.ownerBGColor = '#6C78AF';
@@ -180,7 +189,7 @@ export class RoomDetailComponent implements OnInit {
     this.ownerBGColor = "#fff"
   }
 
-  showReview(){
+  showReview() {
     this.roomDisplay = 'none';
     this.ownerDisplay = 'none';
     this.reviewDisplay = 'block';
@@ -190,4 +199,42 @@ export class RoomDetailComponent implements OnInit {
   }
 
   averageRating: number = 4;
+
+  // BOOKING ROOM
+  formBookingRoom = {
+    startTime: '',
+    endTime: '',
+  };
+
+  bookingRoom(): void {
+    let startTime = new Date(this.formBookingRoom.startTime);
+    let startTimeString = startTime.getDate() + "/" +
+      startTime.getMonth() + "/" + startTime.getFullYear() + " 00:00:00";
+    let endTime = new Date(this.formBookingRoom.endTime);
+    let endTimeString = endTime.getDate() + "/" + endTime.getMonth() + "/" + endTime.getFullYear() +
+      " 00:00:00";
+
+    let price = this.roomDetail.data.room.price * (100 - this.roomDetail.data.room.sale) / 100;
+    let status: BookRoomStatus = BookRoomStatus.PROCESSING;
+    let reason = "";
+    let motelRoomId = this.roomDetail.data.room.id;
+    const userIdString: string | any = localStorage.getItem('USER_ID');
+    const userId = parseInt(userIdString);
+
+    if (!isNaN(userId)) {
+      this.roomService.bookingRoom(new BookRoomDTO(0, "", startTimeString, endTimeString, price,
+        status, reason, motelRoomId, userId)).subscribe((response) => {
+          console.log("BOOKING ROOM: " + response);
+          if (response.status === 200) {
+            console.log("OK");
+            alert("Yêu cầu thuê trọ thành công")
+          } else {
+            console.log("NOT OK");
+            alert("Yêu cầu thuê trọ thất bại");
+          }
+        }, (error) => {
+            alert("Yêu cầu thuê trọ thất bại");
+        });
+    }
+  }
 }

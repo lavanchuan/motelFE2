@@ -1,0 +1,39 @@
+<!-- <app-header></app-header> -->
+<div class="user-info-container">
+    <h2>User Information</h2>
+    <div class="info-row">
+        <span class="label">Email:</span>
+        <input type="text" class="value" value="{{userInfo.mail}}" readonly>
+    </div>
+    <div class="info-row">
+        <span class="label">Name:</span>
+        <input type="text" class="value editable-input" value="{{userInfo.name}}">
+    </div>
+    <div class="info-row">
+        <span class="label">Created At:</span>
+        <input type="text" class="value" value="{{userInfo.createAt}}">
+    </div>
+    <div class="info-row">
+        <span class="label">Phone:</span>
+        <input type="text" class="value editable-input" value="{{userInfo.phone}}">
+    </div>
+    <div class="info-row">
+        <span class="label">Address:</span>
+        <input type="text" class="value editable-input" value="{{userInfo.address}}">
+    </div>
+    <div class="info-row">
+        <span class="label">Sex:</span>
+        <input type="text" class="value" value="{{userInfo.sex}}" readonly>
+    </div>
+    <div class="info-row">
+        <span class="label">Date of Birth:</span>
+        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}">
+    </div>
+    <div class="info-row">
+        <span class="label">Role:</span>
+        <input type="text" class="value" value="{{userInfo.role}}" readonly>
+    </div>
+    <button class="btn btn-update">Update</button>
+    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'">Register as Owner</button>
+    <button class="btn btn-change-password">Change Password</button>
+</div>
