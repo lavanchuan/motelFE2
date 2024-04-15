@@ -159,7 +159,7 @@
             <div class = "footer" *ngIf="roomDetail.data.room.status!=='OCCUPIED_ROOM'">
                 <button class="booking-button" (click)="openBookingDialog()">Thuê Trọ Ngay</button>
                 <button class="appoint-button" (click)="openAppointmentDialog()">Đặt Lịch Đến Xem Trọ</button>
-                
+                <button class="appoint-button" (click)="onMessage()">Nhắn tin cho chủ trọ</button>
             </div>
         </div>
     </div>
@@ -220,6 +220,11 @@
     <!-- DIALOG REQUEST LOGIN -->
     <div>
         <app-request-login *ngIf="getIsRequestLogin() && getAppointing()"></app-request-login>
+    </div>
+
+    <!-- MESSAGE COMPONENT -->
+    <div class="message-area" *ngIf="isOnMessage()">
+        <app-message></app-message>
     </div>
 
 </div>

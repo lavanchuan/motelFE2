@@ -8,15 +8,18 @@ import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
 import { ROOM_STATUS } from '../../services/Instance';
+import { MessageService } from '../../services/MessageService';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
+import { MessageComponent } from '../message/message.component';
 
 @Component({
   selector: 'app-room-detail',
   standalone: true,
   imports: [HeaderComponent,
     FooterComponent,
+    MessageComponent,
     FormsModule,
     CommonModule,
     RequestLoginComponent],
@@ -29,7 +32,8 @@ export class RoomDetailComponent implements OnInit {
   roomDetail: RoomOwnerResponse | any;
 
   constructor(private roomService: RoomService,
-    private requestLoginService: DialogRequestLoginService) {
+    private requestLoginService: DialogRequestLoginService,
+    private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -236,5 +240,14 @@ export class RoomDetailComponent implements OnInit {
             alert("Yêu cầu thuê trọ thất bại");
         });
     }
+  }
+
+  // MESSAGE
+  isOnMessage():boolean{
+    return this.messageService.getOnMessage();
+  }
+
+  onMessage():void{
+    this.messageService.onMessage();
   }
 }
