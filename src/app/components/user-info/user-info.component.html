@@ -1,4 +1,7 @@
 <!-- <app-header></app-header> -->
+
+<app-header-info></app-header-info>
+
 <div class="user-info-container">
     <h2>User Information</h2>
     <div class="info-row">
@@ -27,14 +30,16 @@
     </div>
     <div class="info-row">
         <span class="label">Date of Birth:</span>
-        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}" [(ngModel)]="userInfo.dateOfBirth">
+        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}"
+            [(ngModel)]="userInfo.dateOfBirth">
     </div>
     <div class="info-row">
         <span class="label">Role:</span>
         <input type="text" class="value" value="{{userInfo.role}}" readonly>
     </div>
     <button class="btn btn-update" (click)="updateInfo()">Update</button>
-    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Register as Owner</button> <!--CHECK-->
+    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Register as
+        Owner</button>
     <button class="btn btn-change-password" (click)="onChangePass=true">Change Password</button>
 </div>
 

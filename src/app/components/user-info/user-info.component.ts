@@ -7,12 +7,14 @@ import { ChangePasswordRequest } from '../../models/request/ChangePasswordReques
 import { UpdateInfoResponse } from '../../models/response/UpdateInfoResponse';
 import { AuthenService } from '../../services/authen.service';
 import { USER_ID, USER_INFO } from '../../services/Instance';
+import { HeaderInfoComponent } from '../header-info/header-info.component';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
   imports: [HeaderComponent,
+    HeaderInfoComponent,
     CommonModule,
     FormsModule],
   templateUrl: './user-info.component.html',
