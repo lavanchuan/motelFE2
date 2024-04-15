@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountDTO } from '../models/dto/AccountDTO';
 import { AccountDTO2 } from '../models/dto/AccountDTO2';
+import { AccountIdRequest } from '../models/request/AccountIdRequest';
+import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest';
 import { LoginRequest } from '../models/request/LoginRequest';
 import { RegisterRequest } from '../models/request/RegisterRequest';
 import { LoginResponse } from '../models/response/LoginResponse';
 import { MailSenderResponse } from '../models/response/MailSenderResponse';
+import { OtherResponse } from '../models/response/OtherResponse';
 import { RegisterResponse } from '../models/response/RegisterResponse';
 import { UpdateInfoResponse } from '../models/response/UpdateInfoResponse';
 import { INSTANCE } from './Instance';
@@ -37,7 +40,12 @@ export class AuthenService {
   }
 
   // change pass
-  changePassword(oldPass:string, newPass:string){
-    // alert("...");
+  changePassword(request: ChangePasswordRequest): Observable<OtherResponse<string>>{
+    return this.http.post<OtherResponse<string>>(`${INSTANCE}/authen/change-password`, request);
+  }
+
+  // register owner
+  registerOwner(request: AccountIdRequest): Observable<OtherResponse<AccountDTO2>>{
+    return this.http.post<OtherResponse<AccountDTO2>>(`${INSTANCE}/authen/register-owner`, request);
   }
 }

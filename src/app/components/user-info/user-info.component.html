@@ -34,7 +34,7 @@
         <input type="text" class="value" value="{{userInfo.role}}" readonly>
     </div>
     <button class="btn btn-update" (click)="updateInfo()">Update</button>
-    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'">Register as Owner</button> <!--CHECK-->
+    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Register as Owner</button> <!--CHECK-->
     <button class="btn btn-change-password" (click)="onChangePass=true">Change Password</button>
 </div>
 

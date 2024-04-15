@@ -1,10 +1,12 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatCurrency } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AccountDTO2 } from '../../models/dto/AccountDTO2';
+import { AccountIdRequest } from '../../models/request/AccountIdRequest';
+import { ChangePasswordRequest } from '../../models/request/ChangePasswordRequest';
 import { UpdateInfoResponse } from '../../models/response/UpdateInfoResponse';
 import { AuthenService } from '../../services/authen.service';
-import { USER_INFO } from '../../services/Instance';
+import { USER_ID, USER_INFO } from '../../services/Instance';
 import { HeaderComponent } from '../header/header.component';
 
 @Component({
@@ -53,6 +55,7 @@ export class UserInfoComponent {
     newPass: '',
     rePass: ''
   }
+
   changePassword(): void {
     if (this.formChangePassword.oldPass === "" ||
       this.formChangePassword.newPass === "" ||
@@ -66,8 +69,50 @@ export class UserInfoComponent {
       return;
     }
 
-    alert("Hệ thống đang nâng cấp");
-    this.onChangePass = false;
-    // this.authService.changePassword(this.formChangePassword.oldPass, this.formChangePassword.newPass);
+    let userIdString: string | any = localStorage.getItem(USER_ID);
+    let userId = parseInt(userIdString);
+    if (isNaN(userId)) {
+      console.log("Không chuyển đổit được id của user");
+      return;
+    }
+
+    this.authService.changePassword(
+      new ChangePasswordRequest(userId, this.formChangePassword.oldPass, this.formChangePassword.newPass))
+      .subscribe((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          alert("Đổi mật khẩu thành công");
+          this.onChangePass = false;
+        } else {
+          alert("Đổi mật khẩu thất bại");
+        }
+      }, (error) => {
+        console.error(error);
+        alert("Đổi mật khẩu thất bại");
+      })
+  }
+
+  // regis owner
+  regisOwner(): void {
+    let userIdString: string | any = localStorage.getItem(USER_ID);
+    let userId = parseInt(userIdString);
+
+    if (isNaN(userId)) {
+      console.log("Không thể chuyển đổi id của user");
+      return;
+    }
+
+    this.authService.registerOwner(new AccountIdRequest(userId)).subscribe((response) => {
+      console.log(response);
+      if (response.status === 200) {
+        console.log(response.data);
+        localStorage.setItem(USER_INFO, JSON.stringify(response.data));
+        alert("Đã gửi đăng ký owner đến admin");
+      } else {
+        alert("Đăng ký owner thất bại");
+      }
+    }, (error) => {
+      alert("Đăng ký owner thất bại");
+    });
   }
 }
