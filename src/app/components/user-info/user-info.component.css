@@ -1,28 +1,74 @@
-.user-info-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Lexend;
+}
+.container{
     margin-top: 100px;
+    padding: 0;
+    width: 100%;
 }
 
-.user-info-container h2 {
+.user-info-container{
+    display: flex;
+    width: 96%;
+    margin-left: 30px;
+    /* border: 1px solid #ccc; */
+    border-radius:  10px;
+    background-color: #f9f9f9;
+}
+
+.header-userinfo{
+    width: 25%;
+    /* border: 1px solid #ccc; */
+    background-color: #fff;
+    border-radius: 10px;
+    min-height: 550px;
+}
+
+.header-btn{
+    padding: 10px 30px;
+    margin: 0;
+    transition: background-color 0.5s ease;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.header-btn:hover{
+    background-color: #ccc !important;
+    color: #6C78AF !important;
+    cursor: pointer;
+}
+
+.user-info {
+    width: 75%;
+    margin: 0 auto;
+    padding: 20px;
+    
+    background-color: #f9f9f9;
+}
+
+.user-info h2 {
     text-align: center;
     margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 40px;
 }
 
 .info-row {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    font-size: 20px;
 }
 
 .label {
     flex: 1;
+    text-align: left;
     font-weight: bold;
     margin-right: 10px;
+    color: #000;
+    max-width: 150px;
 }
 
 .value {
@@ -33,7 +79,7 @@
 }
 
 .editable-input {
-    width: calc(100% - 80px);
+    width: calc(100% - 100px);
 }
 
 .button-container {
@@ -59,51 +105,92 @@
     background-color: #0056b3;
 }
 
+/* Style cho button */
+.btn-changePass {
+    width:100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
 
+/* Hover state cho button */
+.btn-changePass:hover {
+    background-color: #0056b3;
+}
 /* Pass */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Một lớp mờ */
+    z-index: 999; /* Đảm bảo lớp overlay nằm trên dialog-appoint */
+    cursor: pointer; /* Hiển thị icon chuột là pointer */
+}
+
 .change-password-container {
+    z-index: 1000;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+.close {
+    color: rgb(226, 63, 63);
+    float: right;
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(190, 5, 5);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 35px;
+}
+
 .change-password-form {
-    width: 400px;
+    width: 500px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
 }
 
+.change-password-form h2{
+    text-align: center;
+    color: #6C78AF;
+    margin-bottom: 30px;
+}
+
 .change-password-form .form-group {
-    margin-bottom: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: inline-block;
 }
 
 .change-password-form .form-group label {
-    display: block;
     margin-bottom: 5px;
+    width: 200px;
 }
 
 .change-password-form .form-group input[type="password"] {
-    width: calc(100% - 16px); /* Adjust for padding */
+    width: calc(100% - 200px);
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
 }
 
-.change-password-form .form-group button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.change-password-form .form-group button:last-child {
-    margin-top: 10px;
-    background-color: #dc3545; /* Change color for cancel button */
-}

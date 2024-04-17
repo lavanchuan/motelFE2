@@ -1,6 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
+    font-family: Lexend;
 }
 .container{
     margin-top: 100px;
@@ -72,7 +73,7 @@ body, html {
 .header .header-btn:hover{
     background-color: #ccc !important;
     color: #6C78AF !important;
-    cursor: pointer;
+    cursor:pointer;
 }
 
 
@@ -115,7 +116,7 @@ body, html {
 }
 
 .image-container img:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) ;
     transition: box-shadow 0.3s ease;
 }
 

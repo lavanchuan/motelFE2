@@ -117,4 +117,73 @@ export class UserInfoComponent {
       alert("Đăng ký owner thất bại");
     });
   }
+  userInfoDisplay: string = 'block';
+  historyDisplay: string = 'none';
+  roomInfoDisplay: string = 'none';
+  appountRoomDisplay: string = 'none';
+  bookingRoomDisplay: string = 'none';
+
+  userInfoColor: string = '#fff';
+  userInfoBGColor: string = '#6C78AF';
+  historyColor: string = '#6C78AF';
+  historyBGColor: string = '#fff';
+  roomInfoColor: string = '#6C78AF';
+  roomInfoBGColor: string = '#fff';
+  appountRoomColor: string = '#6C78AF';
+  appountRoomBGColor: string = '#fff';
+  bookingRoomColor: string = '#6C78AF';
+  bookingRoomBGColor: string = '#fff';
+  
+  defaultColorAndDisplay(){
+    this.userInfoColor = '#6C78AF';
+    this.userInfoBGColor = '#fff';
+    this.historyColor = '#6C78AF';
+    this.historyBGColor = '#fff';
+    this.roomInfoColor = '#6C78AF';
+    this.roomInfoBGColor = '#fff';
+    this.appountRoomColor = '#6C78AF';
+    this.appountRoomBGColor = '#fff';
+    this.bookingRoomColor = '#6C78AF';
+    this.bookingRoomBGColor = '#fff';
+    this.userInfoDisplay = 'none';
+    this.historyDisplay = 'none';
+    this.roomInfoDisplay = 'none';
+    this.appountRoomDisplay = 'none';
+    this.bookingRoomDisplay = 'none';
+  }
+
+  showUserInfo(){
+    this.defaultColorAndDisplay();
+    this.userInfoDisplay = 'block';
+    this.userInfoColor = '#fff';
+    this.userInfoBGColor = '#6C78AF';
+  }
+
+  showHistory(){
+    this.defaultColorAndDisplay();
+    this.historyDisplay = 'block';
+    this.historyColor = '#fff';
+    this.historyBGColor = '#6C78AF';
+  }
+
+  showRoomInfo(){
+    this.defaultColorAndDisplay();
+    this.roomInfoDisplay = 'block';
+    this.roomInfoColor = '#fff';
+    this.roomInfoBGColor = '#6C78AF';
+  }
+
+  showAppountRoom(){
+    this.defaultColorAndDisplay();
+    this.appountRoomDisplay = 'block';
+    this.appountRoomColor = '#fff';
+    this.appountRoomBGColor = '#6C78AF';
+  }
+
+  showBookingRoom(){
+    this.defaultColorAndDisplay();
+    this.bookingRoomDisplay = 'block';
+    this.bookingRoomColor = '#fff';
+    this.bookingRoomBGColor = '#6C78AF';
+  }
 }
