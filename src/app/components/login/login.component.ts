@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AccountDTO } from '../../models/dto/AccountDTO';
+import { AccountDTO2 } from '../../models/dto/AccountDTO2';
+import { UserInfoDTO } from '../../models/dto/UserInfoDTO';
 import { LoginRequest } from '../../models/request/LoginRequest';
 import { LoginResponse } from '../../models/response/LoginResponse';
 import { MailSenderResponse } from '../../models/response/MailSenderResponse';
@@ -39,7 +41,10 @@ export class LoginComponent implements OnInit {
       .subscribe((isValid: boolean) => {
         if (isValid) {
           localStorage.setItem(IS_LOGGED, LOGGIN_VALUE.TRUE.toString());
-          this.router.navigate(["/home"]);
+
+          if(this.authenService.getRole() === "ADMIN") this.router.navigate(["/admin-home"]);
+          else if(this.authenService.getRole() === "OWNER") this.router.navigate(["/owner-home"]);
+          else this.router.navigate(["/home"]);
         } else {
           this.isCorrect = isValid;
         }
@@ -92,6 +97,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
 
 }
 

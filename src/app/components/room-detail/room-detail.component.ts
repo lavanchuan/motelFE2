@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { BookRoomDTO } from '../../models/dto/BookRoomDTO';
 import { BookRoomStatus } from '../../models/enum/BookRoomStatus';
 import { AppointRequest } from '../../models/request/AppointRequest';
+import { MessageAllOfSender } from '../../models/response/MessageAllOfSender';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
-import { ROOM_STATUS } from '../../services/Instance';
+import { MESSAGE_ALL, MESSAGE_CURRENT, ROOM_OWNER_CURRENT, ROOM_STATUS } from '../../services/Instance';
 import { MessageService } from '../../services/MessageService';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -237,17 +239,25 @@ export class RoomDetailComponent implements OnInit {
             alert("Yêu cầu thuê trọ thất bại");
           }
         }, (error) => {
-            alert("Yêu cầu thuê trọ thất bại");
+          alert("Yêu cầu thuê trọ thất bại");
         });
     }
   }
 
   // MESSAGE
-  isOnMessage():boolean{
+  isOnMessage(): boolean {
     return this.messageService.getOnMessage();
   }
 
-  onMessage():void{
+  onMessage(): void {
     this.messageService.onMessage();
+    let messAllStr : string | any = localStorage.getItem(MESSAGE_ALL);
+    let messageAll : MessageAllOfSender = JSON.parse(messAllStr);
+
+    let roomOwnerCurrentInfoStr : string | any = localStorage.getItem(ROOM_OWNER_CURRENT);
+    let roomOwnerCurrentInfo : RoomOwnerResponse = JSON.parse(roomOwnerCurrentInfoStr);
+
+    let messageCurrent = messageAll.messageAllOfReceiverList.filter(mes => mes.receiver.id === roomOwnerCurrentInfo.data.owner.id)[0];
+    sessionStorage.setItem(MESSAGE_CURRENT, JSON.stringify(messageCurrent));
   }
 }

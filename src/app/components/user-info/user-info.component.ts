@@ -1,6 +1,7 @@
 import { CommonModule, formatCurrency } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { AccountIdRequest } from '../../models/request/AccountIdRequest';
 import { ChangePasswordRequest } from '../../models/request/ChangePasswordRequest';
@@ -24,7 +25,8 @@ export class UserInfoComponent {
 
   userInfo: AccountDTO2 | any;
 
-  constructor(private authService: AuthenService) {
+  constructor(private router: Router,
+    private authService: AuthenService) {
     let userString = localStorage.getItem(USER_INFO);
     if (userString) {
       this.userInfo = JSON.parse(userString);
@@ -116,5 +118,15 @@ export class UserInfoComponent {
     }, (error) => {
       alert("Đăng ký owner thất bại");
     });
+  }
+
+  // NAVIGATE ADMIN/OWNER
+  pageNavigate():void{
+    if(this.authService.getRole() === "ADMIN") this.router.navigate(["/admin-home"]);
+    else this.router.navigate(["/owner-home"]);
+  }
+
+  isUserRole():boolean{
+    return this.authService.getRole() === "USER";
   }
 }

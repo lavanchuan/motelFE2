@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AccountDTO } from '../models/dto/AccountDTO';
 import { AccountDTO2 } from '../models/dto/AccountDTO2';
+import { UserInfoDTO } from '../models/dto/UserInfoDTO';
 import { AccountIdRequest } from '../models/request/AccountIdRequest';
 import { ChangePasswordRequest } from '../models/request/ChangePasswordRequest';
 import { LoginRequest } from '../models/request/LoginRequest';
@@ -12,7 +13,7 @@ import { MailSenderResponse } from '../models/response/MailSenderResponse';
 import { OtherResponse } from '../models/response/OtherResponse';
 import { RegisterResponse } from '../models/response/RegisterResponse';
 import { UpdateInfoResponse } from '../models/response/UpdateInfoResponse';
-import { INSTANCE } from './Instance';
+import { INSTANCE, USER_ID, USER_INFO } from './Instance';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,21 @@ export class AuthenService {
   // register owner
   registerOwner(request: AccountIdRequest): Observable<OtherResponse<AccountDTO2>>{
     return this.http.post<OtherResponse<AccountDTO2>>(`${INSTANCE}/authen/register-owner`, request);
+  }
+
+  // get role
+  getRole():string {
+    let userInfoStr : string | any = localStorage.getItem(USER_INFO);
+    let userInfo : UserInfoDTO = JSON.parse(userInfoStr);
+    return userInfo.role;
+  }
+
+  // get account id
+  getAccountId():number{
+    let accountIdStr : string | any = localStorage.getItem(USER_ID);
+    let accountId = parseInt(accountIdStr);
+
+    if(isNaN(accountId)) return -1;
+    return accountId;
   }
 }

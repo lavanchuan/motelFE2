@@ -41,6 +41,8 @@
     <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Register as
         Owner</button>
     <button class="btn btn-change-password" (click)="onChangePass=true">Change Password</button>
+
+    <button class="btn" (click)="pageNavigate()" *ngIf="!isUserRole()">Quản lý</button>
 </div>
 
 <!-- AREA PASS -->

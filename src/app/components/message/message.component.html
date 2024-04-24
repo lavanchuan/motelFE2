@@ -1,34 +1,11 @@
 <div class="message-container">
-    <div class="message-header" (click)="offMessage()">USERNAME</div>
+    <div class="message-header" (click)="offMessage()">{{messageCurrent.receiver.name}}</div>
     <div class="message-content">
-        <div class="message own-message">
-            <p>Hello.</p>
-        </div>
-        <div class="message other-message">
-            <p>Xin chào.</p>
-        </div>
-        <div class="message own-message">
-            <p>Hello.</p>
-        </div>
-        <div class="message other-message">
-            <p>Xin chào.</p>
-        </div>
-        <div class="message own-message">
-            <p>Hello.</p>
-        </div>
-        <div class="message other-message">
-            <p>Xin chào.</p>
-        </div>
-        <div class="message own-message">
-            <p>Hello.</p>
-        </div>
-        <div class="message other-message">
-            <p>Xin chào.</p>
-        </div>
-        <!-- Thêm các tin nhắn khác tại đây -->
+        <div *ngFor="let mess of messageCurrent.messageList" 
+        class="message {{mess.senderId===getUserId()?'own-message':'other-message'}}">{{mess.message}}</div>
     </div>
     <div class="message-control">
-        <input type="text" id="txtMessage" placeholder="Tin nhắn">
-        <button>Gửi</button>
+        <input type="text" id="txtMessage" placeholder="Tin nhắn" />
+        <button >Gửi</button>
     </div>
 </div>

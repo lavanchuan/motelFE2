@@ -1,0 +1,122 @@
+<app-header></app-header>
+<div class="owner-container">
+    <div class="owner-nav">
+        <ul>
+            <li *ngFor="let item of itemList; let i = index;" (click)="loadDataShow(i)">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+    <div class="owner-content">
+        <table>
+            <thead [ngSwitch]="itemList[itemCurrent]">
+                <ng-container *ngSwitchCase="'Motel'">
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Create at</th>
+                    <th>Status</th>
+                    <th>Electric price</th>
+                    <th>Water price</th>
+                    <th>Cập nhật</th>
+                    <th>Rooms</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Make appoint'">
+                    <th>Create at</th>
+                    <th>Meet time</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Room name</th>
+                    <th>Motel Name</th>
+                    <th>Customer name</th>
+                    <th>Confirm</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Book room'">
+                    <th>...</th>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <th>Name</th>
+                    <th>Area</th>
+                    <th>Create at</th>
+                    <th>Facility</th>
+                    <th>Price</th>
+                    <th>Sale</th>
+                    <th>Status</th>
+                    <th>Cập nhật</th>
+                </ng-container>
+            </thead>
+            <tbody [ngSwitch]="itemList[itemCurrent]">
+                <ng-container *ngSwitchCase="'Motel'">
+                    <tr>
+                        <td><input type="text" placeholder="Tên nhà trọ" [(ngModel)]="motelAdd.name"></td>
+                        <td><input type="text" placeholder="Đại chỉ" [(ngModel)]="motelAdd.address"></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="text" placeholder="Giá điện" [(ngModel)]="motelAdd.electric_price"></td>
+                        <td><input type="text" placeholder="Giá nước" [(ngModel)]="motelAdd.water_price"></td>
+                        <td><button (click)="addMotel()">Thêm nhà trọ</button></td>
+                        <td></td>
+                    </tr>
+                    <tr *ngFor="let data of dataShow; let i = index;">
+                        <td><input type="text" value="{{data.name}}" [(ngModel)]="motelList[i].name" /></td>
+                        <td><input type="text" value="{{data.address}}" [(ngModel)]="motelList[i].address" /></td>
+                        <td>{{data.createAt}}</td>
+                        <td>{{getMotelStatusName(data.status)}}</td>
+                        <td><input type="text" value="{{data.electric_price}}"
+                                [(ngModel)]="motelList[i].electric_price" /></td>
+                        <td><input type="text" value="{{data.water_price}}" [(ngModel)]="motelList[i].water_price" />
+                        </td>
+                        <td><button (click)="updateMotel(data.id)">Chỉnh sửa</button></td>
+                        <td><a (click)="loadRoom(data.id)">Xem nhà trọ</a></td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Make appoint'">
+                    <tr *ngFor="let data of dataShow; let i = index;">
+                        <td *ngIf="dataShow[i] != null">{{dataShow[i].makeAppoint.createAt}}</td>
+                        <td *ngIf="dataShow[i] != null">{{dataShow[i].makeAppoint.meetTime}}</td>
+                        <td *ngIf="dataShow[i] != null">
+                            <textarea cols="10" rows="3" [(ngModel)]="makeAppointList[i].makeAppoint.reason"
+                                [readOnly]="!isProcessingCreate(dataShow[i].makeAppoint.status)"></textarea>
+                        </td>
+                        <td *ngIf="dataShow[i] != null">{{getMakeAppointStatusName(dataShow[i].makeAppoint.status)}}</td>
+                        <td *ngIf="dataShow[i] != null">{{dataShow[i].room.name}}</td>
+                        <td *ngIf="dataShow[i] != null">{{dataShow[i].motel.name}}</td>
+                        <td *ngIf="dataShow[i] != null">{{dataShow[i].motel.address}}</td>
+                        <td *ngIf="dataShow[i] != null">
+                            <button (click)="confirmMakeAppoint(dataShow[i].makeAppoint.id, true)"
+                                *ngIf="isProcessingCreate(dataShow[i].makeAppoint.status)">Confirm</button>
+                            <button (click)="confirmMakeAppoint(dataShow[i].makeAppoint.id, false)"
+                                *ngIf="isProcessingCreate(dataShow[i].makeAppoint.status)">Reject</button>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchCase="'Book room'">
+                    <tr>
+                        <td>...</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <tr>
+                        <td><input type="text" [(ngModel)]="roomAdd.name"></td>
+                        <td><input type="text" [(ngModel)]="roomAdd.area"></td>
+                        <td></td>
+                        <td><input type="text" [(ngModel)]="roomAdd.facility"></td>
+                        <td><input type="number" [(ngModel)]="roomAdd.price"></td>
+                        <td><input type="number" [(ngModel)]="roomAdd.sale"></td>
+                        <td></td>
+                        <td><button (click)="addRoom()">Thêm phòng</button></td>
+                    </tr>
+                    <tr *ngFor="let d of dataShow; let i = index;">
+                        <td><input type="text" [(ngModel)]="roomList[i].name"></td>
+                        <td><input type="text" [(ngModel)]="roomList[i].area"></td>
+                        <td>{{d.createAt}}</td>
+                        <td><input type="text" [(ngModel)]="roomList[i].facility"></td>
+                        <td><input type="number" [(ngModel)]="roomList[i].price"></td>
+                        <td><input type="number" [(ngModel)]="roomList[i].sale"></td>
+                        <td>{{getStatusName(roomList[i].status)}}</td>
+                        <td><button (click)="updateRoom(d.id)">Chỉnh sửa</button></td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -9,7 +9,8 @@ import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { ApiService } from '../../services/api.service';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
-import { USER_ID } from '../../services/Instance';
+import { ROOM_OWNER_CURRENT, USER_ID } from '../../services/Instance';
+import { MessageService } from '../../services/MessageService';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
@@ -31,8 +32,10 @@ export class HomeComponent {
   constructor(private router: Router, 
     private apiService: ApiService, 
     private roomService: RoomService,
-    private requestLoginService : DialogRequestLoginService) {
+    private requestLoginService : DialogRequestLoginService,
+    private messageService : MessageService) {
     this.getRoomAll();
+    this.messageService.loadMessageAll();
   }
 
   
@@ -147,6 +150,9 @@ export class HomeComponent {
   toRoomDetail(roomDetail : RoomOwnerResponse): void{
     this.roomService.setRoomOwnerCurrent(roomDetail);
     this.router.navigate(["/room-detail"]);
+
+    //TODO set room info
+    localStorage.setItem(ROOM_OWNER_CURRENT, JSON.stringify(this.roomService.getRoomOwnerCurrent()));
   }
 
   formatPrice(price: number):string{

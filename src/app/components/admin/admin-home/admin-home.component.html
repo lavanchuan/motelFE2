@@ -1,0 +1,104 @@
+<app-header></app-header>
+<div class="admin-container">
+    <div class="admin-nav">
+        <ul>
+            <li *ngFor="let item of itemList; let i = index;" (click)="loadDataShow(i)">
+                {{ item }}
+            </li>
+        </ul>
+    </div>
+    <div class="admin-content">
+        <table>
+            <thead [ngSwitch]="itemList[itemCurrent]">
+                <ng-container *ngSwitchCase="'USER'">
+                    <th>Name</th>
+                    <th>Mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Create at</th>
+                    <th>Birthday</th>
+                    <th>Sex</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Confirm</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'OWNER'">
+                    <th>Name</th>
+                    <th>Mail</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Create at</th>
+                    <th>Birthday</th>
+                    <th>Sex</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <th>Name</th>
+                    <th>Area</th>
+                    <th>Address</th>
+                    <th>Create at</th>
+                    <th>Facility</th>
+                    <th>Electric price</th>
+                    <th>Water price</th>
+                    <th>Price</th>
+                    <th>Sale</th>
+                    <th>Owner name</th>
+                    <th>Owner mail</th>
+                    <th>Confirm</th>
+                </ng-container>
+            </thead>
+            <tbody [ngSwitch]="itemList[itemCurrent]">
+                <ng-container *ngSwitchCase="'USER'">
+                    <tr *ngFor="let data of dataShow">
+                        <td>{{data.name}}</td>
+                        <td>{{data.mail}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.address}}</td>
+                        <td>{{data.createAt}}</td>
+                        <td>{{data.dateOfBirth}}</td>
+                        <td>{{data.sex}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.role}}</td>
+                        <td *ngIf="isRegisOwner(data.status)">
+                            <button (click)="confirmRegisOwner(data.id, true)">Confirm</button>
+                            <button (click)="confirmRegisOwner(data.id, false)">Reject</button>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchCase="'OWNER'">
+                    <tr *ngFor="let data of dataShow">
+                        <td>{{data.name}}</td>
+                        <td>{{data.mail}}</td>
+                        <td>{{data.phone}}</td>
+                        <td>{{data.address}}</td>
+                        <td>{{data.createAt}}</td>
+                        <td>{{data.dateOfBirth}}</td>
+                        <td>{{data.sex}}</td>
+                        <td>{{data.status}}</td>
+                        <td>{{data.role}}</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <tr *ngFor="let d of dataShow; let i = index;">
+                        <td>{{dataShow[i].data.room.name}}</td>
+                        <td>{{dataShow[i].data.room.area}}</td>
+                        <td>{{dataShow[i].data.motel.address}}</td>
+                        <td>{{dataShow[i].data.room.createAt}}</td>
+                        <td>{{dataShow[i].data.room.facility}}</td>
+                        <td>{{dataShow[i].data.motel.electric_price}}</td>
+                        <td>{{dataShow[i].data.motel.water_price}}</td>
+                        <td>{{dataShow[i].data.room.price}}</td>
+                        <td>{{dataShow[i].data.room.sale}}</td>
+                        <td>{{dataShow[i].data.owner.name}}</td>
+                        <td>{{dataShow[i].data.owner.mail}}</td>
+                        <td>
+                            <button (click)="confirmAddRoomRequest(dataShow[i].data.room.id, true)">Confirm</button>
+                            <button (click)="confirmAddRoomRequest(dataShow[i].data.room.id, false)">Reject</button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>
