@@ -130,45 +130,99 @@ export class UserInfoComponent {
     return this.authService.getRole() === "USER";
   }
 
-  userInfoDisplay: string = 'block';
-  historyAppointDisplay: string = 'none';
-  historyBookingDisplay: string = 'none';
-  roomInfoDisplay: string = 'none';
-  appountRoomDisplay: string = 'none';
-  bookingRoomDisplay: string = 'none';
+  isOwnerRole():boolean{
+    return this.authService.getRole() === "OWNER";
+  }
 
+  isAdminRole():boolean{
+    return this.authService.getRole() === "ADMIN";
+  }
+
+
+  userInfoDisplay: string = 'block';
   userInfoColor: string = '#fff';
   userInfoBGColor: string = '#6C78AF';
+
+  historyAppointDisplay: string = 'none';
   historyAppointColor: string = '#6C78AF';
   historyAppointBGColor: string = '#fff';
+
+  historyBookingDisplay: string = 'none';
   historyBookingColor: string = '#6C78AF';
   historyBookingBGColor: string = '#fff';
+
+  roomInfoDisplay: string = 'none';
   roomInfoColor: string = '#6C78AF';
   roomInfoBGColor: string = '#fff';
+
+  appountRoomDisplay: string = 'none';
   appountRoomColor: string = '#6C78AF';
   appountRoomBGColor: string = '#fff';
+
+  bookingRoomDisplay: string = 'none';
   bookingRoomColor: string = '#6C78AF';
   bookingRoomBGColor: string = '#fff';
+
+  listAdminDisplay: string = 'none';
+  listAdminColor: string = '#6C78AF';
+  listAdminBGColor: string = '#fff';
+
+  listOwnerDisplay: string = 'none';
+  listOwnerColor: string = '#6C78AF';
+  listOwnerBGColor: string = '#fff';
+
+  listUserDisplay: string = 'none';
+  listUserColor: string = '#6C78AF';
+  listUserBGColor: string = '#fff';
+
+  statisticDisplay: string = 'none';
+  statisticColor: string = '#6C78AF';
+  statisticBGColor: string = '#fff';
+
+  searchDisplay: string = 'none';
   
   defaultColorAndDisplay(){
+    this.userInfoDisplay = 'none';
     this.userInfoColor = '#6C78AF';
     this.userInfoBGColor = '#fff';
+
+    this.historyAppointDisplay = 'none';
     this.historyAppointColor = '#6C78AF';
     this.historyAppointBGColor = '#fff';
+
+    this.historyBookingDisplay = 'none';
     this.historyBookingColor = '#6C78AF';
     this.historyBookingBGColor = '#fff';
+
+    this.roomInfoDisplay = 'none';
     this.roomInfoColor = '#6C78AF';
     this.roomInfoBGColor = '#fff';
+
+    this.appountRoomDisplay = 'none';
     this.appountRoomColor = '#6C78AF';
     this.appountRoomBGColor = '#fff';
+
+    this.bookingRoomDisplay = 'none';
     this.bookingRoomColor = '#6C78AF';
     this.bookingRoomBGColor = '#fff';
-    this.userInfoDisplay = 'none';
-    this.historyAppointDisplay = 'none';
-    this.historyBookingDisplay = 'none';
-    this.roomInfoDisplay = 'none';
-    this.appountRoomDisplay = 'none';
-    this.bookingRoomDisplay = 'none';
+
+    this.listAdminDisplay = 'none';
+    this.listAdminColor = '#6C78AF';
+    this.listAdminBGColor = '#fff';
+
+    this.listOwnerDisplay = 'none';
+    this.listOwnerColor = '#6C78AF';
+    this.listOwnerBGColor = '#fff';
+
+    this.listUserDisplay = 'none';
+    this.listUserColor = '#6C78AF';
+    this.listUserBGColor = '#fff';
+
+    this.statisticDisplay = 'none';
+    this.statisticColor = '#6C78AF';
+    this.statisticBGColor = '#fff';
+
+    this.searchDisplay = 'none';
   }
 
   showUserInfo(){
@@ -211,5 +265,36 @@ export class UserInfoComponent {
     this.bookingRoomDisplay = 'block';
     this.bookingRoomColor = '#fff';
     this.bookingRoomBGColor = '#6C78AF';
+  }
+
+  showListAdmin(){
+    this.defaultColorAndDisplay();
+    this.searchDisplay = 'block';
+    this.listAdminDisplay = 'block';
+    this.listAdminColor = '#fff';
+    this.listAdminBGColor = '#6C78AF';
+  }
+
+  showListOwner(){
+    this.defaultColorAndDisplay();
+    this.searchDisplay = 'block';
+    this.listOwnerDisplay = 'block';
+    this.listOwnerColor = '#fff';
+    this.listOwnerBGColor = '#6C78AF';
+  }
+
+  showListUser(){
+    this.defaultColorAndDisplay();
+    this.searchDisplay = 'block';
+    this.listUserDisplay = 'block';
+    this.listUserColor = '#fff';
+    this.listUserBGColor = '#6C78AF';
+  }
+
+  showStatistic(){
+    this.defaultColorAndDisplay();
+    this.statisticDisplay = 'block';
+    this.statisticColor = '#fff';
+    this.statisticBGColor = '#6C78AF';
   }
 }

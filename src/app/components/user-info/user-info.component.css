@@ -19,11 +19,16 @@ body, html {
 }
 
 .header-userinfo{
-    width: 25%;
+    width: 18%;
     /* border: 1px solid #ccc; */
     background-color: #fff;
     border-radius: 10px;
     min-height: 550px;
+}
+
+.user-info-content{
+    flex:1;
+    width: 75%;
 }
 
 .header-btn{
@@ -41,14 +46,18 @@ body, html {
 }
 
 .user-info {
-    width: 75%;
+    width: 100%;
     margin: 0 auto;
     padding: 20px;
     
     background-color: #f9f9f9;
 }
 
-.user-info h2 {
+
+.user-info h2,
+.list-admin h2,
+.list-owner h2,
+.list-user h2{
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
@@ -80,12 +89,6 @@ body, html {
 
 .editable-input {
     width: calc(100% - 100px);
-}
-
-.button-container {
-    /* display: flex;
-    justify-content: flex-end;
-    margin-top: 20px; */
 }
 
 .btn {
@@ -192,5 +195,48 @@ body, html {
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
+}
+
+.search{
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.form-search {
+    width: 100%;
+    padding: 10px;
+}
+
+#address, #phone, #mail {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: 20%;
+    border: 1px solid #ddd;
+}
+
+#address:hover,
+#phone:hover,
+#mail:hover {
+    border-color: #1e2731;
+}
+
+.btn-search {
+    padding: 10px;
+    margin-left: 37px;
+    
+    width: 25%;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+ 
+.btn-search:hover {
+    background-color: #0056b3;
 }
 

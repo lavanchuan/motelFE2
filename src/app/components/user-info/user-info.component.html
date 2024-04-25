@@ -11,13 +11,26 @@
         <div class = "user-info-container">
             <div class = "header-userinfo">
                 <p class = "header-btn" (click)="showUserInfo()"  [style.background-color]="userInfoBGColor" [style.color] ="userInfoColor">Thông tin cá nhân</p>
-                <p class = "header-btn" (click)="showHistoryAppoint()"  [style.background-color]="historyAppointBGColor" [style.color] ="historyAppointColor">Lịch sử đặt lịch xem phòng trọ</p>
-                <p class = "header-btn" (click)="showHistoryBooking()"  [style.background-color]="historyBookingBGColor" [style.color] ="historyBookingColor">Lịch sử yêu cầu thuê phòng trọ</p>
-                <p class = "header-btn" (click)="showRoomInfo()" *ngIf="!isUserRole()" [style.background-color]="roomInfoBGColor" [style.color] ="roomInfoColor">Thông tin nhà trọ</p>
-                <p class = "header-btn" (click)="showAppountRoom()" *ngIf="!isUserRole()"  [style.background-color]="appountRoomBGColor" [style.color] ="appountRoomColor">Các lịch hẹn xem trọ</p>
-                <p class = "header-btn" (click)="showBookingRoom()" *ngIf="!isUserRole()" [style.background-color]="bookingRoomBGColor" [style.color] ="bookingRoomColor">Các yêu cầu thuê trọ</p>
+                <p class = "header-btn" (click)="showHistoryAppoint()" *ngIf="!isAdminRole()" [style.background-color]="historyAppointBGColor" [style.color] ="historyAppointColor">Lịch sử đặt lịch xem phòng</p>
+                <p class = "header-btn" (click)="showHistoryBooking()" *ngIf="!isAdminRole()" [style.background-color]="historyBookingBGColor" [style.color] ="historyBookingColor">Lịch sử yêu cầu thuê phòng</p>
+                <p class = "header-btn" (click)="showRoomInfo()" *ngIf="isOwnerRole()" [style.background-color]="roomInfoBGColor" [style.color] ="roomInfoColor">Thông tin nhà trọ</p>
+                <p class = "header-btn" (click)="showAppountRoom()" *ngIf="isOwnerRole()"  [style.background-color]="appountRoomBGColor" [style.color] ="appountRoomColor">Các lịch hẹn xem trọ</p>
+                <p class = "header-btn" (click)="showBookingRoom()" *ngIf="isOwnerRole()" [style.background-color]="bookingRoomBGColor" [style.color] ="bookingRoomColor">Các yêu cầu thuê trọ</p>
+                <p class = "header-btn" (click)="showListAdmin()" *ngIf="isAdminRole()" [style.background-color]="listAdminBGColor" [style.color] ="listAdminColor">Danh sách quản lý</p>
+                <p class = "header-btn" (click)="showListOwner()" *ngIf="isAdminRole()"  [style.background-color]="listOwnerBGColor" [style.color] ="listOwnerColor">Danh sách người cho thuê</p>
+                <p class = "header-btn" (click)="showListUser()" *ngIf="isAdminRole()"  [style.background-color]="listUserBGColor" [style.color] ="listUserColor">Danh sách khách hàng</p>
+                <p class = "header-btn" (click)="showStatistic()" *ngIf="isAdminRole()"  [style.background-color]="statisticBGColor" [style.color] ="statisticColor">Thống kê</p>
             </div>
-
+        <div class = "user-info-content">
+            <div class = "search" [style.display]= "searchDisplay">
+                <form action="" class = "form-search">
+                    <input type="text" id="address" name="address"  required placeholder = "Họ và tên">
+                    <input type="text" id="mail" name="mail"  required placeholder = "Email">
+                    <input type="text" id="phone" name="phone"  required placeholder = "Số điện thoại">
+                    <button typr = "submit" class = "btn-search">Tìm kiếm</button>
+                </form>
+                
+            </div>
             <div class="user-info" [style.display]="userInfoDisplay">
                 <h2>Thông tin cá nhân</h2>
                 <div class="info-row">
@@ -74,6 +87,26 @@
 
             </div>
 
+            <div class = "list-admin" [style.display]= "listAdminDisplay">
+                <h2>Danh sách quản lý</h2>
+            </div>
+
+            <div class = "list-owner" [style.display]= "listOwnerDisplay">
+                <h2>Danh sách người cho thuê</h2>
+
+            </div>
+
+            <div class = "list-user" [style.display]= "listUserDisplay">
+                <h2>Danh sách khách hàng</h2>
+
+            </div>
+
+            <div class = "statistic" [style.display]= "statisticDisplay">
+                <h2>Thống kê</h2>
+            </div>
+
+            
+        </div>
 
             <!-- AREA PASS -->
             <div class="change-password-container" *ngIf="onChangePass">
