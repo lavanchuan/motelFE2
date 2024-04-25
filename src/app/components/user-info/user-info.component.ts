@@ -129,4 +129,87 @@ export class UserInfoComponent {
   isUserRole():boolean{
     return this.authService.getRole() === "USER";
   }
+
+  userInfoDisplay: string = 'block';
+  historyAppointDisplay: string = 'none';
+  historyBookingDisplay: string = 'none';
+  roomInfoDisplay: string = 'none';
+  appountRoomDisplay: string = 'none';
+  bookingRoomDisplay: string = 'none';
+
+  userInfoColor: string = '#fff';
+  userInfoBGColor: string = '#6C78AF';
+  historyAppointColor: string = '#6C78AF';
+  historyAppointBGColor: string = '#fff';
+  historyBookingColor: string = '#6C78AF';
+  historyBookingBGColor: string = '#fff';
+  roomInfoColor: string = '#6C78AF';
+  roomInfoBGColor: string = '#fff';
+  appountRoomColor: string = '#6C78AF';
+  appountRoomBGColor: string = '#fff';
+  bookingRoomColor: string = '#6C78AF';
+  bookingRoomBGColor: string = '#fff';
+  
+  defaultColorAndDisplay(){
+    this.userInfoColor = '#6C78AF';
+    this.userInfoBGColor = '#fff';
+    this.historyAppointColor = '#6C78AF';
+    this.historyAppointBGColor = '#fff';
+    this.historyBookingColor = '#6C78AF';
+    this.historyBookingBGColor = '#fff';
+    this.roomInfoColor = '#6C78AF';
+    this.roomInfoBGColor = '#fff';
+    this.appountRoomColor = '#6C78AF';
+    this.appountRoomBGColor = '#fff';
+    this.bookingRoomColor = '#6C78AF';
+    this.bookingRoomBGColor = '#fff';
+    this.userInfoDisplay = 'none';
+    this.historyAppointDisplay = 'none';
+    this.historyBookingDisplay = 'none';
+    this.roomInfoDisplay = 'none';
+    this.appountRoomDisplay = 'none';
+    this.bookingRoomDisplay = 'none';
+  }
+
+  showUserInfo(){
+    this.defaultColorAndDisplay();
+    this.userInfoDisplay = 'block';
+    this.userInfoColor = '#fff';
+    this.userInfoBGColor = '#6C78AF';
+  }
+
+  showHistoryAppoint(){
+    this.defaultColorAndDisplay();
+    this.historyAppointDisplay = 'block';
+    this.historyAppointColor = '#fff';
+    this.historyAppointBGColor = '#6C78AF';
+  }
+
+  showHistoryBooking(){
+    this.defaultColorAndDisplay();
+    this.historyBookingDisplay = 'block';
+    this.historyBookingColor = '#fff';
+    this.historyBookingBGColor = '#6C78AF';
+  }
+
+  showRoomInfo(){
+    this.defaultColorAndDisplay();
+    this.roomInfoDisplay = 'block';
+    this.roomInfoColor = '#fff';
+    this.roomInfoBGColor = '#6C78AF';
+  }
+
+  showAppountRoom(){
+    this.defaultColorAndDisplay();
+    this.appountRoomDisplay = 'block';
+    this.appountRoomColor = '#fff';
+    this.appountRoomBGColor = '#6C78AF';
+  }
+
+  showBookingRoom(){
+    this.defaultColorAndDisplay();
+    this.bookingRoomDisplay = 'block';
+    this.bookingRoomColor = '#fff';
+    this.bookingRoomBGColor = '#6C78AF';
+  }
 }

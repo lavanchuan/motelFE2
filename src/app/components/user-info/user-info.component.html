@@ -1,67 +1,102 @@
-<!-- <app-header></app-header> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <app-header-info></app-header-info>
+    <div class = "container">
+        <div class = "user-info-container">
+            <div class = "header-userinfo">
+                <p class = "header-btn" (click)="showUserInfo()"  [style.background-color]="userInfoBGColor" [style.color] ="userInfoColor">Thông tin cá nhân</p>
+                <p class = "header-btn" (click)="showHistoryAppoint()"  [style.background-color]="historyAppointBGColor" [style.color] ="historyAppointColor">Lịch sử đặt lịch xem phòng trọ</p>
+                <p class = "header-btn" (click)="showHistoryBooking()"  [style.background-color]="historyBookingBGColor" [style.color] ="historyBookingColor">Lịch sử yêu cầu thuê phòng trọ</p>
+                <p class = "header-btn" (click)="showRoomInfo()" *ngIf="!isUserRole()" [style.background-color]="roomInfoBGColor" [style.color] ="roomInfoColor">Thông tin nhà trọ</p>
+                <p class = "header-btn" (click)="showAppountRoom()" *ngIf="!isUserRole()"  [style.background-color]="appountRoomBGColor" [style.color] ="appountRoomColor">Các lịch hẹn xem trọ</p>
+                <p class = "header-btn" (click)="showBookingRoom()" *ngIf="!isUserRole()" [style.background-color]="bookingRoomBGColor" [style.color] ="bookingRoomColor">Các yêu cầu thuê trọ</p>
+            </div>
 
-<app-header-info></app-header-info>
+            <div class="user-info" [style.display]="userInfoDisplay">
+                <h2>Thông tin cá nhân</h2>
+                <div class="info-row">
+                    <span class="label">Email:</span>
+                    <input type="text" class="value" value="{{userInfo.mail}}" readonly>
+                </div>
+                <div class="info-row">
+                    <span class="label">Họ và tên:</span>
+                    <input type="text" class="value editable-input" value="{{userInfo.name}}" [(ngModel)]="userInfo.name">
+                </div>
+                <div class="info-row">
+                    <span class="label">Số điện thoại:</span>
+                    <input type="text" class="value editable-input" value="{{userInfo.phone}}" [(ngModel)]="userInfo.phone">
+                </div>
+                <div class="info-row">
+                    <span class="label">Địa chỉ:</span>
+                    <input type="text" class="value editable-input" value="{{userInfo.address}}" [(ngModel)]="userInfo.address">
+                </div>
+                <div class="info-row">
+                    <span class="label">Giới tính:</span>
+                    <input type="text" class="value" value="{{userInfo.sex}}" readonly>
+                </div>
+                <div class="info-row">
+                    <span class="label">Ngày sinh:</span>
+                    <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}"
+                        [(ngModel)]="userInfo.dateOfBirth">
+                </div>
+                <button class="btn btn-update" (click)="updateInfo()">Lưu</button>
+                <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Đăng ký làm người cho thuê</button>
+                <button class="btn btn-change-password" (click)="onChangePass=true">Đổi mật khẩu</button>
+                <button class="btn btn-owner" (click)="pageNavigate()" *ngIf="!isUserRole()">Quản lý</button>
+            </div>
 
-<div class="user-info-container">
-    <h2>User Information</h2>
-    <div class="info-row">
-        <span class="label">Email:</span>
-        <input type="text" class="value" value="{{userInfo.mail}}" readonly>
-    </div>
-    <div class="info-row">
-        <span class="label">Name:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.name}}" [(ngModel)]="userInfo.name">
-    </div>
-    <div class="info-row">
-        <span class="label">Created At:</span>
-        <input type="text" class="value" value="{{userInfo.createAt}}">
-    </div>
-    <div class="info-row">
-        <span class="label">Phone:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.phone}}" [(ngModel)]="userInfo.phone">
-    </div>
-    <div class="info-row">
-        <span class="label">Address:</span>
-        <input type="text" class="value editable-input" value="{{userInfo.address}}" [(ngModel)]="userInfo.address">
-    </div>
-    <div class="info-row">
-        <span class="label">Sex:</span>
-        <input type="text" class="value" value="{{userInfo.sex}}" readonly>
-    </div>
-    <div class="info-row">
-        <span class="label">Date of Birth:</span>
-        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}"
-            [(ngModel)]="userInfo.dateOfBirth">
-    </div>
-    <div class="info-row">
-        <span class="label">Role:</span>
-        <input type="text" class="value" value="{{userInfo.role}}" readonly>
-    </div>
-    <button class="btn btn-update" (click)="updateInfo()">Update</button>
-    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Register as
-        Owner</button>
-    <button class="btn btn-change-password" (click)="onChangePass=true">Change Password</button>
+            <div class = "history-appoint" [style.display] = "historyAppointDisplay">
+                <h2>Lịch sử lịch hẹn xem trọ</h2>
+            </div>
 
-    <button class="btn" (click)="pageNavigate()" *ngIf="!isUserRole()">Quản lý</button>
-</div>
+            <div class = "history-booking" [style.display] = "historyBookingDisplay">
+                <h2>Lịch sử thuê trọ</h2>
+            </div>
 
-<!-- AREA PASS -->
-<div class="change-password-container" *ngIf="onChangePass">
-    <form class="change-password-form" (ngSubmit)="changePassword()">
-        <h2>Đổi Mật Khẩu</h2>
-        <div class="form-group">
-            <label for="oldPassword">Mật khẩu cũ:</label>
-            <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="formChangePassword.oldPass">
+            <div class = "room-info" [style.display] = "roomInfoDisplay">
+                <h2>Thông tin nhà trọ</h2>
+
+            </div>
+
+            <div class = "appoint-room" [style.display] = "appountRoomDisplay">
+                <h2>Lịch hẹn đến xem phòng trọ</h2>
+
+            </div>
+
+            <div class = "booking-room" [style.display] = "bookingRoomDisplay">
+                <h2>Yêu cầu thuê phòng trọ</h2>
+
+            </div>
+
+
+            <!-- AREA PASS -->
+            <div class="change-password-container" *ngIf="onChangePass">
+                <form class="change-password-form" (ngSubmit)="changePassword()">
+                    <h2>Đổi Mật Khẩu</h2>
+                    <div class="form-group">
+                        <label for="oldPassword">Mật khẩu cũ:</label>
+                        <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="formChangePassword.oldPass">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Mật khẩu mới:</label>
+                        <input type="password" id="newPassword" name="newPassword" [(ngModel)]="formChangePassword.newPass">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="formChangePassword.rePass">
+                    </div>
+                    <button type="submit" class="btn">Đổi mật khẩu</button>
+                    <button type="button" class="btn" (click)="onChangePass=false">Hủy</button>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="newPassword">Mật khẩu mới:</label>
-            <input type="password" id="newPassword" name="newPassword" [(ngModel)]="formChangePassword.newPass">
-        </div>
-        <div class="form-group">
-            <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="formChangePassword.rePass">
-        </div>
-        <button type="submit" class="btn">Đổi mật khẩu</button>
-        <button type="button" class="btn" (click)="onChangePass=false">Hủy</button>
-    </form>
-</div>
+    </div>
+</body>
+</html>
+
