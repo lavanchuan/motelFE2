@@ -1,112 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <app-header-info></app-header-info>
-    <div class = "container">
-        <div class = "user-info-container">
-            <div class = "header-userinfo">
-                <p class = "header-btn" (click)="showUserInfo()"  [style.background-color]="userInfoBGColor" [style.color] ="userInfoColor">Thông tin cá nhân</p>
-                <p class = "header-btn" (click)="showHistoryAppoint()" *ngIf="!isAdminRole()" [style.background-color]="historyAppointBGColor" [style.color] ="historyAppointColor">Lịch sử đặt lịch xem phòng</p>
-                <p class = "header-btn" (click)="showHistoryBooking()" *ngIf="!isAdminRole()" [style.background-color]="historyBookingBGColor" [style.color] ="historyBookingColor">Lịch sử yêu cầu thuê phòng</p>
-                <p class = "header-btn" (click)="showRoomInfo()" *ngIf="isOwnerRole()" [style.background-color]="roomInfoBGColor" [style.color] ="roomInfoColor">Thông tin nhà trọ</p>
-                <p class = "header-btn" (click)="showAppountRoom()" *ngIf="isOwnerRole()"  [style.background-color]="appountRoomBGColor" [style.color] ="appountRoomColor">Các lịch hẹn xem trọ</p>
-                <p class = "header-btn" (click)="showBookingRoom()" *ngIf="isOwnerRole()" [style.background-color]="bookingRoomBGColor" [style.color] ="bookingRoomColor">Các yêu cầu thuê trọ</p>
-                <p class = "header-btn" (click)="showListAdmin()" *ngIf="isAdminRole()" [style.background-color]="listAdminBGColor" [style.color] ="listAdminColor">Danh sách quản lý</p>
-                <p class = "header-btn" (click)="showListOwner()" *ngIf="isAdminRole()"  [style.background-color]="listOwnerBGColor" [style.color] ="listOwnerColor">Danh sách người cho thuê</p>
-                <p class = "header-btn" (click)="showListUser()" *ngIf="isAdminRole()"  [style.background-color]="listUserBGColor" [style.color] ="listUserColor">Danh sách khách hàng</p>
-                <p class = "header-btn" (click)="showStatistic()" *ngIf="isAdminRole()"  [style.background-color]="statisticBGColor" [style.color] ="statisticColor">Thống kê</p>
+    <div class="container">
+        <div class="user-info-container">
+            <div class="header-userinfo">
+                <p class="header-btn" (click)="showUserInfo()" [style.background-color]="userInfoBGColor"
+                    [style.color]="userInfoColor">Thông tin cá nhân</p>
+                <p class="header-btn" (click)="showHistoryAppoint()" *ngIf="!isAdminRole()"
+                    [style.background-color]="historyAppointBGColor" [style.color]="historyAppointColor">Lịch sử đặt
+                    lịch xem phòng</p>
+                <p class="header-btn" (click)="showHistoryBooking()" *ngIf="!isAdminRole()"
+                    [style.background-color]="historyBookingBGColor" [style.color]="historyBookingColor">Lịch sử yêu cầu
+                    thuê phòng</p>
+                <p class="header-btn" (click)="showRoomInfo()" *ngIf="isOwnerRole()"
+                    [style.background-color]="roomInfoBGColor" [style.color]="roomInfoColor">Thông tin nhà trọ</p>
+                <!-- <p class="header-btn" (click)="showAppountRoom()" *ngIf="isOwnerRole()"
+                    [style.background-color]="appountRoomBGColor" [style.color]="appountRoomColor">Các lịch hẹn xem trọ
+                </p>
+                <p class="header-btn" (click)="showBookingRoom()" *ngIf="isOwnerRole()"
+                    [style.background-color]="bookingRoomBGColor" [style.color]="bookingRoomColor">Các yêu cầu thuê trọ
+                </p> -->
+                <p class="header-btn" (click)="showListAdmin()" *ngIf="isAdminRole()"
+                    [style.background-color]="listAdminBGColor" [style.color]="listAdminColor">Danh sách quản lý</p>
+                <p class="header-btn" (click)="showListOwner()" *ngIf="isAdminRole()"
+                    [style.background-color]="listOwnerBGColor" [style.color]="listOwnerColor">Danh sách người cho thuê
+                </p>
+                <p class="header-btn" (click)="showListUser()" *ngIf="isAdminRole()"
+                    [style.background-color]="listUserBGColor" [style.color]="listUserColor">Danh sách khách hàng</p>
+                <p class="header-btn" (click)="showStatistic()" *ngIf="isAdminRole()"
+                    [style.background-color]="statisticBGColor" [style.color]="statisticColor">Thống kê</p>
             </div>
-        <div class = "user-info-content">
-            <div class = "search" [style.display]= "searchDisplay">
-                <form action="" class = "form-search">
-                    <input type="text" id="address" name="address"  required placeholder = "Họ và tên">
-                    <input type="text" id="mail" name="mail"  required placeholder = "Email">
-                    <input type="text" id="phone" name="phone"  required placeholder = "Số điện thoại">
-                    <button typr = "submit" class = "btn-search">Tìm kiếm</button>
-                </form>
-                
-            </div>
-            <div class="user-info" [style.display]="userInfoDisplay">
-                <h2>Thông tin cá nhân</h2>
-                <div class="info-row">
-                    <span class="label">Email:</span>
-                    <input type="text" class="value" value="{{userInfo.mail}}" readonly>
+            <div class="user-info-content">
+                <div class="search" [style.display]="searchDisplay">
+                    <form action="" class="form-search">
+                        <input type="text" id="address" name="address" required placeholder="Họ và tên">
+                        <input type="text" id="mail" name="mail" required placeholder="Email">
+                        <input type="text" id="phone" name="phone" required placeholder="Số điện thoại">
+                        <button typr="submit" class="btn-search">Tìm kiếm</button>
+                    </form>
+
                 </div>
-                <div class="info-row">
-                    <span class="label">Họ và tên:</span>
-                    <input type="text" class="value editable-input" value="{{userInfo.name}}" [(ngModel)]="userInfo.name">
+                <div class="user-info" [style.display]="userInfoDisplay">
+                    <h2>Thông tin cá nhân</h2>
+                    <div class="info-row">
+                        <span class="label">Email:</span>
+                        <input type="text" class="value" value="{{userInfo.mail}}" readonly>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Họ và tên:</span>
+                        <input type="text" class="value editable-input" value="{{userInfo.name}}"
+                            [(ngModel)]="userInfo.name">
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Số điện thoại:</span>
+                        <input type="text" class="value editable-input" value="{{userInfo.phone}}"
+                            [(ngModel)]="userInfo.phone">
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Địa chỉ:</span>
+                        <input type="text" class="value editable-input" value="{{userInfo.address}}"
+                            [(ngModel)]="userInfo.address">
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Giới tính:</span>
+                        <!-- <input type="text" class="value" value="{{userInfo.sex}}" readonly> -->
+                        <!-- <select [(ngModel)]="userInfo.sex">
+                            <option *ngFor="let sex of SEX_LIST" [value]="sex">{{sex}}</option>
+                        </select> -->
+                        <label *ngFor="let sex of SEX_LIST" class="sex">
+                            <input type="radio" name="sex" [value]="sex" [(ngModel)]="userInfo.sex">
+                            {{sex}}
+                        </label>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Ngày sinh:</span>
+                        <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}"
+                            [(ngModel)]="userInfo.dateOfBirth">
+                    </div>
+                    <button class="btn btn-update" (click)="updateInfo()">Lưu</button>
+                    <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Đăng
+                        ký làm người cho thuê</button>
+                    <button class="btn btn-change-password" (click)="onChangePass=true">Đổi mật khẩu</button>
+                    <button class="btn btn-owner" (click)="pageNavigate()" *ngIf="!isUserRole()">Quản lý</button>
                 </div>
-                <div class="info-row">
-                    <span class="label">Số điện thoại:</span>
-                    <input type="text" class="value editable-input" value="{{userInfo.phone}}" [(ngModel)]="userInfo.phone">
+
+                <div class="history-appoint" [style.display]="historyAppointDisplay">
+                    <h2>Lịch sử lịch hẹn xem trọ</h2>
+                    <div class="history-appoint-content">
+                        <h4 *ngIf="historyAppoint.length == 0">chưa có lịch hẹn xem trọ nào</h4>
+                        <table border="1" *ngIf="historyAppoint.length > 0">
+                            <thead>
+                                <th>Phòng</th>
+                                <th>Nhà trọ</th>
+                                <th>Địa chỉ</th>
+                                <th>Thời gian xem</th>
+                                <th>Trạng thái</th>
+                                <th>Lý do</th>
+                                <th>Chủ trọ</th>
+                                <th>Liên hệ chủ trọ</th>
+                                <th>Hủy</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let appoint of historyAppoint; let i = index;">
+                                    <td>{{appoint.room.name}}</td>
+                                    <td>{{appoint.motel.name}}</td>
+                                    <td>{{appoint.motel.address}}</td>
+                                    <td>{{appoint.appoint.meetTime}}</td>
+                                    <td>{{getAppointStatusString(appoint.appoint.status)}}</td>
+                                    <td>{{appoint.appoint.reason}}</td>
+                                    <td>{{appoint.owner.name}}</td>
+                                    <td>{{appoint.owner.phone}} || {{appoint.owner.mail}}</td>
+                                    <td><button *ngIf="!(appoint.appoint.status === 'REJECTED' || 
+                                            appoint.appoint.status === 'CANCELLED')"
+                                            (click)="cancelAppoint(appoint.appoint.id)">Hủy</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="info-row">
-                    <span class="label">Địa chỉ:</span>
-                    <input type="text" class="value editable-input" value="{{userInfo.address}}" [(ngModel)]="userInfo.address">
+
+                <div class="history-booking" [style.display]="historyBookingDisplay">
+                    <h2>Lịch sử thuê trọ</h2>
+                    <h4 *ngIf="historyBookings.length == 0">Chưa có yêu cầu thuê trọ nào</h4>
+                    <div class="history-booking-content">
+                        <table border="1" *ngIf="historyBookings.length > 0">
+                            <thead>
+                                <th>Phòng</th>
+                                <th>Nhà trọ</th>
+                                <th>Địa chỉ</th>
+                                <th>Giá thuê</th>
+                                <th>Thời gian thuê</th>
+                                <th>Thời gian trả</th>
+                                <th>Chủ trọ</th>
+                                <th>Liên hệ chủ trọ</th>
+                                <th>Trạng thái</th>
+                                <th>Lý do</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let booking of historyBookings; let i = index;">
+                                    <td>{{booking.room.name}}</td>
+                                    <td>{{booking.motel.name}}</td>
+                                    <td>{{booking.motel.address}}</td>
+                                    <td>{{booking.booking.price}}</td>
+                                    <td>{{booking.booking.startTime}}</td>
+                                    <td>{{booking.booking.endTime}}</td>
+                                    <td>{{booking.owner.name}}</td>
+                                    <td>{{booking.owner.phone}} || {{booking.owner.mail}}</td>
+                                    <td>{{getBookingStatusString(booking.booking.status)}}</td>
+                                    <td>{{booking.booking.reason}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="info-row">
-                    <span class="label">Giới tính:</span>
-                    <input type="text" class="value" value="{{userInfo.sex}}" readonly>
+
+                <div class="room-info" [style.display]="roomInfoDisplay">
+                    <h2>Thông tin nhà trọ</h2>
+                    <p>Tổng số nhà trọ đang hoạt động: {{getMotelActivateString()}}</p>
+                    <p *ngIf="countMotelAll > 0"><a href="/owner-home">Xem</a> chi tiết các nhà trọ</p>
                 </div>
-                <div class="info-row">
-                    <span class="label">Ngày sinh:</span>
-                    <input type="date" class="value editable-input" value="{{userInfo.dateOfBirth}}"
-                        [(ngModel)]="userInfo.dateOfBirth">
+
+                <!-- <div class="appoint-room" [style.display]="appountRoomDisplay">
+                    <h2>Lịch hẹn đến xem phòng trọ</h2>
+
+                </div> -->
+
+                <!-- <div class="booking-room" [style.display]="bookingRoomDisplay">
+                    <h2>Yêu cầu thuê phòng trọ</h2>
+
                 </div>
-                <button class="btn btn-update" (click)="updateInfo()">Lưu</button>
-                <button class="btn btn-register-owner" *ngIf="userInfo.role === 'USER'" (click)="regisOwner()">Đăng ký làm người cho thuê</button>
-                <button class="btn btn-change-password" (click)="onChangePass=true">Đổi mật khẩu</button>
-                <button class="btn btn-owner" (click)="pageNavigate()" *ngIf="!isUserRole()">Quản lý</button>
-            </div>
 
-            <div class = "history-appoint" [style.display] = "historyAppointDisplay">
-                <h2>Lịch sử lịch hẹn xem trọ</h2>
-            </div>
+                <div class="list-admin" [style.display]="listAdminDisplay">
+                    <h2>Danh sách quản lý</h2>
+                </div> -->
 
-            <div class = "history-booking" [style.display] = "historyBookingDisplay">
-                <h2>Lịch sử thuê trọ</h2>
-            </div>
+                <div class="list-owner" [style.display]="listOwnerDisplay">
+                    <h2>Danh sách người cho thuê</h2>
 
-            <div class = "room-info" [style.display] = "roomInfoDisplay">
-                <h2>Thông tin nhà trọ</h2>
+                </div>
 
-            </div>
+                <div class="list-user" [style.display]="listUserDisplay">
+                    <h2>Danh sách khách hàng</h2>
 
-            <div class = "appoint-room" [style.display] = "appountRoomDisplay">
-                <h2>Lịch hẹn đến xem phòng trọ</h2>
+                </div>
+
+                <div class="statistic" [style.display]="statisticDisplay">
+                    <h2>Thống kê</h2>
+                </div>
+
 
             </div>
-
-            <div class = "booking-room" [style.display] = "bookingRoomDisplay">
-                <h2>Yêu cầu thuê phòng trọ</h2>
-
-            </div>
-
-            <div class = "list-admin" [style.display]= "listAdminDisplay">
-                <h2>Danh sách quản lý</h2>
-            </div>
-
-            <div class = "list-owner" [style.display]= "listOwnerDisplay">
-                <h2>Danh sách người cho thuê</h2>
-
-            </div>
-
-            <div class = "list-user" [style.display]= "listUserDisplay">
-                <h2>Danh sách khách hàng</h2>
-
-            </div>
-
-            <div class = "statistic" [style.display]= "statisticDisplay">
-                <h2>Thống kê</h2>
-            </div>
-
-            
-        </div>
 
             <!-- AREA PASS -->
             <div class="change-password-container" *ngIf="onChangePass">
@@ -114,15 +206,18 @@
                     <h2>Đổi Mật Khẩu</h2>
                     <div class="form-group">
                         <label for="oldPassword">Mật khẩu cũ:</label>
-                        <input type="password" id="oldPassword" name="oldPassword" [(ngModel)]="formChangePassword.oldPass">
+                        <input type="password" id="oldPassword" name="oldPassword"
+                            [(ngModel)]="formChangePassword.oldPass">
                     </div>
                     <div class="form-group">
                         <label for="newPassword">Mật khẩu mới:</label>
-                        <input type="password" id="newPassword" name="newPassword" [(ngModel)]="formChangePassword.newPass">
+                        <input type="password" id="newPassword" name="newPassword"
+                            [(ngModel)]="formChangePassword.newPass">
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Xác nhận mật khẩu mới:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="formChangePassword.rePass">
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            [(ngModel)]="formChangePassword.rePass">
                     </div>
                     <button type="submit" class="btn">Đổi mật khẩu</button>
                     <button type="button" class="btn" (click)="onChangePass=false">Hủy</button>
@@ -131,5 +226,5 @@
         </div>
     </div>
 </body>
-</html>
 
+</html>

@@ -31,9 +31,19 @@
                     <th>Confirm</th>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Book room'">
-                    <th>...</th>
+                    <th>Phòng</th>
+                    <th>Nhà trọ</th>
+                    <th>Người thuê</th>
+                    <th>Giá</th>
+                    <th>Thời gian tạo</th>
+                    <th>Thời gian thuê</th>
+                    <th>Thời gian trả</th>
+                    <th>Trạng thái</th>
+                    <th>Lý do</th>
+                    <th>Xác nhận</th>
                 </ng-container>
                 <ng-container *ngSwitchDefault>
+                    <!-- <th>Ảnh</th> -->
                     <th>Name</th>
                     <th>Area</th>
                     <th>Create at</th>
@@ -41,6 +51,7 @@
                     <th>Price</th>
                     <th>Sale</th>
                     <th>Status</th>
+                    <th>Ảnh</th>
                     <th>Cập nhật</th>
                 </ng-container>
             </thead>
@@ -51,8 +62,10 @@
                         <td><input type="text" placeholder="Đại chỉ" [(ngModel)]="motelAdd.address"></td>
                         <td></td>
                         <td></td>
-                        <td><input type="text" placeholder="Giá điện" [(ngModel)]="motelAdd.electric_price"></td>
-                        <td><input type="text" placeholder="Giá nước" [(ngModel)]="motelAdd.water_price"></td>
+                        <td><input type="text" placeholder="Giá điện" [(ngModel)]="motelAdd.electric_price"
+                                class="short"></td>
+                        <td><input type="text" placeholder="Giá nước" [(ngModel)]="motelAdd.water_price" class="short">
+                        </td>
                         <td><button (click)="addMotel()">Thêm nhà trọ</button></td>
                         <td></td>
                     </tr>
@@ -61,9 +74,10 @@
                         <td><input type="text" value="{{data.address}}" [(ngModel)]="motelList[i].address" /></td>
                         <td>{{data.createAt}}</td>
                         <td>{{getMotelStatusName(data.status)}}</td>
-                        <td><input type="text" value="{{data.electric_price}}"
-                                [(ngModel)]="motelList[i].electric_price" /></td>
-                        <td><input type="text" value="{{data.water_price}}" [(ngModel)]="motelList[i].water_price" />
+                        <td><input type="text" value="{{data.electric_price}}" [(ngModel)]="motelList[i].electric_price"
+                                class="short" /></td>
+                        <td><input type="text" value="{{data.water_price}}" [(ngModel)]="motelList[i].water_price"
+                                class="short" />
                         </td>
                         <td><button (click)="updateMotel(data.id)">Chỉnh sửa</button></td>
                         <td><a (click)="loadRoom(data.id)">Xem nhà trọ</a></td>
@@ -77,7 +91,8 @@
                             <textarea cols="10" rows="3" [(ngModel)]="makeAppointList[i].makeAppoint.reason"
                                 [readOnly]="!isProcessingCreate(dataShow[i].makeAppoint.status)"></textarea>
                         </td>
-                        <td *ngIf="dataShow[i] != null">{{getMakeAppointStatusName(dataShow[i].makeAppoint.status)}}</td>
+                        <td *ngIf="dataShow[i] != null">{{getMakeAppointStatusName(dataShow[i].makeAppoint.status)}}
+                        </td>
                         <td *ngIf="dataShow[i] != null">{{dataShow[i].room.name}}</td>
                         <td *ngIf="dataShow[i] != null">{{dataShow[i].motel.name}}</td>
                         <td *ngIf="dataShow[i] != null">{{dataShow[i].motel.address}}</td>
@@ -90,33 +105,167 @@
                     </tr>
                 </ng-container>
                 <ng-container *ngSwitchCase="'Book room'">
-                    <tr>
-                        <td>...</td>
+                    <tr *ngFor="let data of dataShow; let i = index">
+                        <td *ngIf="data"><a type="button" class="detail"
+                                (click)="setRoomDetail(data.room); onDetail('room');">{{data.room.name}}</a></td>
+                        <td *ngIf="data"><a type="button" class="detail"
+                                (click)="setMotelDetail(data.motel); onDetail('motel');">{{data.motel.name}}</a></td>
+                        <td *ngIf="data"><a type="button" class="detail"
+                                (click)="setUserDetail(data.user); onDetail('user');">{{data.user.name}}</a></td>
+                        <td *ngIf="data">{{data.booking.price}}</td>
+                        <td *ngIf="data">{{data.booking.createAt}}</td>
+                        <td *ngIf="data">{{data.booking.startTime}}</td>
+                        <td *ngIf="data">{{data.booking.endTime}}</td>
+                        <td *ngIf="data">{{getBookingStatusString(data.booking.status)}}</td>
+                        <td *ngIf="data">
+                            <textarea cols="10" rows="3" [(ngModel)]="bookingDetailsUpdate[i].booking.reason"
+                                [readOnly]="isReadOnlyBookingStauts(data.booking.status)">
+                                {{data.booking.reason}}</textarea>
+                        </td>
+                        <td *ngIf="data">
+                            <button (click)="confirmBookRoom(i, true)"
+                                *ngIf="!isReadOnlyBookingStauts(data.booking.status)">Xác nhận</button>
+                            <button (click)="confirmBookRoom(i, false)"
+                                *ngIf="!isReadOnlyBookingStauts(data.booking.status)">Từ chối</button>
+                        </td>
                     </tr>
                 </ng-container>
                 <ng-container *ngSwitchDefault>
                     <tr>
-                        <td><input type="text" [(ngModel)]="roomAdd.name"></td>
-                        <td><input type="text" [(ngModel)]="roomAdd.area"></td>
+                        <!-- <td>...</td> -->
+                        <td><input type="text" [(ngModel)]="roomAdd.name" class="short"></td>
+                        <td><input type="text" [(ngModel)]="roomAdd.area" class="short"></td>
                         <td></td>
                         <td><input type="text" [(ngModel)]="roomAdd.facility"></td>
-                        <td><input type="number" [(ngModel)]="roomAdd.price"></td>
-                        <td><input type="number" [(ngModel)]="roomAdd.sale"></td>
+                        <td><input type="number" [(ngModel)]="roomAdd.price" class="short"></td>
+                        <td><input type="number" [(ngModel)]="roomAdd.sale" class="short"></td>
                         <td></td>
+                        <td><a type="button" class="btn">Ảnh..</a></td>
                         <td><button (click)="addRoom()">Thêm phòng</button></td>
                     </tr>
                     <tr *ngFor="let d of dataShow; let i = index;">
-                        <td><input type="text" [(ngModel)]="roomList[i].name"></td>
-                        <td><input type="text" [(ngModel)]="roomList[i].area"></td>
+                        <!-- <td><img src="" alt="ROOM"></td> -->
+                        <td><input type="text" [(ngModel)]="roomList[i].name" class="short"></td>
+                        <td><input type="text" [(ngModel)]="roomList[i].area" class="short"></td>
                         <td>{{d.createAt}}</td>
                         <td><input type="text" [(ngModel)]="roomList[i].facility"></td>
-                        <td><input type="number" [(ngModel)]="roomList[i].price"></td>
-                        <td><input type="number" [(ngModel)]="roomList[i].sale"></td>
+                        <td><input type="number" [(ngModel)]="roomList[i].price" class="short"></td>
+                        <td><input type="number" [(ngModel)]="roomList[i].sale" class="short"
+                            min="0" max="100"></td>
                         <td>{{getStatusName(roomList[i].status)}}</td>
+                        <td><a type="button" class="btn" (click)="onImageViewUpdate(d.id)">Ảnh</a></td>
                         <td><button (click)="updateRoom(d.id)">Chỉnh sửa</button></td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
+
+        <div class="motel-card flex-card card" *ngIf="isOnDetails[details.indexOf('motel')]">
+            <span class="close" (click)="offDetail('motel')">X</span>
+            <h3>Chi tiết nhà trọ</h3>
+            <table>
+                <tr>
+                    <td>Nhà trọ:</td>
+                    <td>{{motelDetail.name}}</td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ:</td>
+                    <td>{{motelDetail.address}}</td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo:</td>
+                    <td>{{motelDetail.createAt}}</td>
+                </tr>
+                <tr>
+                    <td>Giá điện:</td>
+                    <td>{{motelDetail.electric_price}}</td>
+                </tr>
+                <tr>
+                    <td>Giá nước:</td>
+                    <td>{{motelDetail.water_price}}</td>
+                </tr>
+                <tr>
+                    <td>Trạng thái:</td>
+                    <td>{{getBookingStatusString(motelDetail.status)}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="room-card flex-card card" *ngIf="isOnDetails[details.indexOf('room')]">
+            <span class="close" (click)="offDetail('room')">X</span>
+            <h3>Chi tiết phòng trọ</h3>
+            <table>
+                <tr>
+                    <td>Phòng:</td>
+                    <td>{{roomDetail.name}}</td>
+                </tr>
+                <tr>
+                    <td>Diện tích:</td>
+                    <td>{{roomDetail.area}}</td>
+                </tr>
+                <tr>
+                    <td>Giá:</td>
+                    <td>{{roomDetail.price}}</td>
+                </tr>
+                <tr>
+                    <td>Khuyến mãi:</td>
+                    <td>{{roomDetail.sale}}%</td>
+                </tr>
+                <tr>
+                    <td>Có sẵn:</td>
+                    <td>{{roomDetail.facility}}</td>
+                </tr>
+                <tr>
+                    <td>Thời gian tạo:</td>
+                    <td>{{roomDetail.createAt}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="user-card flex-card card" *ngIf="isOnDetails[details.indexOf('user')]">
+            <span class="close" (click)="offDetail('user')">X</span>
+            <h3>Chi tiết người yêu cầu thuê phòng</h3>
+            <table>
+                <tr>
+                    <td>Tên:</td>
+                    <td>{{userDetail.name}}</td>
+                </tr>
+                <tr>
+                    <td>Mail:</td>
+                    <td>{{userDetail.mail}}</td>
+                </tr>
+                <tr>
+                    <td>Điện thoại:</td>
+                    <td>{{userDetail.phone}}</td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ:</td>
+                    <td>{{userDetail.address}}</td>
+                </tr>
+                <tr>
+                    <td>Giới tính:</td>
+                    <td>{{userDetail.sex}}</td>
+                </tr>
+                <tr>
+                    <td>Ngày sinh:</td>
+                    <td>{{userDetail.dateOfBirth}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Image view and upload -->
+        <div class="image-view-upload" *ngIf="isOnImageViewUpdate">
+            <span class="close" (click)="isOnImageViewUpdate = false;">X</span>
+            <div class="image-view">
+                <button class="previous-image" (click)="changeImage(-1)">&lt;</button>
+                <img [src]="getImageUrl()" alt="Room Image" (click)="changeImage(-1)">
+                <button class="next-image" (click)="changeImage(1)">&gt;</button>
+            </div>
+            <div class="image-upload">
+                <input type="file" [(ngModel)]="imgUpload" accept=".png">
+                <button (click)="uploadImage()">Thêm ảnh</button>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -13,7 +13,7 @@
     <div class="room-details">
         <div class="image-container">
             <button class = "previous-image" (click)="changeImage(-1)">&lt;</button>
-            <img src="{{images[currentImageIndex]}}" alt="Room Image" (click)="changeImage(-1)">
+            <img [src]="getImageUrl()" alt="Room Image" (click)="changeImage(-1)">
             <button class = "next-image" (click)="changeImage(1)">&gt;</button>
         </div>
         <div class="info-container">

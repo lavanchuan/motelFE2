@@ -33,6 +33,32 @@
                     <th>Status</th>
                     <th>Role</th>
                 </ng-container>
+                <ng-container *ngSwitchCase="'MOTEL'">
+                    <th>Nhà trọ</th>
+                    <th>Ngày tạo</th>
+                    <th>Địa chỉ</th>
+                    <th>Giá điện</th>
+                    <th>Giá nước</th>
+                    <th>Trạng thái</th>
+                    <th>Chủ trọ</th>
+                    <th>Liên hệ</th>
+                    <th>Xác nhận</th>
+                </ng-container>
+                <ng-container *ngSwitchCase="'ROOM'">
+                    <th>Phòng</th>
+                    <th>Diện tích</th>
+                    <th>Địa chỉ</th>
+                    <th>Thời gian tạo</th>
+                    <th>Sẵn có</th>
+                    <th>Giá điện</th>
+                    <th>Giá nước</th>
+                    <th>Giá phòng</th>
+                    <th>Khuyến mãi</th>
+                    <th>Trạng thái</th>
+                    <th>Chủ trọ</th>
+                    <th>Liên hệ</th>
+                    <th>Xác nhận</th>
+                </ng-container>
                 <ng-container *ngSwitchDefault>
                     <th>Name</th>
                     <th>Area</th>
@@ -58,11 +84,13 @@
                         <td>{{data.createAt}}</td>
                         <td>{{data.dateOfBirth}}</td>
                         <td>{{data.sex}}</td>
-                        <td>{{data.status}}</td>
+                        <td>{{getUserStatusString(data.status)}}</td>
                         <td>{{data.role}}</td>
-                        <td *ngIf="isRegisOwner(data.status)">
-                            <button (click)="confirmRegisOwner(data.id, true)">Confirm</button>
-                            <button (click)="confirmRegisOwner(data.id, false)">Reject</button>
+                        <td>
+                            <button (click)="confirmRegisOwner(data.id, true)"
+                                *ngIf="isRegisOwner(data.status)">Confirm</button>
+                            <button (click)="confirmRegisOwner(data.id, false)"
+                                *ngIf="isRegisOwner(data.status)">Reject</button>
                         </td>
                     </tr>
                 </ng-container>
@@ -77,6 +105,46 @@
                         <td>{{data.sex}}</td>
                         <td>{{data.status}}</td>
                         <td>{{data.role}}</td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchCase="'MOTEL'">
+                    <tr *ngFor="let data of dataShow">
+                        <td>{{data.motel.name}}</td>
+                        <td>{{data.motel.createAt}}</td>
+                        <td>{{data.motel.address}}</td>
+                        <td>{{data.motel.electric_price}}</td>
+                        <td>{{data.motel.water_price}}</td>
+                        <td>{{getMotelStatusString(data.motel.status)}}</td>
+                        <td>{{data.owner.name}}</td>
+                        <td>{{data.owner.phone}} || {{data.owner.mail}}</td>
+                        <td>
+                            <button *ngIf="isProcessingStatus(data.motel.status)"
+                                (click)="confirmMotelCreate(data.motel.id, true)">Xác nhận</button>
+                            <button *ngIf="isProcessingStatus(data.motel.status)"
+                                (click)="confirmMotelCreate(data.motel.id, false)">Từ chối</button>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngSwitchCase="'ROOM'">
+                    <tr *ngFor="let data of dataShow">
+                        <td>{{data.room.name}}</td>
+                        <td>{{data.room.area}}</td>
+                        <td>{{data.motel.address}}</td>
+                        <td>{{data.room.createAt}}</td>
+                        <td>{{data.room.facility}}</td>
+                        <td>{{data.motel.electric_price}}</td>
+                        <td>{{data.motel.water_price}}</td>
+                        <td>{{data.room.price}}</td>
+                        <td>{{data.room.sale}}%</td>
+                        <td>{{getRoomStatusString(data.room.status)}}</td>
+                        <td>{{data.owner.name}}%</td>
+                        <td>{{data.owner.phone}} || {{data.owner.mail}}</td>
+                        <td>
+                            <button *ngIf="isRoomCreate(data.room.status)"
+                                (click)="confirmAddRoom(data.room.id, true)">Xác nhận</button>
+                            <button *ngIf="isRoomCreate(data.room.status)"
+                                (click)="confirmAddRoom(data.room.id, false)">Từ chối</button>
+                        </td>
                     </tr>
                 </ng-container>
                 <ng-container *ngSwitchDefault>

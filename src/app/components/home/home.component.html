@@ -22,14 +22,14 @@
                     <option value="3">Từ 4 đến 6 triệu</option>
                     <option value="4">Trên 6 triệu</option>
                 </select>
-                <button typr = "submit" class = "btn-search">Tìm kiếm</button>
+                <button type = "submit" class = "btn-search">Tìm kiếm</button>
             </form>
             
         </div>
 
         <div *ngIf="rooms" class="room-list-container">
             <div class="room-card" (click)="toRoomDetail(room)" *ngFor="let room of rooms; index as i">
-                <img src="assets/p101-1.png" alt="Room Image" class="room-image" (click)="openDialog(room)">
+                <img [src]="loadImage(room.data.images)" alt="Room Image" class="room-image" (click)="openDialog(room)">
                 <p class = "sale-icon" *ngIf="!isSale(room.data.room.sale)"> -{{room.data.room.sale}}%</p>
                 <div class="room-details">
                     <h2 class="room-name">{{ room.data.room.name }}</h2>

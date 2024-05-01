@@ -5,9 +5,13 @@ import { Router } from '@angular/router';
 import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { AccountIdRequest } from '../../models/request/AccountIdRequest';
 import { ChangePasswordRequest } from '../../models/request/ChangePasswordRequest';
+import { AppointDetail } from '../../models/response/AppointDetail';
+import { BookingDetail } from '../../models/response/BookingDetail';
 import { UpdateInfoResponse } from '../../models/response/UpdateInfoResponse';
 import { AuthenService } from '../../services/authen.service';
-import { USER_ID, USER_INFO } from '../../services/Instance';
+import { USER_ID, USER_INFO, USER_STATUS } from '../../services/Instance';
+import { OwnerService } from '../../services/owner.service';
+import { UserService } from '../../services/user.service';
 import { HeaderInfoComponent } from '../header-info/header-info.component';
 import { HeaderComponent } from '../header/header.component';
 
@@ -26,10 +30,19 @@ export class UserInfoComponent {
   userInfo: AccountDTO2 | any;
 
   constructor(private router: Router,
-    private authService: AuthenService) {
+    private authService: AuthenService,
+    private userService: UserService,
+    private ownerService: OwnerService) {
     let userString = localStorage.getItem(USER_INFO);
     if (userString) {
       this.userInfo = JSON.parse(userString);
+
+      //load history appoint
+      this.loadHistoryAppoint();
+      //load history booking
+      this.loadHistoryBooking();
+      //load count motel activate
+      this.loadMotelCount();
     } else {
       console.error("ERROR: LOAD USER INFO");
     }
@@ -121,20 +134,20 @@ export class UserInfoComponent {
   }
 
   // NAVIGATE ADMIN/OWNER
-  pageNavigate():void{
-    if(this.authService.getRole() === "ADMIN") this.router.navigate(["/admin-home"]);
+  pageNavigate(): void {
+    if (this.authService.getRole() === "ADMIN") this.router.navigate(["/admin-home"]);
     else this.router.navigate(["/owner-home"]);
   }
 
-  isUserRole():boolean{
+  isUserRole(): boolean {
     return this.authService.getRole() === "USER";
   }
 
-  isOwnerRole():boolean{
+  isOwnerRole(): boolean {
     return this.authService.getRole() === "OWNER";
   }
 
-  isAdminRole():boolean{
+  isAdminRole(): boolean {
     return this.authService.getRole() === "ADMIN";
   }
 
@@ -180,8 +193,8 @@ export class UserInfoComponent {
   statisticBGColor: string = '#fff';
 
   searchDisplay: string = 'none';
-  
-  defaultColorAndDisplay(){
+
+  defaultColorAndDisplay() {
     this.userInfoDisplay = 'none';
     this.userInfoColor = '#6C78AF';
     this.userInfoBGColor = '#fff';
@@ -225,49 +238,49 @@ export class UserInfoComponent {
     this.searchDisplay = 'none';
   }
 
-  showUserInfo(){
+  showUserInfo() {
     this.defaultColorAndDisplay();
     this.userInfoDisplay = 'block';
     this.userInfoColor = '#fff';
     this.userInfoBGColor = '#6C78AF';
   }
 
-  showHistoryAppoint(){
+  showHistoryAppoint() {
     this.defaultColorAndDisplay();
     this.historyAppointDisplay = 'block';
     this.historyAppointColor = '#fff';
     this.historyAppointBGColor = '#6C78AF';
   }
 
-  showHistoryBooking(){
+  showHistoryBooking() {
     this.defaultColorAndDisplay();
     this.historyBookingDisplay = 'block';
     this.historyBookingColor = '#fff';
     this.historyBookingBGColor = '#6C78AF';
   }
 
-  showRoomInfo(){
+  showRoomInfo() {
     this.defaultColorAndDisplay();
     this.roomInfoDisplay = 'block';
     this.roomInfoColor = '#fff';
     this.roomInfoBGColor = '#6C78AF';
   }
 
-  showAppountRoom(){
+  showAppountRoom() {
     this.defaultColorAndDisplay();
     this.appountRoomDisplay = 'block';
     this.appountRoomColor = '#fff';
     this.appountRoomBGColor = '#6C78AF';
   }
 
-  showBookingRoom(){
+  showBookingRoom() {
     this.defaultColorAndDisplay();
     this.bookingRoomDisplay = 'block';
     this.bookingRoomColor = '#fff';
     this.bookingRoomBGColor = '#6C78AF';
   }
 
-  showListAdmin(){
+  showListAdmin() {
     this.defaultColorAndDisplay();
     this.searchDisplay = 'block';
     this.listAdminDisplay = 'block';
@@ -275,7 +288,7 @@ export class UserInfoComponent {
     this.listAdminBGColor = '#6C78AF';
   }
 
-  showListOwner(){
+  showListOwner() {
     this.defaultColorAndDisplay();
     this.searchDisplay = 'block';
     this.listOwnerDisplay = 'block';
@@ -283,7 +296,7 @@ export class UserInfoComponent {
     this.listOwnerBGColor = '#6C78AF';
   }
 
-  showListUser(){
+  showListUser() {
     this.defaultColorAndDisplay();
     this.searchDisplay = 'block';
     this.listUserDisplay = 'block';
@@ -291,10 +304,97 @@ export class UserInfoComponent {
     this.listUserBGColor = '#6C78AF';
   }
 
-  showStatistic(){
+  showStatistic() {
     this.defaultColorAndDisplay();
     this.statisticDisplay = 'block';
     this.statisticColor = '#fff';
     this.statisticBGColor = '#6C78AF';
   }
+
+  //TODO history appoint
+  historyAppoint: AppointDetail | any;
+
+  loadHistoryAppoint(): void {
+    this.userService.appointAllByUserId(this.authService.getAccountId())
+      .subscribe((res) => {
+        this.historyAppoint = res;
+        console.log("SUCCESS: load history appoints success");
+      }, (err) => {
+        console.error("ERROR: call api error");
+      })
+  }
+
+  getAppointStatusString(status: string): string {
+    switch (status) {
+      case 'PROCESSING_CREATE': return "Chờ xác nhận";
+      case 'CONFIRMED': return 'Đã đồng ý';
+      case 'REJECTED': return 'Đã từ chối';
+      case 'CANCELLED': return 'Đã hủy';
+      default: return 'Đang cập nhật';
+    }
+  }
+
+  cancelAppoint(appointId: number): void {
+    this.userService.cancelAppoint(appointId)
+      .subscribe((res) => {
+        this.historyAppoint = res;
+        console.log("SUCCESS: cancel appoint success");
+      }, (err) => {
+        console.error("ERROR: call api error");
+      });
+  }
+
+  //TODO history booking
+  historyBookings: BookingDetail | any;
+
+  loadHistoryBooking() {
+    this.userService.bookingAllByUserId(this.authService.getAccountId())
+      .subscribe((res) => {
+        this.historyBookings = res;
+        console.log(this.historyBookings.length);
+
+        console.log("SUCCESS: load history booking success");
+      }, (error) => {
+        console.error("ERROR: call api error");
+      });
+  }
+
+  getBookingStatusString(status: string): string {
+    switch (status) {
+      case 'PROCESSING': return 'Đang xử lý';
+      case 'CANCELLED': return 'Đã hủy';
+      case 'CONFIRMED': return 'Đã xác nhận';
+      case 'REJECTED': return 'Đã từ chối';
+      case 'EXPIRED': return 'Hết hạn';
+      case 'AWAITING_PAYMENT': return 'Chờ thanh toán';
+      case 'PAID': return 'Đã thanh toán';
+      default: return 'Đang cập nhật';
+    }
+  }
+
+  //TODO motel
+  countMotelActive: number = 0;
+  countMotelAll: number = 0;
+
+  getMotelActivateString(): string {
+    if (this.countMotelAll === 0) return "0";
+    return this.countMotelActive + "/" + this.countMotelAll;
+  }
+
+  loadMotelCount(): void {
+    this.ownerService.countMotelActivate(this.authService.getAccountId())
+      .subscribe((res) => {
+        let cma = res;
+
+        this.countMotelActive = cma.countMotelActivate;
+        this.countMotelAll = cma.count;
+
+        console.log("SUCCESS: load motel count success");
+      }, (err) => {
+        console.error("ERROR: call api error");
+      })
+  }
+
+  //TODO sex
+  SEX_LIST = ["MALE", "FEMALE", "LGBT", "OTHER"];
 }

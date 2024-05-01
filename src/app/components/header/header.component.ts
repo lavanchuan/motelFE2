@@ -9,21 +9,21 @@ import { UserInfoComponent } from '../user-info/user-info.component';
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule,
-  UserInfoComponent],
+    UserInfoComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
 
-  constructor(){
+  constructor() {
 
   }
 
-  isLogged():boolean {
+  isLogged(): boolean {
     return localStorage.getItem(IS_LOGGED) === LOGGIN_VALUE.TRUE.toString();
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
     localStorage.setItem(IS_LOGGED, LOGGIN_VALUE.FALSE.toString());
   }
@@ -38,4 +38,43 @@ export class HeaderComponent {
       return "";
     }
   }
+
+  // Notification and message
+  notificSrc = 'assets/icons/notific_';
+  notificCount = 200;
+  messageCount = 1;
+
+  getCountString(count: number): string {
+    return "" + (count > 20 ? "20+" : count);
+  }
+
+  //
+  isOns = [
+    { type: 'MESSAGE', state: false },
+    { type: 'NOTIFICATION', state: false }
+  ];
+
+  onType(type: string) {
+
+    if (this.getTypeState(type)) {
+      for (let i = 0; i < this.isOns.length; i++) {
+        this.isOns[i].state = false;
+      }
+    }
+    else {
+      for (let i = 0; i < this.isOns.length; i++) {
+        if (this.isOns[i].type !== type) this.isOns[i].state = false;
+        else this.isOns[i].state = true;
+      }
+    }
+  }
+
+  getTypeState(type: string): boolean {
+    for (let i = 0; i < this.isOns.length; i++) {
+      if (this.isOns[i].type === type) return this.isOns[i].state;
+    }
+
+    return false;
+  }
+
 }

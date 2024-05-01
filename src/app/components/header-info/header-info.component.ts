@@ -39,4 +39,72 @@ export class HeaderInfoComponent {
       return "";
     }
   }
+
+  // Notification and message
+  notificSrc = 'assets/icons/notific_';
+  notificCount = 200;
+  messageCount = 1;
+
+  getCountString(count: number): string {
+    return "" + (count > 20 ? "20+" : count);
+  }
+
+  //
+  isOns = [
+    { type: 'MESSAGE', state: false },
+    { type: 'NOTIFICATION', state: false }
+  ];
+
+  onType(type: string) {
+
+    if (this.getTypeState(type)) {
+      for (let i = 0; i < this.isOns.length; i++) {
+        this.isOns[i].state = false;
+      }
+    }
+    else {
+      for (let i = 0; i < this.isOns.length; i++) {
+        if (this.isOns[i].type !== type) this.isOns[i].state = false;
+        else this.isOns[i].state = true;
+      }
+    }
+  }
+
+  getTypeState(type: string): boolean {
+    for (let i = 0; i < this.isOns.length; i++) {
+      if (this.isOns[i].type === type) return this.isOns[i].state;
+    }
+
+    return false;
+  }
+
+  notifics = [
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
+  ];
+  messages = [
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
+  ]
+
 }

@@ -9,7 +9,7 @@ import { MessageAllOfSender } from '../../models/response/MessageAllOfSender';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
-import { MESSAGE_ALL, MESSAGE_CURRENT, ROOM_OWNER_CURRENT, ROOM_STATUS } from '../../services/Instance';
+import { MESSAGE_ALL, MESSAGE_CURRENT, ROOM_IMAGE_DEFAULT, ROOM_OWNER_CURRENT, ROOM_STATUS, URL_ROOM_IMAGE } from '../../services/Instance';
 import { MessageService } from '../../services/MessageService';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -66,6 +66,8 @@ export class RoomDetailComponent implements OnInit {
     if (this.currentImageIndex === -1)
       this.currentImageIndex = this.images.length - 1;
   }
+
+
   isSale(sale: number): boolean {
     return sale == 0;
   }
@@ -251,13 +253,26 @@ export class RoomDetailComponent implements OnInit {
 
   onMessage(): void {
     this.messageService.onMessage();
-    let messAllStr : string | any = localStorage.getItem(MESSAGE_ALL);
-    let messageAll : MessageAllOfSender = JSON.parse(messAllStr);
+    let messAllStr: string | any = localStorage.getItem(MESSAGE_ALL);
+    let messageAll: MessageAllOfSender = JSON.parse(messAllStr);
 
-    let roomOwnerCurrentInfoStr : string | any = localStorage.getItem(ROOM_OWNER_CURRENT);
-    let roomOwnerCurrentInfo : RoomOwnerResponse = JSON.parse(roomOwnerCurrentInfoStr);
+    let roomOwnerCurrentInfoStr: string | any = localStorage.getItem(ROOM_OWNER_CURRENT);
+    let roomOwnerCurrentInfo: RoomOwnerResponse = JSON.parse(roomOwnerCurrentInfoStr);
 
     let messageCurrent = messageAll.messageAllOfReceiverList.filter(mes => mes.receiver.id === roomOwnerCurrentInfo.data.owner.id)[0];
     sessionStorage.setItem(MESSAGE_CURRENT, JSON.stringify(messageCurrent));
   }
+
+  //TODO image
+  getImageUrl(): string {
+    let url: string = URL_ROOM_IMAGE;
+    let imageName = "";
+    if (!this.roomDetail.data.images[this.currentImageIndex] ||
+      this.roomDetail.data.images[this.currentImageIndex].length === 0)
+      imageName = ROOM_IMAGE_DEFAULT;
+    else imageName = this.roomDetail.data.images[this.currentImageIndex].url;
+
+    return url + imageName + ".png";
+  }
+
 }

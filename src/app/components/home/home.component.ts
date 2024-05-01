@@ -3,13 +3,14 @@ import { Component, NgModule, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ImageDTO } from '../../models/dto/ImageDTO';
 import { MotelRoomDTO } from '../../models/dto/MotelRoomDTO';
 import { AppointRequest } from '../../models/request/AppointRequest';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
 import { ApiService } from '../../services/api.service';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
-import { ROOM_OWNER_CURRENT, USER_ID } from '../../services/Instance';
+import { ROOM_IMAGE_DEFAULT, ROOM_OWNER_CURRENT, URL_ROOM_IMAGE, USER_ID } from '../../services/Instance';
 import { MessageService } from '../../services/MessageService';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -159,5 +160,11 @@ export class HomeComponent {
     const integerPart: string = Math.floor(price).toString();
     const formattedPrice: string = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return formattedPrice;
+  }
+
+  //TODO image
+  loadImage(images: ImageDTO[]): string {
+    if(!images || images.length === 0) return URL_ROOM_IMAGE + ROOM_IMAGE_DEFAULT + ".png";
+    return URL_ROOM_IMAGE + images[0].url + ".png";
   }
 }
