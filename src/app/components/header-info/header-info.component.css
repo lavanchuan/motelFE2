@@ -1,29 +1,38 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
+
 .header {
     background-color: #F1F1F1;
-    color: hsl(0, 0%, 0%); /* Màu chữ của header */
-    padding: 10px; /* Khoảng cách giữa nội dung và viền của header */
-    display: flex; /* Hiển thị các phần tử trên cùng một dòng */
-    justify-content: space-between; /* Canh chỉnh các phần tử theo chiều ngang */
-    align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
+    color: hsl(0, 0%, 0%);
+    /* Màu chữ của header */
+    padding: 10px;
+    /* Khoảng cách giữa nội dung và viền của header */
+    display: flex;
+    /* Hiển thị các phần tử trên cùng một dòng */
+    justify-content: space-between;
+    /* Canh chỉnh các phần tử theo chiều ngang */
+    align-items: center;
+    /* Căn chỉnh các phần tử theo chiều dọc */
 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-   
-    z-index: 9999; /* Đảm bảo header hiển thị trên tất cả các phần tử khác */
+
+    z-index: 9999;
+    /* Đảm bảo header hiển thị trên tất cả các phần tử khác */
 
 }
 
 .header .navigation {
     display: flex;
-    align-items: center; /* Canh các phần tử theo chiều dọc giữa nhau */
-    flex-grow: 1; /* Mở rộng navigation để lấp đầy không gian trống */
-    margin-right: 10%; 
+    align-items: center;
+    /* Canh các phần tử theo chiều dọc giữa nhau */
+    flex-grow: 1;
+    /* Mở rộng navigation để lấp đầy không gian trống */
+    margin-right: 10%;
     font-size: 1.5em;
     font-family: Lexend;
 }
@@ -35,49 +44,56 @@
 }
 
 .nav-home li {
-    display: inline; /* Hiển thị các phần tử trên cùng một hàng */
+    display: inline;
+    /* Hiển thị các phần tử trên cùng một hàng */
 }
 
 .nav-menu {
     list-style: none;
     padding: 0;
     margin: 0;
-    margin-left: auto; /* Đẩy các phần tử sang phải cùng khoảng cách giữa chúng */
+    margin-left: auto;
+    /* Đẩy các phần tử sang phải cùng khoảng cách giữa chúng */
 }
 
 .nav-menu li {
     display: inline;
-    margin-left: 20px; /* Khoảng cách giữa các phần tử */
+    margin-left: 20px;
+    /* Khoảng cách giữa các phần tử */
 }
 
 .logo img {
-    height: 50px; /* Đặt chiều cao của logo */
-    width: auto; /* Đảm bảo logo co dãn đúng tỷ lệ */
-    vertical-align: middle; /* Canh logo theo chiều dọc giữa với văn bản */
+    height: 50px;
+    /* Đặt chiều cao của logo */
+    width: auto;
+    /* Đảm bảo logo co dãn đúng tỷ lệ */
+    vertical-align: middle;
+    /* Canh logo theo chiều dọc giữa với văn bản */
     padding-left: 40px;
     padding-right: 40px;
 }
 
-.nav-menu li a{
+.nav-menu li a {
     color: #6C78AF;
     text-decoration: none;
     padding: 10px;
     border-radius: 10px;
 }
+
 .nav-home li a {
-    font-size:45px;
+    font-size: 45px;
     color: #6C78AF;
     text-decoration: none;
 }
 
-.nav-menu li a:hover{
+.nav-menu li a:hover {
     color: #fff;
     background-color: #6C78AF;
 }
 
 /* Notification and message */
 
-.icon{
+.icon {
     position: relative;
     top: 1px;
     display: inline-block;
@@ -88,7 +104,7 @@
     user-select: none;
 }
 
-.count{
+.count {
     position: absolute;
     font-size: 10px;
     font-weight: bold;
@@ -100,7 +116,8 @@
     user-select: none;
 }
 
-.notific-container, .message-container{
+.notific-container,
+.message-container {
     position: absolute;
     list-style-type: none;
     right: 5%;
@@ -110,10 +127,12 @@
     font-size: 20px;
 }
 
-.notific-content, .message-content{
+.notific-content,
+.message-content {
     display: block !important;
     margin-bottom: 1px;
     background-color: #fff;
+    padding-right: 10px;
 }
 
 .message-content{
@@ -122,7 +141,8 @@
     text-overflow: ellipsis;
 }
 
-.notific-time, .message-time{
+.notific-time,
+.message-time {
     text-align: right;
     font-size: 15px;
 }

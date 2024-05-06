@@ -1,67 +1,155 @@
 .message-container {
-    position: fixed;
-    bottom: 1px;
-    right: 20px;
-    width: 300px;
-    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    width: 360px;
+    height: 500px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px black solid;
+    overflow: auto;
+    position: absolute;
+    background-color: rgb(255,255,255);
+    overflow-x: hidden;
+    user-select: none;
+}
+
+/* .message-container::-webkit-scrollbar {
+    display: none;
+} */
+
+.message-container .message-header {
+    padding: 0px 10px 0px 10px;
+}
+
+.message-nav {
+    padding: 0;
+    margin: 0 10px 0 10px;
+    font-size: 0.8em;
+}
+
+.message-nav .message-item {
+    padding: 2px 5px 5px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-nav .message-item:hover {
+    background-color: rgb(200, 230, 230);
+    border-radius: 10px;
+}
+
+.message-nav h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.message-nav .message-item .message-mess {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.message-nav .message-item:hover {
+    background-color: rgb(200, 230, 230);
+}
+
+.message-content{
+    position: fixed;
+    width: 300px;
+    height: 440px;
+    bottom: 0;
+    right: 20px;
+    border: 5px rgb(0,0,0) solid;
+    border-radius: 20px 20px 0 0;
+    overflow: auto;
+    overflow-x: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.message-content .message-content-header {
+    font-weight: bold;
+    user-select: none;
+    padding: 10px;
+    padding-bottom: 0;
+    background-color: rgb(0, 230, 230);
+}
+
+.message-content .message-content-header h4 {
+    padding: 10px;
+    margin: 0;
+    display: inline-block;
     overflow: hidden;
 }
 
-.message-header {
-    padding: 10px;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    border-bottom: 1px solid #ddd;
+.message-content .message-content-header .icon {
+    float: right;
+    padding: 5px;
+    margin: 2px;
+    margin-left: 5px;
+    border: 1px rgb(0,0,0) solid;
+    border-radius: 25%;
+    font-family: '';
 }
 
-.message-content {
-    max-height: 300px;
-    overflow-y: auto;
+.message-content .message-content-header .icon:hover {
+    color: red;
 }
 
-.message {
-    /* max-width: 80%; */
-    padding: 10px;
-    margin: 5px;
+.message-content .message-content-main {
+    height: 310px;
+    overflow: auto;
+}
+
+.message-content-item {
+    padding: 0px 10px 5px 10px;
+    font-size: 0.9em;
+}
+
+.message-content-item:hover{
+    background-color: rgb(200, 230, 230);
+}
+
+.message-content-item .message-mess {
+    display: block;
     border-radius: 10px;
+    padding: 5px;
+    text-justify: auto;
+    font-size: 0.8em;
 }
 
-.own-message {
-    background-color: #0084ff;
-    color: #fff;
-    align-self: flex-start;
-    text-align: left;
-}
-
-.other-message {
-    background-color: #ddd;
-    color: #333;
-    align-self: flex-end;
+.message-content-item .message-time {
+    width: 100%;
+    font-style: italic;
+    font-size: 0.6em;
+    display: inline-block;
     text-align: right;
 }
 
-.message-control {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #ddd;
+.message-self {
+    text-align: right;
+    background-color: rgb(0, 230, 100);
 }
 
-.message-control input[type="text"] {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 20px;
+.message-other {
+    background-color: rgb(0, 100, 230);
+}
+
+.message-send {
+    padding: 2px 10px 0 10px;
+}
+
+.message-send textarea {
+    width: 80%;
+    height: 60px;
+    font-size: 0.65em;
+    margin: 0;
+    border: 1px black solid;
+    border-radius: 5px
+}
+
+.message-send img {
+    width: 8%;
+    float: right;
     margin-right: 10px;
-}
-
-.message-control button {
-    padding: 8px 20px;
-    background-color: #0084ff;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
+    padding: 5px 0 0 0;
 }

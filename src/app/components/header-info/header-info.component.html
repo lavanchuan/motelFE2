@@ -19,33 +19,24 @@
                 <li *ngIf="!isLogged()"><a href="/login">Đăng Nhập</a></li>
                 <li *ngIf="!isLogged()"><a href="/register">Đăng Ký</a></li>
                 <li *ngIf="isLogged()"><a href="/user-info">{{getUserName()}}</a></li>
-                <li *ngIf="isLogged()"><a><img [src]="notificSrc+(notificCount > 0 ? 'on' : 'off')+'.png'" class="icon"
-                            (click)="onType('NOTIFICATION')">
-                        <span class="count" *ngIf="notificCount > 0">{{getCountString(notificCount)}}</span>
-                        <ul class="notific-container" *ngIf="getTypeState('NOTIFICATION')">
-                            <li class="notific-content" *ngFor="let notific of notifics; let i = index;">
-                                <div class="notific-message">
-                                    {{notific.sender}} {{notific.message}} -----------------------------------------
-                                </div>
-                                <div class="notific-time">
-                                    {{notific.createAt}}
-                                </div>
-                            </li>
-                        </ul>
-                    </a></li>
+                <li *ngIf="isLogged()"><a>
+                        <img [src]="notificSrc+(getNotificationCount()> 0 ? 'on' : 'off')+'.png'" class="icon"
+                            (click)="onNotification()">
+                        <span class="count" *ngIf="getNotificationCount() > 0">
+                            {{getCountString(getNotificationCount())}}
+                        </span></a>
+                    <app-notification *ngIf="isOnNotification()"></app-notification>
+                </li>
                 <!-- <li *ngIf="isLogged()"><a><img src="assets/icons/notific_on.png" class="icon"></a></li> -->
-                <li *ngIf="isLogged()"><a><img src="assets/icons/message.png" class="icon" (click)="onType('MESSAGE')">
-                        <span class="count" *ngIf="messageCount > 0">{{getCountString(messageCount)}}</span>
-                        <div class="message-container" *ngIf="getTypeState('MESSAGE')">
-                            <div class="message-content" *ngFor="let message of messages; let i = index;">
-                                <div class="message-message">
-                                    <b>{{message.sender}}</b> <span class="mess">{{message.message}}</span>
-                                </div>
-                                <div class="message-time">{{message.createAt}}</div>
-                            </div>
-                        </div>
-                    </a></li>
-                <li *ngIf="isLogged()" (click)="logout()"><a href=""><i class="glyphicon glyphicon-log-out"></i></a>
+                <li *ngIf="isLogged()"><a>
+                        <img src="assets/icons/message.png" class="icon" (click)="onMessage()">
+                        <span class="count" *ngIf="getMessageCount() > 0">
+                            {{getCountString(getMessageCount())}}
+                        </span></a></li>
+
+                <app-message *ngIf="isOnMessage()"></app-message>
+                <li *ngIf="isLogged()" (click)="logout()"><a href="">
+                        <i class="glyphicon glyphicon-log-out"></i></a>
                 </li>
             </ul>
         </nav>

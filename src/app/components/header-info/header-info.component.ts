@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { IS_LOGGED, LOGGIN_VALUE, USER_INFO } from '../../services/Instance';
+import { NotificationService } from '../../services/notification/notification.service';
 import { HeaderComponent } from '../header/header.component';
+import { MessageComponent } from '../message/message.component';
+import { NotificationComponent } from '../notification/notification/notification.component';
 import { UserInfoComponent } from '../user-info/user-info.component';
 
 @Component({
@@ -10,13 +13,15 @@ import { UserInfoComponent } from '../user-info/user-info.component';
   standalone: true,
   imports: [
     CommonModule,
-    UserInfoComponent
+    UserInfoComponent,
+    NotificationComponent,
+    MessageComponent
   ],
   templateUrl: './header-info.component.html',
   styleUrl: './header-info.component.css'
 })
 export class HeaderInfoComponent {
-  constructor() {
+  constructor(private notificationService: NotificationService) {
 
   }
 
@@ -42,69 +47,36 @@ export class HeaderInfoComponent {
 
   // Notification and message
   notificSrc = 'assets/icons/notific_';
-  notificCount = 200;
-  messageCount = 1;
 
   getCountString(count: number): string {
     return "" + (count > 20 ? "20+" : count);
   }
 
-  //
-  isOns = [
-    { type: 'MESSAGE', state: false },
-    { type: 'NOTIFICATION', state: false }
-  ];
 
-  onType(type: string) {
 
-    if (this.getTypeState(type)) {
-      for (let i = 0; i < this.isOns.length; i++) {
-        this.isOns[i].state = false;
-      }
-    }
-    else {
-      for (let i = 0; i < this.isOns.length; i++) {
-        if (this.isOns[i].type !== type) this.isOns[i].state = false;
-        else this.isOns[i].state = true;
-      }
-    }
+  getNotificationCount(): number {
+    return this.notificationService.getCountNotificationSent();
   }
 
-  getTypeState(type: string): boolean {
-    for (let i = 0; i < this.isOns.length; i++) {
-      if (this.isOns[i].type === type) return this.isOns[i].state;
-    }
-
-    return false;
+  getMessageCount(): number {
+    return 1;
   }
 
-  notifics = [
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-    { sender: 1, createAt: '12-12-2024 12:12:12', message: 'HELLO' },
-  ];
-  messages = [
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-    { sender: 'senderName', status: 'status', message: 'message ------ ------- messsage..', createAt: '12-12-2024 12:12:12' },
-  ]
+  // CONTROL
+  onNotification(): void {
+    this.notificationService.onType('NOTIFICATION');
+  }
+
+  isOnNotification(): boolean {
+    return this.notificationService.getTypeState('NOTIFICATION');
+  }
+
+  onMessage(): void {
+    this.notificationService.onType('MESSAGE')
+  }
+
+  isOnMessage(): boolean {
+    return this.notificationService.getTypeState('MESSAGE');
+  }
 
 }

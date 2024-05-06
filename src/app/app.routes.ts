@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { MessageComponent } from './components/message/message.component';
+import { NotificationComponent } from './components/notification/notification/notification.component';
 import { OwnerHomeComponent } from './components/owner/owner-home/owner-home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RoomDetailComponent } from './components/room-detail/room-detail.component';
@@ -17,6 +19,6 @@ export const routes: Routes = [
     {path: "user-info", component: UserInfoComponent},
     {path: "admin-home", component: AdminHomeComponent},
     {path: "owner-home", component: OwnerHomeComponent},
-    {path: "test", component: TestComponent},
-    
+    {path: "notification", component: NotificationComponent},
+    {path: "message", component: MessageComponent},
 ];

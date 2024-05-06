@@ -1,0 +1,71 @@
+.notification-container {
+    padding: 0;
+    margin: 0;
+    width: 360px;
+    height: 500px;
+    border-radius: 10px;
+    border: 1px black solid;
+    overflow: auto;
+    position: absolute;
+    background-color: rgb(255,255,255);
+    overflow-x: hidden;
+}
+
+.notification-header {
+    padding: 0px 10px 0px 10px;
+}
+
+.notification-nav {
+    font-family: inherit;
+}
+
+.notification-nav ul {
+    list-style: none;
+    padding: 0px 20px 0px 20px;
+}
+
+.notification-nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 5px;
+    user-select: none;
+}
+
+.notification-nav ul li:hover {
+    background-color: rgb(200, 230, 230);
+    border: 1px black solid;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.notification-content {
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+}
+
+.notification-content h4 {
+    padding: 0px 10px 0px 10px;
+    margin: 0;
+    font-size: 1em;
+}
+
+.notification-content .notification-item {
+    width: 100%;
+    display: block;
+    padding: 2px 10px 0px 10px;
+    overflow: auto;
+}
+
+.notification-content .notification-item:hover {
+    background-color: rgb(200, 230, 230);
+}
+
+.notification-time {
+    /* width: 100%; */
+    display: block;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 0.6em;
+    font-style: italic;
+}

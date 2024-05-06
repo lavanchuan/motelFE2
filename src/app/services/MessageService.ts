@@ -1,7 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MessageDTO } from '../models/dto/MessageDTO';
+import { MessageSendRequest } from '../models/request/MessageSendRequest';
 import { MessageAllOfSender } from '../models/response/MessageAllOfSender';
+import { OtherResponse } from '../models/response/OtherResponse';
 import { ApiService } from './api.service';
-import { MESSAGE_ALL, USER_ID } from './Instance';
+import { INSTANCE, MESSAGE_ALL, USER_ID } from './Instance';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +17,8 @@ export class MessageService {
 
   private messageAll: MessageAllOfSender | any;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+    private http: HttpClient) {
     this.loadMessageAll();
   }
 
@@ -47,4 +53,14 @@ export class MessageService {
       console.error("ERROR:\tLỗi khi get message all");
     });
   }
+
+  public getMessageAll(): MessageAllOfSender {
+    return this.messageAll;
+  }
+
+  // SEND MESSAGE
+  public sendMessage(request: MessageSendRequest): Observable<OtherResponse<MessageDTO>> {
+    return this.http.post<OtherResponse<MessageDTO>>(`${INSTANCE}/api/send-message`, request);
+  }
 }
+

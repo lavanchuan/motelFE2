@@ -1,0 +1,109 @@
+<div class="notification-container">
+    <div class="notification-header">
+        <h2>Thông báo</h2>
+    </div>
+    <div class="notification-nav">
+        <ul>
+            <li *ngFor="let type of NOTIFICATION_TYPE; let i = index;"
+                (click)="notificationType = NOTIFICATION_TYPE[i];">{{getTypeString(i)}}</li>
+        </ul>
+    </div>
+    <div class="notification-content">
+        <div [ngSwitch]="notificationType">
+            <ng-container *ngSwitchCase="'ALL'">
+                <div class="notification-new">
+                    <!-- <h4>Mới</h4> -->
+                    <div class="new-content">
+                        <span class="notification-item" *ngFor="let data of getNotifications(); let i = index;">
+                            <div *ngIf="data.navigate" (click)="navigate(data)">
+                                <b *ngIf="isSentStatus(data.status)">{{data.message}}</b>
+                                <span *ngIf="!isSentStatus(data.status)">{{data.message}}</span>
+                                <span class="notification-time">{{data.createAt}}</span>
+                            </div>
+                            <div *ngIf="!data.navigate">
+                                <b *ngIf="isSentStatus(data.status)">{{data.message}}</b>
+                                <span *ngIf="!isSentStatus(data.status)">{{data.message}}</span>
+                                <span class="notification-time">{{data.createAt}}</span>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+                <!-- <div class="notification-old">
+                    <h4>Trước đó</h4>
+                    <div class="new-content">
+                        <span class="notification-item">xxx</span>
+                        <span class="notification-item">xxx</span>
+                        <span class="notification-item">xxx</span>
+                    </div>
+                </div> -->
+            </ng-container>
+            <ng-container *ngSwitchCase="'UNREAD'">
+                <div class="notification-unread">
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                    <span class="notification-item">Chưa đọc</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

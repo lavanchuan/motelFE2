@@ -1,11 +1,44 @@
-<div class="message-container">
-    <div class="message-header" (click)="offMessage()">{{messageCurrent.receiver.name}}</div>
-    <div class="message-content">
-        <div *ngFor="let mess of messageCurrent.messageList" 
-        class="message {{mess.senderId===getUserId()?'own-message':'other-message'}}">{{mess.message}}</div>
+<div class="message-container" *ngIf="getIsOnMessageNav()">
+    <div class="message-header">
+        <h2>Tin nhắn</h2>
     </div>
-    <div class="message-control">
-        <input type="text" id="txtMessage" placeholder="Tin nhắn" />
-        <button >Gửi</button>
+    <div class="message-nav">
+        <div *ngFor="let messageDetail of messageAll.messageAllOfReceiverList" class="message-item"
+            (click)="onMessageContent(messageDetail);">
+            <h5>{{messageDetail.receiver.name}}</h5>
+            <span class="message-mess" *ngIf="!isReceive(messageDetail.messageList[0].receiverId) || 
+                !isSent(messageDetail.messageList[0])">
+                <span *ngIf="isReceive(messageDetail.messageList[0].receiverId)">{{messageDetail.receiver.name}}: </span>
+                {{messageDetail.messageList[0].message}}
+            </span>
+            <b *ngIf="isReceive(messageDetail.messageList[0].receiverId) && 
+                isSent(messageDetail.messageList[0])"><span class="message-mess">
+                    <span *ngIf="isReceive(messageDetail.messageList[0].receiverId)">{{messageDetail.receiver.name}}: </span>
+                    {{messageDetail.messageList[0].message}}
+                </span></b>
+        </div>
+    </div>
+</div>
+
+
+<div class="message-content" *ngIf="getIsOnMessageContent()">
+    <div class="message-content-header">
+        <h4>{{messList.receiver.name}}</h4>
+        <span class="close close icon" (click)="offMessageContent()">X</span>
+        <span class="min-size close icon" (click)="minSizeMessageContent()">-</span>
+    </div>
+    <div class="message-content-main">
+        <div class="message-content-item" *ngFor="let mess of messList.messageList">
+            <span class="message-mess message-self" *ngIf="!isReceive(mess.receiverId)">{{mess.message}}</span>
+            <span class="message-mess message-other" *ngIf="isReceive(mess.receiverId)">{{mess.message}}</span>
+            <span class="message-time">{{mess.createAt}}</span>
+        </div>
+
+    </div>
+    <div class="message-send">
+        <textarea rows="max" placeholder="Tin nhắn" [(ngModel)]="txtMessageSend"></textarea>
+        <i class="btn-send">
+            <img src="/assets/icons/send.png" *ngIf="txtMessageSend && txtMessageSend !== ''" (click)="sendMessage()">
+        </i>
     </div>
 </div>
