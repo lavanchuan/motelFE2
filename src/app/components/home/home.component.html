@@ -13,9 +13,10 @@
     <app-header></app-header>
     <div class="container">
         <div class = "search">
-            <form action="" class = "form-search">
-                <input type="text" id="address" name="address"  required placeholder = "Địa chỉ tìm kiếm">
-                <select id="price" name="price">
+            <form (ngSubmit)="searchRoomByAddressAndPrice()" class = "form-search">
+                <input type="text" id="address" name="address"  required placeholder = "Địa chỉ tìm kiếm"
+                    [(ngModel)]="addressSearch">
+                <select id="price" name="price" [(ngModel)]="priceSearch">
                     <option value="0" selected>-- Giá cho thuê --</option>
                     <option value="1">Dưới 2 triệu</option>
                     <option value="2">Từ 2 đến 4 triệu</option>

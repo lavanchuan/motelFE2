@@ -74,7 +74,7 @@ export class HeaderComponent {
   }
 
   onMessage(): void {
-    this.notificationService.onType('MESSAGE')
+    this.notificationService.onType('MESSAGE');
   }
 
   isOnMessage(): boolean {
