@@ -29,9 +29,9 @@ export class RoomService {
   }
 
   // bookingAppoint(request: AppointRequest) : Observable<AppointResponse>{
-  //   console.log("\n\nbookingAppoint: {" + request.meetTime + ", ");
-  //   console.log(request.userId +", ");
-  //   console.log(request.motelRoomId + "}\n\n");
+  //   // console.log("\n\nbookingAppoint: {" + request.meetTime + ", ");
+  //   // console.log(request.userId +", ");
+  //   // console.log(request.motelRoomId + "}\n\n");
     
   //   return this.http.post<AppointResponse>(INSTANCE + "/user/booking-appoint", request);
   // }
@@ -43,13 +43,13 @@ export class RoomService {
   // Book room
   // bookingRoom(request: BookRoomDTO) : Observable<BookRoomResponse>{
 
-  //   console.log(request);
+  //   // console.log(request);
     
   //   return this.http.post<BookRoomResponse>(INSTANCE + "/user/booking-room", request);
   // }
   bookingRoom(request: BookingRoomRequest) : Observable<BookRoomResponse>{
 
-    console.log(request);
+    // console.log(request);
     
     return this.http.post<BookRoomResponse>(INSTANCE + "/user/booking-room", request);
   }

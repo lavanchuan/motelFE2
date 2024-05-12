@@ -64,7 +64,7 @@ export class AdminHomeComponent {
   loadUser(): void {
     this.adminService.getUserAll().subscribe((response) => {
       this.dataShow = response;
-      console.log("SUCCESS: Load ok");
+      // // console.log("SUCCESS: Load ok");
     }, (error) => {
       console.error("ERROR: Call API error");
     });
@@ -73,7 +73,7 @@ export class AdminHomeComponent {
   loadOwner(): void {
     this.adminService.getOwnerAll().subscribe((response) => {
       this.dataShow = response;
-      console.log("SUCCESS: Load ok");
+      // // console.log("SUCCESS: Load ok");
     }, (error) => {
       console.error("ERROR: Call API error");
     });
@@ -82,8 +82,8 @@ export class AdminHomeComponent {
   loadRoom(): void {
     this.adminService.getAllAddRoomRequest().subscribe((response) => {
       this.dataShow = response;
-      console.log(response[0].data.room.name);
-      console.log("SUCCESS: Load ok");
+      // // console.log(response[0].data.room.name);
+      // // console.log("SUCCESS: Load ok");
     }, (error) => {
       console.error("ERROR: Call API error");
     });
@@ -96,12 +96,12 @@ export class AdminHomeComponent {
   // CONFIRM REGIS OWNER
   confirmRegisOwner(id: number, isConfirm: boolean): void {
     if (isConfirm) this.adminService.confirmRegisOwner(new ConfirmRequest(id, "")).subscribe((response) => {
-      console.log(response);
+      // // console.log(response);
     }, (error) => {
       console.error("ERROR: call api error");
     });
     else this.adminService.rejectRegisOwner(new ConfirmRequest(id, "")).subscribe((response) => {
-      console.log(response);
+      // // console.log(response);
     }, (error) => {
       console.error("ERROR: call api error");
     });
@@ -113,12 +113,12 @@ export class AdminHomeComponent {
   confirmAddRoomRequest(id: number, isConfirm: boolean): void {
 
     if (isConfirm) this.adminService.confirmAddRoom(new ConfirmRequest(id, ""), this.getAdminId()).subscribe((response) => {
-      console.log(response);
+      // // console.log(response);
     }, (error) => {
       console.error("ERROR: call api error");
     });
     else this.adminService.rejectAddRoom(new ConfirmRequest(id, ""), this.getAdminId()).subscribe((response) => {
-      console.log(response);
+      // // console.log(response);
     }, (error) => {
       console.error("ERROR: call api error");
     });
@@ -150,7 +150,7 @@ export class AdminHomeComponent {
   loadMotelOwner(): void {
     this.adminService.findAllMotel().subscribe((res) => {
       this.dataShow = res;
-      console.log("SUCCESS: load motel owner success");
+      // // console.log("SUCCESS: load motel owner success");
     }, (error) => {
       console.error("ERROR: load motel owner error");
     });
@@ -178,7 +178,7 @@ export class AdminHomeComponent {
           alert("Xác nhận thêm nhà trọ thất bại");
           console.error("ERROR: confirm add motel error");
         } else {
-          console.log("SUCCESS: confirm add motel success");
+          // // console.log("SUCCESS: confirm add motel success");
           alert("Xác nhận thêm nhà trọ thành công");
         }
       }, (err) => {
@@ -191,7 +191,7 @@ export class AdminHomeComponent {
           alert("Từ chối thêm nhà trọ thất bại");
           console.error("ERROR: reject add motel error");
         } else {
-          console.log("SUCCESS: reject add motel success");
+          // console.log("SUCCESS: reject add motel success");
           alert("Từ chối thêm nhà trọ thành công");
         }
       }, (err) => {
@@ -208,7 +208,7 @@ export class AdminHomeComponent {
   loadRoomDetail(): void {
     this.adminService.findRoomAll().subscribe((res) => {
       this.dataShow = res;
-      console.log("SUCCESS: load room detail success");
+      // console.log("SUCCESS: load room detail success");
     }, (err) => {
       console.error("ERROR: load room detail error");
     });
@@ -237,7 +237,7 @@ export class AdminHomeComponent {
             alert("Xác nhận thêm phòng trọ thất bại");
             console.error("ERROR: confirm add room error");
           } else {
-            console.log("SUCCESS: confirm add room success");
+            // console.log("SUCCESS: confirm add room success");
             alert("Xác nhận thêm phòng trọ thành công");
           }
         }, (err) => {
@@ -251,7 +251,7 @@ export class AdminHomeComponent {
             alert("Từ chối thêm phòng trọ thất bại");
             console.error("ERROR: reject add room error");
           } else {
-            console.log("SUCCESS: reject add room success");
+            // console.log("SUCCESS: reject add room success");
             alert("Từ chối thêm phòng trọ thành công");
           }
         }, (err) => {

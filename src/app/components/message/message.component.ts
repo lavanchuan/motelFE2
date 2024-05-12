@@ -22,24 +22,24 @@ import { UserService } from '../../services/user.service';
 })
 export class MessageComponent implements OnInit {
 
-  messageAll: MessageAllOfSender | any;
+  // messageAll: MessageAllOfSender | any;
   autoLoadMessageAll: any;
 
   constructor(private messageService: MessageService,
     private userService: UserService,
     private notificationService: NotificationService,
     private authService: AuthenService) {
-    this.getMessageAll();
+    // this.getMessageAll();
   }
   ngOnInit(): void {
-    this.autoLoadMessageAll = setInterval(() => {
-      this.messageAll = this.getMessageAll();
-      this.messList = this.getMessageListOfReceiver(this.messageAll, this.messList.receiver);
-    }, 1000);
+    // this.autoLoadMessageAll = setInterval(() => {
+    //   this.messageAll = this.getMessageAll();
+    //   this.messList = this.getMessageListOfReceiver(this.messageAll, this.messList.receiver);
+    // }, 1000);
   }
 
   ngDestroy(): void {
-    clearInterval(this.autoLoadMessageAll());
+    // clearInterval(this.autoLoadMessageAll());
   }
 
   getMessageListOfReceiver(messAll: MessageAllOfSender, receiver: AccountDTO2): MessageAllOfReceiver | any {
@@ -49,38 +49,38 @@ export class MessageComponent implements OnInit {
     return null;
   }
 
-  isOnMessageNav: boolean = true;
+  // isOnMessageNav: boolean = true;
   getIsOnMessageNav(): boolean {
-    return this.isOnMessageNav;
+    return this.notificationService.getIsOnMessageNav();
   }
 
   offMessageNav(): void {
-    this.isOnMessageNav = false;
+    this.notificationService.offMessageNav();
   }
 
   onMessageNav(): void {
-    this.isOnMessageNav = true;
+    this.notificationService.onMessageNav();
+
   }
 
-  isOnMessageContent: boolean = false;
+  // isOnMessageContent: boolean = false;
   getIsOnMessageContent(): boolean {
-    return this.isOnMessageContent;
+    return this.notificationService.getIsOnMessageContent();
   }
 
   offMessageContent(): void {
-    this.isOnMessageContent = false;
-    this.notificationService.offMessage();
+    this.notificationService.offMessageContent();
   }
 
-  messList: MessageAllOfReceiver | any;
+  // messList: MessageAllOfReceiver | any;
   onMessageContent(messList: MessageAllOfReceiver): void {
-    this.messList = messList;
-    this.isOnMessageContent = true;
+    this.notificationService.setMessList(messList);
+    this.notificationService.onMessageContent();
     this.offMessageNav();
-    for(let i = 0; i < this.messList.messageList.length; i++){
-      if(this.messList.messageList[i].status === "SANDED" && 
-        this.authService.getAccountId() === this.messList.messageList[i].receiverId) {
-        this.notificationService.readMessageAPI(this.messList.messageList[i]);
+    for (let i = 0; i < this.notificationService.getMessList().messageList.length; i++) {
+      if (this.notificationService.getMessList().messageList[i].status === "SANDED" &&
+        this.authService.getAccountId() === this.notificationService.getMessList().messageList[i].receiverId) {
+        this.notificationService.readMessageAPI(this.notificationService.getMessList().messageList[i]);
       }
     }
   }
@@ -92,10 +92,10 @@ export class MessageComponent implements OnInit {
   txtMessageSend: string = "";
   sendMessage(): void {
     this.messageService.sendMessage(new MessageSendRequest(this.authService.getAccountId(),
-      this.messList.receiver.id, this.txtMessageSend))
+    this.notificationService.getMessList().receiver.id, this.txtMessageSend))
       .subscribe((res) => {
         if (res.status === 200) {
-          console.log("SUCCESS: send message success");
+          // console.log("SUCCESS: send message success");
           this.txtMessageSend = "";
         } else console.error("ERROR: send message error");
       }, (err) => {
@@ -114,4 +114,7 @@ export class MessageComponent implements OnInit {
   isReceive(receiverId: number): boolean {
     return receiverId === this.authService.getAccountId();
   }
+
+  getMessList(): MessageAllOfReceiver {return this.notificationService.getMessList();}
+
 }

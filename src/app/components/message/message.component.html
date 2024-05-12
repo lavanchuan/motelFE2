@@ -3,7 +3,7 @@
         <h2>Tin nhắn</h2>
     </div>
     <div class="message-nav">
-        <div *ngFor="let messageDetail of messageAll.messageAllOfReceiverList" class="message-item"
+        <div *ngFor="let messageDetail of getMessageAll().messageAllOfReceiverList" class="message-item"
             (click)="onMessageContent(messageDetail);">
             <h5>{{messageDetail.receiver.name}}</h5>
             <span class="message-mess" *ngIf="!isReceive(messageDetail.messageList[0].receiverId) || 
@@ -23,12 +23,12 @@
 
 <div class="message-content" *ngIf="getIsOnMessageContent()">
     <div class="message-content-header">
-        <h4>{{messList.receiver.name}}</h4>
+        <h4>{{getMessList().receiver.name}}</h4>
         <span class="close close icon" (click)="offMessageContent()">X</span>
         <span class="min-size close icon" (click)="minSizeMessageContent()">-</span>
     </div>
     <div class="message-content-main">
-        <div class="message-content-item" *ngFor="let mess of messList.messageList">
+        <div class="message-content-item" *ngFor="let mess of getMessList().messageList">
             <span class="message-mess message-self" *ngIf="!isReceive(mess.receiverId)">{{mess.message}}</span>
             <span class="message-mess message-other" *ngIf="isReceive(mess.receiverId)">{{mess.message}}</span>
             <span class="message-time">{{mess.createAt}}</span>

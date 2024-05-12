@@ -118,7 +118,7 @@ export class TestComponent {
     formData.append('file', this.file[0]);
 
     this.http.post<any>(`${INSTANCE}/owner/upload-image`, formData).subscribe((res) => {
-      console.log(formData);
+      // console.log(formData);
     }, (error) => {
       console.error("ERROR");
     });

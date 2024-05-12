@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MessageDTO } from '../models/dto/MessageDTO';
 import { MessageSendRequest } from '../models/request/MessageSendRequest';
+import { MessageAllOfReceiver } from '../models/response/MessageAllOfReceiver';
 import { MessageAllOfSender } from '../models/response/MessageAllOfSender';
 import { OtherResponse } from '../models/response/OtherResponse';
 import { ApiService } from './api.service';
@@ -43,7 +44,7 @@ export class MessageService {
     }
     this.apiService.findMessageAllBySenderId(userId).subscribe((response) => {
       if (response.status === 200) {
-        console.log(`DATA:\t${response}`);
+        // console.log(`DATA:\t${response}`);
         this.messageAll = response.data;
         localStorage.setItem(MESSAGE_ALL, JSON.stringify(response.data));
       } else {
@@ -61,6 +62,11 @@ export class MessageService {
   // SEND MESSAGE
   public sendMessage(request: MessageSendRequest): Observable<OtherResponse<MessageDTO>> {
     return this.http.post<OtherResponse<MessageDTO>>(`${INSTANCE}/api/send-message`, request);
+  }
+
+  //TODO load message with owner
+  loadMessageAllSenderAndReceiver(userId: number, ownerId: number): Observable<MessageAllOfReceiver> {
+    return this.http.get<MessageAllOfReceiver>(`${INSTANCE}/api/message-all?senderId=${userId}&receiverId=${ownerId}`);
   }
 }
 

@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private authenService: AuthenService) { }
 
   ngOnInit(): void {
-    console.log("INIT");
+    // console.log("INIT");
   }
 
   appName: string = '';
@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit {
     return new Observable<boolean>((observer) => {
       this.authenService.login(new LoginRequest(mail, password))
         .subscribe((response: LoginResponse) => {
-          console.log(typeof (response));
+          // console.log(typeof (response));
           if (response.status === 200) {
-            console.log(response);
+            // console.log(response);
             //
             localStorage.setItem(USER_ID, "" + response.data.id);
             localStorage.setItem(USER_INFO, JSON.stringify(response.data));
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.authenService.forgotPassword(this.mail).subscribe((response: MailSenderResponse) => {
         if (response.status === 200) {
-          console.log(response);
+          // console.log(response);
           alert("Đã gửi mật khẩu đến mail của bạn");
         } else {
 

@@ -84,7 +84,7 @@ export class OwnerHomeComponent {
 
       this.motelList = this.dataShow;
 
-      console.log("SUCCESS: Load ok");
+      // console.log("SUCCESS: Load ok");
     }, (error) => {
       console.error("ERROR: Call API error");
     });
@@ -92,10 +92,10 @@ export class OwnerHomeComponent {
 
   updateMotel(i: number): void {
     this.ownerService.updateMotel(this.motelList[i]).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         this.dataShow = response.data;
-        console.log("SUCCESS: Load ok");
+        // console.log("SUCCESS: Load ok");
         alert("Cập nhật nhà trọ thành công");
         window.location.reload();
       } else {
@@ -108,13 +108,13 @@ export class OwnerHomeComponent {
   }
 
   addMotel(): void {
-    console.log(this.motelAdd);
+    // console.log(this.motelAdd);
 
     this.ownerService.addMotel(this.motelAdd).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         this.dataShow = response.data;
-        console.log("SUCCESS: Load ok");
+        // console.log("SUCCESS: Load ok");
         alert("Thêm nhà trọ thành công");
 
         window.location.reload();
@@ -130,11 +130,11 @@ export class OwnerHomeComponent {
   loadRoom(motelId: number): void {
     this.motelIdCurrent = motelId;
     this.ownerService.motelRoomFindAll(motelId).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.dataShow = response;
       this.roomList = this.dataShow;
       this.itemCurrent = this.itemList.length;
-      console.log("Load room success");
+      // console.log("Load room success");
     },
       (error) => {
         console.error("ERROR: call api error");
@@ -144,14 +144,14 @@ export class OwnerHomeComponent {
   updateRoom(id: number): void {
     for (let i = 0; i < this.roomList.length; i++) {
       if (this.roomList[i].id === id) {
-        console.log(id);
+        // console.log(id);
 
         this.ownerService.updateRoom(this.roomList[i]).subscribe((response) => {
-          console.log(response);
+          // console.log(response);
           this.dataShow = response;
           this.itemCurrent = this.itemList.length;
           alert("Cập nhật phòng thành công");
-          console.log("Update room success");
+          // console.log("Update room success");
 
           window.location.reload();
         }, (error) => {
@@ -166,9 +166,9 @@ export class OwnerHomeComponent {
     this.roomAdd.motelId = this.motelIdCurrent;
 
     this.ownerService.addMotelRoom(this.roomAdd).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.dataShow = response;
-      console.log("Yêu cầu tạo phòng trọ mới thành công");
+      // console.log("Yêu cầu tạo phòng trọ mới thành công");
       alert("Đã gửi yêu cầu tạo phòng mới");
       this.loadRoom(this.authService.getAccountId());
       window.location.reload();
@@ -194,7 +194,7 @@ export class OwnerHomeComponent {
     this.ownerService.findAllMakeAppoint(ownerId).subscribe((response) => {
       this.dataShow = response;
       this.makeAppointList = this.dataShow;
-      console.log("Load Make Appoint Success");
+      // console.log("Load Make Appoint Success");
     }, (error) => {
       console.error("ERROR: call api error");
     });
@@ -204,7 +204,7 @@ export class OwnerHomeComponent {
     let request: MakeAppointDTO | any = this.getMakeAppointById(makeAppointId);
     if (isConfirm) {
       this.ownerService.confirmMakeAppoint(request).subscribe((response) => {
-        console.log("Confirm make appoint success");
+        // console.log("Confirm make appoint success");
         alert("Xác nhận hẹn xem trọ thành công");
         this.loadMakeAppoint();
       }, (error) => {
@@ -212,7 +212,7 @@ export class OwnerHomeComponent {
       });
     } else {
       this.ownerService.rejectMakeAppoint(request).subscribe((response) => {
-        console.log("Reject make appoint success");
+        // console.log("Reject make appoint success");
         alert("Từ chối hẹn xem trọ thành công");
         this.loadMakeAppoint();
       }, (error) => {
@@ -263,7 +263,7 @@ export class OwnerHomeComponent {
       .subscribe((res) => {
         this.dataShow = res;
         this.bookingDetailsUpdate = this.dataShow;
-        console.log("SUCCESS: load bookings success")
+        // console.log("SUCCESS: load bookings success")
       }, (error) => {
         console.error("ERROR: call api error");
 
@@ -326,7 +326,7 @@ export class OwnerHomeComponent {
         .subscribe((res) => {
           this.loadBookings();
           alert("Xác nhận thuê trọ thành công");
-          console.log("SUCCESS: confirm booking room");
+          // console.log("SUCCESS: confirm booking room");
         }, (error) => {
           alert("Xác nhận thuê trọ thất bại");
           console.error("ERROR: call api error");
@@ -336,7 +336,7 @@ export class OwnerHomeComponent {
         .subscribe((response) => {
           this.loadBookings();
           alert("Từ chối thuê trọ thành công");
-          console.log("SUCCESS: reject booking room");
+          // console.log("SUCCESS: reject booking room");
         }, (error) => {
           alert("Từ chối thuê trọ thất bại");
           console.error("ERROR: call api error");
@@ -372,7 +372,7 @@ export class OwnerHomeComponent {
 
     this.apiService.findAllImageByRoomId(roomId).subscribe((res) => {
       this.imgViewUpdate = res;
-      console.log("SUCCESS: load images success");
+      // console.log("SUCCESS: load images success");
     }, (error) => {
       console.error("ERROR: load images error");
     });
@@ -393,7 +393,7 @@ export class OwnerHomeComponent {
         } else {
           this.imgViewUpdate = res.data;
           alert("Thêm ảnh thành công");
-          console.log("SUCCESS: add image success");
+          // console.log("SUCCESS: add image success");
           this.isOnImageViewUpdate = false;
         }
       }, (error) => {

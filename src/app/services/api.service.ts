@@ -20,7 +20,8 @@ export class ApiService {
   }
 
   findMessageAllBySenderId(senderId: number): Observable<OtherResponse<MessageAllOfSender>> {
-    return this.http.get<OtherResponse<MessageAllOfSender>>(`${INSTANCE}/api/find-message-all-by-sender-id?senderId=${senderId}`);
+    // return this.http.get<OtherResponse<MessageAllOfSender>>(`${INSTANCE}/api/find-message-all-by-sender-id?senderId=${senderId}`);
+    return this.http.get<OtherResponse<MessageAllOfSender>>(`${INSTANCE}/api/message-all-by-user-id?userId=${senderId}`);
   }
 
   findAllImageByRoomId(roomId: number): Observable<ImageDTO[]> {

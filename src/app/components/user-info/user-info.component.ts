@@ -12,13 +12,12 @@ import { AuthenService } from '../../services/authen.service';
 import { USER_ID, USER_INFO, USER_STATUS } from '../../services/Instance';
 import { OwnerService } from '../../services/owner.service';
 import { UserService } from '../../services/user.service';
-import { HeaderInfoComponent } from '../header-info/header-info.component';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderInfoComponent } from '../header/header-info/header-info.component';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [HeaderComponent,
+  imports: [
     HeaderInfoComponent,
     CommonModule,
     FormsModule],
@@ -36,13 +35,14 @@ export class UserInfoComponent {
     let userString = localStorage.getItem(USER_INFO);
     if (userString) {
       this.userInfo = JSON.parse(userString);
-
-      //load history appoint
-      this.loadHistoryAppoint();
-      //load history booking
-      this.loadHistoryBooking();
-      //load count motel activate
-      this.loadMotelCount();
+      let autoLoad = setInterval(() => {
+        //load history appoint
+        this.loadHistoryAppoint();
+        //load history booking
+        this.loadHistoryBooking();
+        //load count motel activate
+        this.loadMotelCount();
+      }, 1000);
     } else {
       console.error("ERROR: LOAD USER INFO");
     }
@@ -52,7 +52,7 @@ export class UserInfoComponent {
   // update info
   updateInfo() {
     this.authService.updateInfo(this.userInfo).subscribe((response: UpdateInfoResponse) => {
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         localStorage.setItem(USER_INFO, JSON.stringify(response.data));
         alert("Cập nhật thông tin thành công");
@@ -89,14 +89,14 @@ export class UserInfoComponent {
     let userIdString: string | any = localStorage.getItem(USER_ID);
     let userId = parseInt(userIdString);
     if (isNaN(userId)) {
-      console.log("Không chuyển đổit được id của user");
+      // console.log("Không chuyển đổit được id của user");
       return;
     }
 
     this.authService.changePassword(
       new ChangePasswordRequest(userId, this.formChangePassword.oldPass, this.formChangePassword.newPass))
       .subscribe((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {
           alert("Đổi mật khẩu thành công");
           this.onChangePass = false;
@@ -115,14 +115,14 @@ export class UserInfoComponent {
     let userId = parseInt(userIdString);
 
     if (isNaN(userId)) {
-      console.log("Không thể chuyển đổi id của user");
+      // console.log("Không thể chuyển đổi id của user");
       return;
     }
 
     this.authService.registerOwner(new AccountIdRequest(userId)).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem(USER_INFO, JSON.stringify(response.data));
         alert("Đã gửi đăng ký owner đến admin");
       } else {
@@ -318,7 +318,7 @@ export class UserInfoComponent {
     this.userService.appointAllByUserId(this.authService.getAccountId())
       .subscribe((res) => {
         this.historyAppoint = res;
-        console.log("SUCCESS: load history appoints success");
+        // console.log("SUCCESS: load history appoints success");
       }, (err) => {
         console.error("ERROR: call api error");
       })
@@ -338,7 +338,7 @@ export class UserInfoComponent {
     this.userService.cancelAppoint(appointId)
       .subscribe((res) => {
         this.historyAppoint = res;
-        console.log("SUCCESS: cancel appoint success");
+        // console.log("SUCCESS: cancel appoint success");
       }, (err) => {
         console.error("ERROR: call api error");
       });
@@ -351,9 +351,9 @@ export class UserInfoComponent {
     this.userService.bookingAllByUserId(this.authService.getAccountId())
       .subscribe((res) => {
         this.historyBookings = res;
-        console.log(this.historyBookings.length);
+        // console.log(this.historyBookings.length);
 
-        console.log("SUCCESS: load history booking success");
+        // console.log("SUCCESS: load history booking success");
       }, (error) => {
         console.error("ERROR: call api error");
       });
@@ -389,7 +389,7 @@ export class UserInfoComponent {
         this.countMotelActive = cma.countMotelActivate;
         this.countMotelAll = cma.count;
 
-        console.log("SUCCESS: load motel count success");
+        // console.log("SUCCESS: load motel count success");
       }, (err) => {
         console.error("ERROR: call api error");
       })

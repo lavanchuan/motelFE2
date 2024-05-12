@@ -1,26 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AccountDTO2 } from '../../models/dto/AccountDTO2';
-import { IS_LOGGED, LOGGIN_VALUE, USER_INFO } from '../../services/Instance';
-import { NotificationService } from '../../services/notification/notification.service';
-import { HeaderComponent } from '../header/header.component';
-import { MessageComponent } from '../message/message.component';
-import { NotificationComponent } from '../notification/notification/notification.component';
-import { UserInfoComponent } from '../user-info/user-info.component';
+import { AccountDTO2 } from '../../../models/dto/AccountDTO2';
+import { IS_LOGGED, LOGGIN_VALUE, USER_INFO } from '../../../services/Instance';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { AutoLoadComponent } from '../../load/auto-load/auto-load.component';
+import { MessageComponent } from '../../message/message.component';
+import { NotificationComponent } from '../../notification/notification/notification.component';
+import { UserInfoComponent } from '../../user-info/user-info.component';
 
 @Component({
   selector: 'app-header-info',
   standalone: true,
-  imports: [
-    CommonModule,
+  imports: [CommonModule,
     UserInfoComponent,
     NotificationComponent,
-    MessageComponent
+    MessageComponent,
+    AutoLoadComponent
   ],
   templateUrl: './header-info.component.html',
   styleUrl: './header-info.component.css'
 })
 export class HeaderInfoComponent {
+
   constructor(private notificationService: NotificationService) {
 
   }
@@ -47,19 +48,19 @@ export class HeaderInfoComponent {
 
   // Notification and message
   notificSrc = 'assets/icons/notific_';
-
+  
   getCountString(count: number): string {
     return "" + (count > 20 ? "20+" : count);
   }
 
+  
 
-
-  getNotificationCount(): number {
+  getNotificationCount(): number{
     return this.notificationService.getCountNotificationSent();
   }
 
   getMessageCount(): number {
-    return 1;
+    return this.notificationService.getCountMessageSent();
   }
 
   // CONTROL
@@ -72,7 +73,12 @@ export class HeaderInfoComponent {
   }
 
   onMessage(): void {
-    this.notificationService.onType('MESSAGE')
+    this.notificationService.onType('MESSAGE');
+    if(this.notificationService.getTypeState('MESSAGE')){
+      this.notificationService.onMessageNav();
+    } else {
+      this.notificationService.offMessageContent();
+    }
   }
 
   isOnMessage(): boolean {

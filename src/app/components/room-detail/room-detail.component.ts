@@ -7,8 +7,10 @@ import { BookRoomStatus } from '../../models/enum/BookRoomStatus';
 import { AppointRequest } from '../../models/request/AppointRequest';
 import { BookingAppointRequest } from '../../models/request/BookingAppointRequest';
 import { BookingRoomRequest } from '../../models/request/BookingRoomRequest';
+import { MessageAllOfReceiver } from '../../models/response/MessageAllOfReceiver';
 import { MessageAllOfSender } from '../../models/response/MessageAllOfSender';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
+import { AuthenService } from '../../services/authen.service';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
 import { MESSAGE_ALL, MESSAGE_CURRENT, ROOM_IMAGE_DEFAULT, ROOM_OWNER_CURRENT, ROOM_STATUS, URL_ROOM_IMAGE } from '../../services/Instance';
@@ -36,14 +38,24 @@ export class RoomDetailComponent implements OnInit {
 
   roomDetail: RoomOwnerResponse | any;
 
+  autoLoad: any;
+
   constructor(private roomService: RoomService,
     private requestLoginService: DialogRequestLoginService,
     private messageService: MessageService,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    private authService: AuthenService) {
   }
 
   ngOnInit(): void {
     this.roomDetail = this.roomService.getRoomOwnerCurrent();
+    this.autoLoad = setInterval(() => {
+      this.loadMessList();
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.autoLoad);
   }
 
   getStatusString(status: ROOM_STATUS): string {
@@ -102,7 +114,7 @@ export class RoomDetailComponent implements OnInit {
 
   openAppointmentDialog() {
     this.openAppointDialog = true;
-    console.log(this.openAppointDialog);
+    // console.log(this.openAppointDialog);
 
   }
 
@@ -128,9 +140,9 @@ export class RoomDetailComponent implements OnInit {
     const userId = parseInt(userIdString); // Chuyển đổi thành số nguyên
 
     // TODO
-    console.log(this.formData);
-    console.log("MeetTime: " + meetTime);
-    console.log("UserId: " + userId);
+    // console.log(this.formData);
+    // console.log("MeetTime: " + meetTime);
+    // console.log("UserId: " + userId);
 
 
     if (!isNaN(userId)) { // Kiểm tra xem chuyển đổi thành công hay không
@@ -143,7 +155,7 @@ export class RoomDetailComponent implements OnInit {
             alert("Đặt lịch xem trọ không thành công");
             return;
           }
-          console.log(response);
+          // console.log(response);
           this.openAppointDialog = false;
           alert("Lịch xem trọ của bạn đã được gửi đến chủ trọ");
           // this.requestLoginService.setAppointing(true); // set Appointing for show request login
@@ -245,12 +257,12 @@ export class RoomDetailComponent implements OnInit {
       this.roomService.bookingRoom(new BookingRoomRequest(motelRoomId, userId,
         startTimeString, endTimeString))
         .subscribe((response) => {
-          console.log("BOOKING ROOM: " + response);
+          // console.log("BOOKING ROOM: " + response);
           if (response.status === 200) {
-            console.log("OK");
+            // console.log("OK");
             alert("Yêu cầu thuê trọ thành công")
           } else {
-            console.log("NOT OK");
+            // console.log("NOT OK");
             alert("Yêu cầu thuê trọ thất bại");
           }
         }, (error) => {
@@ -264,6 +276,17 @@ export class RoomDetailComponent implements OnInit {
     return this.messageService.getOnMessage();
   }
 
+  private messList: MessageAllOfReceiver | any;// [Toàn bộ tin nhắn của owner và user đã đăng nhập]
+  loadMessList(): void {
+    this.messageService.loadMessageAllSenderAndReceiver(this.authService.getAccountId(), 
+      this.roomDetail.data.owner.id)
+      .subscribe((res) => {
+        this.messList = res;
+      }, (err) => {
+        console.error("ERROR: load message error");
+      })
+  }
+
   onMessage(): void {
     // this.messageService.onMessage();
     // let messAllStr: string | any = localStorage.getItem(MESSAGE_ALL);
@@ -275,9 +298,11 @@ export class RoomDetailComponent implements OnInit {
     // let messageCurrent = messageAll.messageAllOfReceiverList.filter(mes => mes.receiver.id === roomOwnerCurrentInfo.data.owner.id)[0];
     // sessionStorage.setItem(MESSAGE_CURRENT, JSON.stringify(messageCurrent));
 
-    alert("On message in header");
+    //TODO update
     this.notificationService.onType('MESSAGE');
-
+    this.notificationService.offMessageNav();
+    this.notificationService.setMessList(this.messList);
+    this.notificationService.onMessageContent();
   }
 
   //TODO image

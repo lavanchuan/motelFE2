@@ -75,6 +75,11 @@ export class HeaderComponent {
 
   onMessage(): void {
     this.notificationService.onType('MESSAGE');
+    if(this.notificationService.getTypeState('MESSAGE')){
+      this.notificationService.onMessageNav();
+    } else {
+      this.notificationService.offMessageContent();
+    }
   }
 
   isOnMessage(): boolean {

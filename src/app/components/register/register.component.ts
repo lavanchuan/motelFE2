@@ -42,7 +42,7 @@ export class RegisterComponent {
       return;
     } 
     
-    console.log(this.formData);
+    // console.log(this.formData);
     
 
     this.isValidRegister(new RegisterRequest(this.formData.name, 
@@ -61,9 +61,9 @@ export class RegisterComponent {
     return new Observable<boolean>((observer) => {
       this.authenService.register(request)
         .subscribe((response: RegisterResponse) => {
-          console.log(typeof(response));
+          // console.log(typeof(response));
           if (response.status === 200) {
-            console.log(response);
+            // console.log(response);
             observer.next(true);
             observer.complete(); 
           } else {

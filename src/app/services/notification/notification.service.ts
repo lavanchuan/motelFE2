@@ -6,12 +6,14 @@ import { AccountDTO2 } from '../../models/dto/AccountDTO2';
 import { MessageDTO } from '../../models/dto/MessageDTO';
 import { NotificationDTO } from '../../models/dto/NotificationDTO';
 import { BaseCount } from '../../models/response/BaseCount';
+import { MessageAllOfReceiver } from '../../models/response/MessageAllOfReceiver';
 import { MessageAllOfSender } from '../../models/response/MessageAllOfSender';
 import { MessageDetail } from '../../models/response/MessageDetail';
 import { OtherResponse } from '../../models/response/OtherResponse';
 import { ApiService } from '../api.service';
 import { AuthenService } from '../authen.service';
 import { INSTANCE } from '../Instance';
+import { MessageService } from '../MessageService';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class NotificationService {
 
   constructor(private http: HttpClient,
     private authService: AuthenService,
-    private apiService: ApiService) {
+    private apiService: ApiService,
+    private messageService: MessageService) {
 
     // alert("USER_ID: " + this.authService.getAccountId());
 
@@ -117,8 +120,8 @@ export class NotificationService {
 
   readMessageAPI(request: MessageDTO): void {
     this.readMessage(request).subscribe((res) => {
-      if(res.status === 200) {
-        console.log("SUCCESS: read message success");
+      if (res.status === 200) {
+        // console.log("SUCCESS: read message success");
       } else {
         console.error("ERROR: read message error");
       }
@@ -147,18 +150,28 @@ export class NotificationService {
   // }
 
   loadMessageAll(): void {
-    console.log("LOADING MESSAGE............................");
+    // console.log("LOADING MESSAGE............................");
 
     this.loadMessageReceivedCount();
 
     this.apiService.findMessageAllBySenderId(this.authService.getAccountId())
       .subscribe((res) => {
         this.messageAll = res.data;
-        console.log("SUCCESS: load message success");
+        // console.log("SUCCESS: load message success");
 
       }, (error) => {
         console.error("ERROR: load message error");
       });
+
+    if (this.messList) {
+      this.messageService.loadMessageAllSenderAndReceiver(this.authService.getAccountId(),
+        this.messList.receiver.id)
+        .subscribe((res) => {
+          this.messList = res;
+        }, (err) => {
+          console.error("ERROR: load mess list error");
+        });
+    }
   }
 
   public getMessageAll(): MessageAllOfSender {
@@ -210,11 +223,26 @@ export class NotificationService {
         break;
       }
     }
+
   }
-}
 
+  // Update
+  isOnMessageNav: boolean = true;
+  getIsOnMessageNav(): boolean { return this.isOnMessageNav; }
+  offMessageNav(): void { this.isOnMessageNav = false; }
+  onMessageNav(): void { this.isOnMessageNav = true; }
 
-function interval(arg0: number) {
-  throw new Error('Function not implemented.');
+  isOnMessageContent: boolean = false;
+  getIsOnMessageContent(): boolean { return this.isOnMessageContent; }
+  offMessageContent(): void {
+    this.isOnMessageContent = false;
+    this.offMessage();
+  }
+  onMessageContent(): void { this.isOnMessageContent = true; }
+
+  private messList: MessageAllOfReceiver | any;
+  getMessList(): MessageAllOfReceiver { return this.messList; }
+  setMessList(messList: MessageAllOfReceiver): void { this.messList = messList; }
+
 }
 

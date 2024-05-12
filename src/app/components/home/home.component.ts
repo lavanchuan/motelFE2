@@ -47,7 +47,7 @@ export class HomeComponent {
   getRoom(id: number) {
     let data: any;
     this.roomService.findById(id).subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       data = response;
     }, (e) => {
       console.error(e);
@@ -58,7 +58,7 @@ export class HomeComponent {
   getRoomAll(): void {
 
     this.roomService.findAll().subscribe((response) => {
-      console.log(response);
+      // console.log(response);
       this.rooms = response;
     }, (e) => {
       console.error(e);
@@ -86,9 +86,9 @@ export class HomeComponent {
     const userId = parseInt(userIdString); // Chuyển đổi thành số nguyên
 
     // TODO
-    console.log(this.formData);
-    console.log("MeetTime: " + meetTime);
-    console.log("UserId: " + userId);
+    // console.log(this.formData);
+    // console.log("MeetTime: " + meetTime);
+    // console.log("UserId: " + userId);
 
 
     if (!isNaN(userId)) { // Kiểm tra xem chuyển đổi thành công hay không
@@ -97,7 +97,7 @@ export class HomeComponent {
         new AppointRequest(meetTime, this.currentRoom.data.room.id, userId))
         .subscribe((response) => {
           // Xử lý khi yêu cầu thành công
-          console.log(response);
+          // console.log(response);
           this.openAppointDialog = false;
         }, (error) => {
           // Xử lý khi yêu cầu thất bại

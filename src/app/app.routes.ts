@@ -19,6 +19,6 @@ export const routes: Routes = [
     {path: "user-info", component: UserInfoComponent},
     {path: "admin-home", component: AdminHomeComponent},
     {path: "owner-home", component: OwnerHomeComponent},
-    {path: "notification", component: NotificationComponent},
-    {path: "message", component: MessageComponent},
+    // {path: "notification", component: NotificationComponent},
+    // {path: "message", component: MessageComponent},
 ];
