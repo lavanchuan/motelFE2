@@ -94,6 +94,7 @@ body, html {
     padding-bottom: 50px;
 }
 
+.review-post-submit,
 .appoint-button,
 .booking-button {
     margin: 0 10px;
@@ -107,11 +108,11 @@ body, html {
     transition: opacity 0.3s ease;
 
 }
+.review-post-submit:hover,
 .appoint-button:hover,
-.booking-button:hover{
+.booking-button:hover
+{
     box-shadow: 0 0 10px 3px rgba(3, 65, 236, 0.7);
- 
-
 }
 
 .image-container img:hover {
@@ -234,7 +235,7 @@ body, html {
 }
 .review-card {
     position: relative;
-    width: 100%;
+    width: 80%;
     padding: 20px;
     border-bottom: 1px solid #6C78AF;
     border-top: 1px solid #6C78AF;
@@ -260,4 +261,50 @@ body, html {
 }
 .user-star{
     margin-left: 20px;
+}
+
+.review-post {
+    /* position: fixed; */
+    top: 150px;
+}
+
+.review-post-rate {
+    padding: 0 10px;
+    height: 30px;
+    text-align: center;
+}
+
+.review-post>h3 {
+    text-align: center;
+    margin: 0 10px;
+}
+
+.review-post-rate:not(:checked)>.rate {
+    position: absolute;
+    top: -9999px;
+}
+
+.review-post-comment {
+    width: calc(80% - 2*10px);
+    height: 50px;
+    padding: 5px 10px;
+    /* background-color: cyan; */
+    position: relative;
+}
+
+.review-post-submit {
+    /* margin: 0 10px; */
+    width: 10%;
+    height: auto;
+    /* background-color: cyan; */
+    z-index: 10;
+}
+
+.review-post-content {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    /* background-color: cyan; */
+    justify-items: center;
+    /* gap: 5px; */
 }

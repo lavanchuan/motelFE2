@@ -123,3 +123,14 @@
 .test-upload-image{
     padding: 100px;
 }
+
+/* .start-container{
+    background-color: rgb(0, 255, 255);
+    background: linear-gradient(to right, rgba(255, 215, 0, 0.5) 50%, transparent 50%)
+} */
+
+.content {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}

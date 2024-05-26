@@ -7,18 +7,23 @@ import { BookRoomStatus } from '../../models/enum/BookRoomStatus';
 import { AppointRequest } from '../../models/request/AppointRequest';
 import { BookingAppointRequest } from '../../models/request/BookingAppointRequest';
 import { BookingRoomRequest } from '../../models/request/BookingRoomRequest';
+import { ReviewRequest } from '../../models/request/ReviewRequest';
 import { MessageAllOfReceiver } from '../../models/response/MessageAllOfReceiver';
 import { MessageAllOfSender } from '../../models/response/MessageAllOfSender';
 import { RoomOwnerResponse } from '../../models/response/RoomOwnerResponse';
+import { UserReviewResponse } from '../../models/response/UserReviewResponse';
 import { AuthenService } from '../../services/authen.service';
 import { RoomService } from '../../services/component/room.service';
 import { DialogRequestLoginService } from '../../services/dialog/dialog-request-login.service';
 import { MESSAGE_ALL, MESSAGE_CURRENT, ROOM_IMAGE_DEFAULT, ROOM_OWNER_CURRENT, ROOM_STATUS, URL_ROOM_IMAGE } from '../../services/Instance';
 import { MessageService } from '../../services/MessageService';
 import { NotificationService } from '../../services/notification/notification.service';
+import { ReviewService } from '../../services/review/review.service';
+import { UserService } from '../../services/user.service';
 import { RequestLoginComponent } from '../dialog/request-login/request-login.component';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
+import { AutoLoadReviewComponent } from '../load/auto-load-review/auto-load-review.component';
 import { MessageComponent } from '../message/message.component';
 
 @Component({
@@ -29,7 +34,8 @@ import { MessageComponent } from '../message/message.component';
     MessageComponent,
     FormsModule,
     CommonModule,
-    RequestLoginComponent],
+    RequestLoginComponent,
+    AutoLoadReviewComponent],
   templateUrl: './room-detail.component.html',
   styleUrl: './room-detail.component.css'
 })
@@ -44,7 +50,9 @@ export class RoomDetailComponent implements OnInit {
     private requestLoginService: DialogRequestLoginService,
     private messageService: MessageService,
     private notificationService: NotificationService,
-    private authService: AuthenService) {
+    private authService: AuthenService,
+    private userService: UserService,
+    private reviewService: ReviewService) {
   }
 
   ngOnInit(): void {
@@ -151,7 +159,7 @@ export class RoomDetailComponent implements OnInit {
         new BookingAppointRequest(this.roomDetail.data.room.id, userId, meetTime))
         .subscribe((response) => {
           // Xử lý khi yêu cầu thành công
-          if(response.status !== 200) {
+          if (response.status !== 200) {
             alert("Đặt lịch xem trọ không thành công");
             return;
           }
@@ -228,7 +236,10 @@ export class RoomDetailComponent implements OnInit {
     this.reviewBGColor = "#fff"
   }
 
-  averageRating: number = 4;
+  getAverageRating(): number {
+    // return this.reviewService.getAverageRating();
+    return Math.round(this.reviewService.getAverageRating() * 100) / 100;
+  }
 
   // BOOKING ROOM
   formBookingRoom = {
@@ -278,7 +289,7 @@ export class RoomDetailComponent implements OnInit {
 
   private messList: MessageAllOfReceiver | any;// [Toàn bộ tin nhắn của owner và user đã đăng nhập]
   loadMessList(): void {
-    this.messageService.loadMessageAllSenderAndReceiver(this.authService.getAccountId(), 
+    this.messageService.loadMessageAllSenderAndReceiver(this.authService.getAccountId(),
       this.roomDetail.data.owner.id)
       .subscribe((res) => {
         this.messList = res;
@@ -316,5 +327,43 @@ export class RoomDetailComponent implements OnInit {
 
     return url + imageName + ".png";
   }
+
+  // get review all
+  getReviewAll(): UserReviewResponse[] {
+    return this.reviewService.getReviewAll();
+  }
+
+  getRateList(idx: number): number[] {
+    let rate: number = this.getReviewAll()[idx].review.rate;
+    return new Array(rate);
+  }
+
+  // review post rate content
+  rateValue: number = 5;
+  reviewComment: string = "";
+
+  getStarChecked(rateValue: number): string {
+    return rateValue <= this.rateValue ? `#ffd700` : `black`;
+  }
+
+  postReview(): void {
+    this.reviewService.setComment(this.reviewComment);
+    this.userService.postReview(new ReviewRequest(this.rateValue,
+      this.reviewService.getComment(),
+      this.reviewService.getLastBookingRoom().id))
+      .subscribe((res) => {
+        alert("Đánh giá phòng trọ thành công");
+        this.reviewComment = "";
+      }, (err) => {
+        alert("Đánh giá phòng trọ thất bại");
+        console.error("ERROR: post review error");
+      });
+  }
+
+  isHiddenPostComment(): boolean { return this.reviewService.isHiddenPostComment(); }
+
+  getComment(): string { return this.reviewService.getComment(); }
+  setComment(comment: string): void { this.reviewService.setComment(this.reviewComment); }
+  isHiddenCommentSubmit(): boolean { return this.reviewComment === ""; }
 
 }

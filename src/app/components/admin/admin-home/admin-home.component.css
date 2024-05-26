@@ -38,7 +38,7 @@ table {
     border-collapse: collapse;
 }
 
-tbody{
+tbody {
     font-size: 1em;
 }
 
@@ -51,4 +51,25 @@ td {
 
 th {
     background-color: #f2f2f2;
+}
+
+td>button {
+    margin: 0 10px;
+    padding: 10px;
+    color: #fff;
+    font-size: 10px;
+    height: 100%;
+    width: 80%;
+    background-color: #6C78AF;
+    border: none;
+    border-radius: 10px;
+    transition: opacity 0.3s ease;
+}
+
+td>button:hover {
+    box-shadow: 0 0 10px 3px rgba(3, 65, 236, 0.7);
+}
+
+tr:hover{
+    background-color: rgb(220, 230, 230);
 }

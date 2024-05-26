@@ -12,8 +12,9 @@ import { LoginResponse } from '../models/response/LoginResponse';
 import { MailSenderResponse } from '../models/response/MailSenderResponse';
 import { OtherResponse } from '../models/response/OtherResponse';
 import { RegisterResponse } from '../models/response/RegisterResponse';
+import { RoomOwnerResponse } from '../models/response/RoomOwnerResponse';
 import { UpdateInfoResponse } from '../models/response/UpdateInfoResponse';
-import { INSTANCE, USER_ID, USER_INFO } from './Instance';
+import { INSTANCE, ROOM_OWNER_CURRENT, USER_ID, USER_INFO } from './Instance';
 
 @Injectable({
   providedIn: 'root'

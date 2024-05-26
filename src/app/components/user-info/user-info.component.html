@@ -96,7 +96,7 @@
                     <h2>Lịch sử lịch hẹn xem trọ</h2>
                     <div class="history-appoint-content">
                         <h4 *ngIf="historyAppoint.length == 0">chưa có lịch hẹn xem trọ nào</h4>
-                        <table border="1" *ngIf="historyAppoint.length > 0">
+                        <table *ngIf="historyAppoint.length > 0">
                             <thead>
                                 <th>Phòng</th>
                                 <th>Nhà trọ</th>
@@ -132,7 +132,7 @@
                     <h2>Lịch sử thuê trọ</h2>
                     <h4 *ngIf="historyBookings.length == 0">Chưa có yêu cầu thuê trọ nào</h4>
                     <div class="history-booking-content">
-                        <table border="1" *ngIf="historyBookings.length > 0">
+                        <table *ngIf="historyBookings.length > 0">
                             <thead>
                                 <th>Phòng</th>
                                 <th>Nhà trọ</th>

@@ -6,6 +6,7 @@ import { MotelRoomDTO } from '../models/dto/MotelRoomDTO';
 import { MessageAllOfSender } from '../models/response/MessageAllOfSender';
 import { OtherResponse } from '../models/response/OtherResponse';
 import { RoomOwnerResponse } from '../models/response/RoomOwnerResponse';
+import { UserReviewResponse } from '../models/response/UserReviewResponse';
 import { INSTANCE } from './Instance';
 
 @Injectable({
@@ -31,6 +32,10 @@ export class ApiService {
   searchRoomByAddressAndPrice(address: string, minPrice: number, maxPrice: number): Observable<RoomOwnerResponse[]> {
     return this.http.get<RoomOwnerResponse[]>
       (`${INSTANCE}/api/search-room-by-address-and-price?address=${address}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
+  }
+
+  reviewAll(roomId: number): Observable<UserReviewResponse[]> {
+    return this.http.get<UserReviewResponse[]>(`${INSTANCE}/api/review-all?roomId=${roomId}`);
   }
 
 }

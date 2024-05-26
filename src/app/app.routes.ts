@@ -21,4 +21,5 @@ export const routes: Routes = [
     {path: "owner-home", component: OwnerHomeComponent},
     // {path: "notification", component: NotificationComponent},
     // {path: "message", component: MessageComponent},
+    {path: "test", component: TestComponent},
 ];

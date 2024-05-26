@@ -149,9 +149,9 @@
                         <td><input type="text" [(ngModel)]="roomList[i].area" class="short"></td>
                         <td>{{d.createAt}}</td>
                         <td><input type="text" [(ngModel)]="roomList[i].facility"></td>
-                        <td><input type="number" [(ngModel)]="roomList[i].price" class="short"></td>
+                        <td><input type="number" [(ngModel)]="roomList[i].price" class="short" pattern="[0-9]*"></td>
                         <td><input type="number" [(ngModel)]="roomList[i].sale" class="short"
-                            min="0" max="100"></td>
+                            min="0" max="100" pattern="[0-9]*"></td>
                         <td>{{getStatusName(roomList[i].status)}}</td>
                         <td><a type="button" class="btn" (click)="onImageViewUpdate(d.id)">Ảnh</a></td>
                         <td><button (click)="updateRoom(d.id)">Chỉnh sửa</button></td>

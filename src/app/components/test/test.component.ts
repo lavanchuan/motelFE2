@@ -124,6 +124,16 @@ export class TestComponent {
     });
   }
 
+  rate: number = 80;
+  r: number = 0;
+  g: number = 0;
+  b: number = 0;
+  a: number = 0;
+  getColor(r: number,g: number,b: number, a: number): string {
+    return `rgb(${r}, ${g}, ${b}, ${a/100})`;
+  }
 
-  
+  getStart(a: number) {
+    return `linear-gradient(to right, rgba(255, 215, 0) ${a}%, transparent ${a}%)`;
+  }
 }
